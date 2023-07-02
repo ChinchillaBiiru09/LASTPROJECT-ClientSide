@@ -2,13 +2,13 @@
     "use strict";
 
     // Mendapatkan posisi scroll vertikal saat ini
-    var currentPosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+    // var currentPosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
 
     // // Melakukan refresh halaman
     // window.location.reload();
 
     // Mengatur posisi scroll kembali ke atas
-    window.scrollTo(0, 0);
+    // window.scrollTo(0, 0);
 
     // Spinner
     var spinner = function () {

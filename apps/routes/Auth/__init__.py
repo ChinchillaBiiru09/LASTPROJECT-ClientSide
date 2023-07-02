@@ -13,10 +13,22 @@ def session_check():
     if (session.get('user') != None):
         return redirect(url_for('Dashboard.index'))
 
+
 @auth.get('/')
-@auth.get('/login')
-def login():
+@auth.get('/signin')
+def sign_in():
     return render_template(
         title="Login Aplikasi Undangan Online",
         template_name_or_list='login.html'
     )
+
+@auth.get('/signup')
+def sign_up():
+    return render_template(
+        title="Login Aplikasi Undangan Online",
+        template_name_or_list='register.html'
+    )
+
+@auth.post('/signin')
+def signin_process():
+    return redirect(url_for('dashboard.index'))
