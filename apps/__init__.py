@@ -59,7 +59,7 @@ def logout():
                 message=request.args.get("message"),
                 category='danger'
             )
-    return redirect(url_for('Auth.login'))
+    return redirect(url_for('auth.sign_in'))
 ## Route LogOut ---------------------------------------- Finish
 
 ## Route Not Found ---------------------------------------- Start
