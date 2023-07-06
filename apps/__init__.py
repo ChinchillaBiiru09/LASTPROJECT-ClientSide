@@ -28,12 +28,16 @@ TITLE_DASHBD = os.getenv('TITLE_DASHBD')
 from apps.routes.Home import home
 from apps.routes.Auth import auth
 from apps.routes.Dashboard import dashboard
+from apps.routes.Guest import guest
+from apps.routes.Invitation import invitation
 ## Import Blueprint ---------------------------------------- Finish
 
 ## Register Blueprint ---------------------------------------- Start
 app.register_blueprint(home)
 app.register_blueprint(auth)
 app.register_blueprint(dashboard)
+app.register_blueprint(guest)
+app.register_blueprint(invitation)
 ## Register Blueprint ---------------------------------------- Finish
 # BLUEPRINT ============================================================ End
 
@@ -65,6 +69,6 @@ def logout():
 ## Route Not Found ---------------------------------------- Start
 @app.errorhandler(404)
 def page_not_found(e):
-    return render_template("layout/page_not_found.html")
+    return render_template("pages/ErrorPage/404.html")
 ## Route Not Found ---------------------------------------- Finish
 # ROUTING ============================================================ End

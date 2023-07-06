@@ -18,15 +18,15 @@ def session_check():
 @auth.get('/signin')
 def sign_in():
     return render_template(
-        title="Login Aplikasi Undangan Online",
-        template_name_or_list='login.html'
+        title="Sign In - Aplikasi Undangan Online",
+        template_name_or_list='signin.html'
     )
 
 @auth.get('/signup')
 def sign_up():
     return render_template(
-        title="Login Aplikasi Undangan Online",
-        template_name_or_list='register.html'
+        title="Sign Up - Aplikasi Undangan Online",
+        template_name_or_list='signup.html'
     )
 
 @auth.post('/signin')
