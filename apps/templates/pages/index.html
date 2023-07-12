@@ -1,41 +1,24 @@
-{% extends 'layouts/home_layout.html' %} {% block content %}
+{% extends 'layouts/layout.html' %} {% block content %}
     <div class="container-xxl bg-white p-0">
         <!-- Spinner Start -->
-        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-            <div class="spinner-grow text-primary" style="width: 3rem; height: 3rem;" role="status">
-                <span class="sr-only">Loading...</span>
-            </div>
-        </div>
+        {% include 'components/preloader.html' %}
         <!-- Spinner End -->
 
-
+        
         <!-- Navbar & Hero Start -->
-        <div class="container-xxl position-relative p-0">
-            <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
-                <a href="index.html" class="navbar-brand p-0">
-                    <img src="{{ url_for('static', filename='../../static/assets/images/ic_logo.png') }}" alt="Logo">
-                </a>
-                <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <div class="navbar-nav ms-auto py-0">
-                        <a href="{{ url_for('home') }}" class="nav-item nav-link active">Home</a>
-                        <a href="{{ url_for('home.about') }}" class="nav-item nav-link">About</a>
-                        <a href="{{ url_for('home.service') }}" class="nav-item nav-link">Service</a>
-                    </div>
-                    <a href="{{ url_for('auth.sign_in') }}" class="btn btn-secondary text-light rounded-pill py-2 px-4 ms-3">Login</a>
-                </div>
-            </nav>
+        <div class="container-xxl position-relative p-0" id="top">
+            {% include 'components/navbar.html' %}
 
             <div class="container-xxl py-5 bg-primary hero-header mb-5">
                 <div class="container my-5 py-5 px-lg-5">
                     <div class="row g-5 py-5">
                         <div class="col-lg-6 text-center text-lg-start">
-                            <h1 class="text-white mb-4 animated zoomIn">All in one SEO tool need to grow your business rapidly</h1>
-                            <p class="text-white pb-3 animated zoomIn">Tempor rebum no at dolore lorem clita rebum rebum ipsum rebum stet dolor sed justo kasd. Ut dolor sed magna dolor sea diam. Sit diam sit justo amet ipsum vero ipsum clita lorem</p>
-                            <a href="{{ url_for('auth.sign_up') }}" class="btn btn-light py-sm-3 px-sm-5 rounded-pill animated slideInLeft">Start</a>
-                            <!-- <a href="" class="btn btn-outline-light py-sm-3 px-sm-5 rounded-pill animated slideInRight">Contact Us</a> -->
+                            <h1 class="text-white mb-4 animated zoomIn">Buat dan sebarkan undangan anda dengan mudah</h1>
+                            <p class="text-white pb-3 animated zoomIn">Aplikasi undangan digital berbasis website yang dapat memudahkan dalam pembuatan dan pendistribusian surat undangan. Dengan berbagai kategori dan template menarik. Buat undangan anda sekarang juga.</p>
+                            <a href="{{ url_for('auth.sign_up') }}" class="btn btn-light py-sm-3 px-sm-5 rounded-pill animated slideInLeft">Mulai</a>
                         </div>
                         <div class="col-lg-6 text-center text-lg-start">
-                            <img class="img-fluid" src="../../static/assets/images/lp/hero.png" alt="">
+                            <img class="img-fluid" src="{{ url_for('static', filename='assets/images/hero.png') }}" alt="">
                         </div>
                     </div>
                 </div>
@@ -48,32 +31,31 @@
         <div class="container-xxl py-5">
             <div class="container px-lg-5">
                 <div class="row g-5">
-                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">  
                         <div class="section-title position-relative mb-4 pb-2">
-                            <h6 class="position-relative text-primary ps-4">About Us</h6>
-                            <h2 class="mt-2">The best SEO solution with 10 years of experience</h2>
+                            <h6 class="position-relative text-primary ps-4">Tentang Kami</h6>
+                            <h2 class="mt-2">Solusi terbaik pembuatan undangan digital</h2>
                         </div>
                         <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum et tempor sit. Aliqu diam amet diam et eos labore. Clita erat ipsum et lorem et sit, sed stet no labore lorem sit. Sanctus clita duo justo et tempor eirmod magna dolore erat amet</p>
                         <div class="row g-3">
                             <div class="col-sm-6">
-                                <h6 class="mb-3"><i class="fa fa-check text-primary me-2"></i>Award Winning</h6>
-                                <h6 class="mb-0"><i class="fa fa-check text-primary me-2"></i>Professional Staff</h6>
+                                <h6 class="mb-3"><i class="fa fa-check text-primary me-2"></i>Kategori Acara</h6>
+                                <h6 class="mb-0"><i class="fa fa-check text-primary me-2"></i>Template Menarik</h6>
                             </div>
                             <div class="col-sm-6">
-                                <h6 class="mb-3"><i class="fa fa-check text-primary me-2"></i>24/7 Support</h6>
-                                <h6 class="mb-0"><i class="fa fa-check text-primary me-2"></i>Fair Prices</h6>
+                                <h6 class="mb-3"><i class="fa fa-check text-primary me-2"></i>Custom Template</h6>
+                                <h6 class="mb-0"><i class="fa fa-check text-primary me-2"></i>Manajemen Tamu</h6>
                             </div>
                         </div>
                         <div class="d-flex align-items-center mt-4">
                             <a class="btn btn-primary rounded-pill px-4 me-3" href="">Read More</a>
-                            <a class="btn btn-outline-primary btn-square me-3" href=""><i class="fab fa-facebook-f"></i></a>
                             <a class="btn btn-outline-primary btn-square me-3" href=""><i class="fab fa-twitter"></i></a>
                             <a class="btn btn-outline-primary btn-square me-3" href=""><i class="fab fa-instagram"></i></a>
                             <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-linkedin-in"></i></a>
                         </div>
                     </div>
                     <div class="col-lg-6">
-                        <img class="img-fluid wow zoomIn" data-wow-delay="0.5s" src="../../static/assets/images/lp/about.jpg">
+                        <img class="img-fluid wow zoomIn" data-wow-delay="0.5s" src="{{ url_for('static', filename='assets/images/about.jpg') }}">
                     </div>
                 </div>
             </div>
@@ -82,7 +64,7 @@
 
 
         <!-- Portfolio Start -->
-        <div class="container-xxl py-5">
+        <!-- <div class="container-xxl py-5">
             <div class="container px-lg-5">
                 <div class="section-title position-relative text-center mb-5 pb-2 wow fadeInUp" data-wow-delay="0.1s">
                     <h6 class="position-relative d-inline text-primary ps-4">Our Projects</h6>
@@ -100,9 +82,9 @@
                 <div class="row g-4 portfolio-container">
                     <div class="col-lg-4 col-md-6 portfolio-item first wow zoomIn" data-wow-delay="0.1s">
                         <div class="position-relative rounded overflow-hidden">
-                            <img class="img-fluid w-100" src="../../static/assets/images/lp/portfolio-1.jpg" alt="">
+                            <img class="img-fluid w-100" src="{{ url_for('static', filename='assets/images/portfolio-1.jpg') }}" alt="">
                             <div class="portfolio-overlay">
-                                <a class="btn btn-light" href="../../static/assets/images/lp/portfolio-1.jpg" data-lightbox="portfolio"><i class="fa fa-plus fa-2x text-primary"></i></a>
+                                <a class="btn btn-light" href="{{ url_for('static', filename='assets/images/portfolio-1.jpg') }}" data-lightbox="portfolio"><i class="fa fa-plus fa-2x text-primary"></i></a>
                                 <div class="mt-auto">
                                     <small class="text-white"><i class="fa fa-folder me-2"></i>Web Design</small>
                                     <a class="h5 d-block text-white mt-1 mb-0" href="">Project Name</a>
@@ -112,9 +94,9 @@
                     </div>
                     <div class="col-lg-4 col-md-6 portfolio-item second wow zoomIn" data-wow-delay="0.3s">
                         <div class="position-relative rounded overflow-hidden">
-                            <img class="img-fluid w-100" src="../../static/assets/images/lp/portfolio-2.jpg" alt="">
+                            <img class="img-fluid w-100" src="{{ url_for('static', filename='assets/images/portfolio-2.jpg') }}" alt="">
                             <div class="portfolio-overlay">
-                                <a class="btn btn-light" href="../../static/assets/images/lp/portfolio-2.jpg" data-lightbox="portfolio"><i class="fa fa-plus fa-2x text-primary"></i></a>
+                                <a class="btn btn-light" href="{{ url_for('static', filename='assets/images/portfolio-2.jpg') }}" data-lightbox="portfolio"><i class="fa fa-plus fa-2x text-primary"></i></a>
                                 <div class="mt-auto">
                                     <small class="text-white"><i class="fa fa-folder me-2"></i>Web Design</small>
                                     <a class="h5 d-block text-white mt-1 mb-0" href="">Project Name</a>
@@ -124,9 +106,9 @@
                     </div>
                     <div class="col-lg-4 col-md-6 portfolio-item first wow zoomIn" data-wow-delay="0.6s">
                         <div class="position-relative rounded overflow-hidden">
-                            <img class="img-fluid w-100" src="../../static/assets/images/lp/portfolio-3.jpg" alt="">
+                            <img class="img-fluid w-100" src="{{ url_for('static', filename='assets/images/portfolio-3.jpg') }}" alt="">
                             <div class="portfolio-overlay">
-                                <a class="btn btn-light" href="../../static/assets/images/lp/portfolio-3.jpg" data-lightbox="portfolio"><i class="fa fa-plus fa-2x text-primary"></i></a>
+                                <a class="btn btn-light" href="{{ url_for('static', filename='assets/images/portfolio-3.jpg') }}" data-lightbox="portfolio"><i class="fa fa-plus fa-2x text-primary"></i></a>
                                 <div class="mt-auto">
                                     <small class="text-white"><i class="fa fa-folder me-2"></i>Web Design</small>
                                     <a class="h5 d-block text-white mt-1 mb-0" href="">Project Name</a>
@@ -136,9 +118,9 @@
                     </div>
                     <div class="col-lg-4 col-md-6 portfolio-item second wow zoomIn" data-wow-delay="0.1s">
                         <div class="position-relative rounded overflow-hidden">
-                            <img class="img-fluid w-100" src="../../static/assets/images/lp/portfolio-4.jpg" alt="">
+                            <img class="img-fluid w-100" src="{{ url_for('static', filename='assets/images/portfolio-4.jpg') }}" alt="">
                             <div class="portfolio-overlay">
-                                <a class="btn btn-light" href="../../static/assets/images/lp/portfolio-4.jpg" data-lightbox="portfolio"><i class="fa fa-plus fa-2x text-primary"></i></a>
+                                <a class="btn btn-light" href="{{ url_for('static', filename='assets/images/portfolio-4.jpg') }}" data-lightbox="portfolio"><i class="fa fa-plus fa-2x text-primary"></i></a>
                                 <div class="mt-auto">
                                     <small class="text-white"><i class="fa fa-folder me-2"></i>Web Design</small>
                                     <a class="h5 d-block text-white mt-1 mb-0" href="">Project Name</a>
@@ -148,9 +130,9 @@
                     </div>
                     <div class="col-lg-4 col-md-6 portfolio-item first wow zoomIn" data-wow-delay="0.3s">
                         <div class="position-relative rounded overflow-hidden">
-                            <img class="img-fluid w-100" src="../../static/assets/images/lp/portfolio-5.jpg" alt="">
+                            <img class="img-fluid w-100" src="{{ url_for('static', filename='assets/images/portfolio-5.jpg') }}" alt="">
                             <div class="portfolio-overlay">
-                                <a class="btn btn-light" href="../../static/assets/images/lp/portfolio-5.jpg" data-lightbox="portfolio"><i class="fa fa-plus fa-2x text-primary"></i></a>
+                                <a class="btn btn-light" href="{{ url_for('static', filename='assets/images/portfolio-5.jpg') }}" data-lightbox="portfolio"><i class="fa fa-plus fa-2x text-primary"></i></a>
                                 <div class="mt-auto">
                                     <small class="text-white"><i class="fa fa-folder me-2"></i>Web Design</small>
                                     <a class="h5 d-block text-white mt-1 mb-0" href="">Project Name</a>
@@ -160,9 +142,9 @@
                     </div>
                     <div class="col-lg-4 col-md-6 portfolio-item second wow zoomIn" data-wow-delay="0.6s">
                         <div class="position-relative rounded overflow-hidden">
-                            <img class="img-fluid w-100" src="../../static/assets/images/lp/portfolio-6.jpg" alt="">
+                            <img class="img-fluid w-100" src="{{ url_for('static', filename='assets/images/portfolio-6.jpg') }}" alt="">
                             <div class="portfolio-overlay">
-                                <a class="btn btn-light" href="../../static/assets/images/lp/portfolio-6.jpg" data-lightbox="portfolio"><i class="fa fa-plus fa-2x text-primary"></i></a>
+                                <a class="btn btn-light" href="{{ url_for('static', filename='assets/images/portfolio-6.jpg') }}" data-lightbox="portfolio"><i class="fa fa-plus fa-2x text-primary"></i></a>
                                 <div class="mt-auto">
                                     <small class="text-white"><i class="fa fa-folder me-2"></i>Web Design</small>
                                     <a class="h5 d-block text-white mt-1 mb-0" href="">Project Name</a>
@@ -172,12 +154,12 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <!-- Portfolio End -->
 
 
         <!-- Testimonial Start -->
-        <div class="container-xxl bg-primary testimonial py-5 my-5 wow fadeInUp" data-wow-delay="0.1s">
+        <!-- <div class="container-xxl bg-primary testimonial py-5 my-5 wow fadeInUp" data-wow-delay="0.1s">
             <div class="container py-5 px-lg-5">
                 <div class="owl-carousel testimonial-carousel">
                     <div class="testimonial-item bg-transparent border rounded text-white p-4">
@@ -226,11 +208,11 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <!-- Testimonial End -->
 
 
         <!-- Back to Top -->
-        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top pt-2"><i class="bi bi-arrow-up"></i></a>
+        <a href="#top" class="btn btn-lg btn-primary btn-lg-square back-to-top pt-2"><i class="bi bi-arrow-up"></i></a>
     </div>
 {% endblock %}

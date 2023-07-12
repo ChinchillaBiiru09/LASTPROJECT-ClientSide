@@ -30,6 +30,8 @@ from apps.routes.Auth import auth
 from apps.routes.Dashboard import dashboard
 from apps.routes.Guest import guest
 from apps.routes.Invitation import invitation
+from apps.routes.Templates import templates
+from apps.routes.FAQ import faq
 ## Import Blueprint ---------------------------------------- Finish
 
 ## Register Blueprint ---------------------------------------- Start
@@ -38,6 +40,8 @@ app.register_blueprint(auth)
 app.register_blueprint(dashboard)
 app.register_blueprint(guest)
 app.register_blueprint(invitation)
+app.register_blueprint(templates)
+app.register_blueprint(faq)
 ## Register Blueprint ---------------------------------------- Finish
 # BLUEPRINT ============================================================ End
 
@@ -53,8 +57,8 @@ def home():
 ## Route Home ---------------------------------------- Finish
 
 ## Route LogOut ---------------------------------------- Start
-@app.route('/logout')
-def logout():
+@app.route('/signout')
+def signout():
     if (session.get('user') != None):
         session.pop('user')
         session.clear()

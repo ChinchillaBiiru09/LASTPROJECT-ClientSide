@@ -1,0 +1,14 @@
+<div class="login-header box-shadow">
+    <div class="container-fluid d-flex justify-content-between align-items-center">
+        <div class="brand-logo">
+            <a href="{{ url_for('home') }}">
+                <img src="{{ url_for('static', filename='assets/images/ic_logo_purp.png') }}" alt="">
+            </a>
+        </div>
+        <div class="login-menu">
+            <ul>
+                <li><a href="{{ url_for('auth.sign_up') }}">Sign Up</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
