@@ -32,6 +32,7 @@ from developed.routes.Guest import guest
 from developed.routes.Invitation import invitation
 from developed.routes.Templates import templates
 from developed.routes.FAQ import faq
+from developed.routes.Management import management
 ## Import Blueprint ---------------------------------------- Finish
 
 ## Register Blueprint ---------------------------------------- Start
@@ -42,6 +43,7 @@ app.register_blueprint(guest)
 app.register_blueprint(invitation)
 app.register_blueprint(templates)
 app.register_blueprint(faq)
+app.register_blueprint(management)
 ## Register Blueprint ---------------------------------------- Finish
 # BLUEPRINT ============================================================ End
 
@@ -59,10 +61,7 @@ def home():
 ## Route Home ---------------------------------------- Start
 @app.route('/admin')
 def adm_dashboard():
-    return render_template (
-        title=TITLE_HOME,
-        template_name_or_list='pages/index.html'
-    )
+    return redirect(url_for('dashboard.adm_index'))
 ## Route Home ---------------------------------------- Finish
 
 ## Route LogOut ---------------------------------------- Start

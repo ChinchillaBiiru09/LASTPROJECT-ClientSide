@@ -50,3 +50,10 @@ def index():
         active='dashboard.index'
     )
 
+
+@dashboard.get('/admin')
+def adm_index():
+    return render_template(
+        title=TITLE_DASHBD,
+        template_name_or_list='adm_dashboard.html'
+    )
