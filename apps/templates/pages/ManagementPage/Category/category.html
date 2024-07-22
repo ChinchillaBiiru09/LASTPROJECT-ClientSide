@@ -1,0 +1,182 @@
+<!-- ============================================================== -->
+<!-- PAGE CONTENT - CATEGORY MANAGEMENT - ADMIN -->
+<!-- ============================================================== -->
+{% extends 'layouts/dash_layout.html' %} {% block content %}
+
+	<!-- ============================================================== -->
+	<!-- PRELOADER - ALL PAGE - ALL -->
+	<!-- ============================================================== -->
+    {% include 'components/preloader.html' %}
+	<!-- ============================================================== -->
+	<!-- END PRELOADER -->
+	<!-- ============================================================== -->
+	
+
+	<!-- ============================================================== -->
+	<!-- HEADER - ALL PAGE - ALL -->
+	<!-- ============================================================== -->
+	{% include 'components/dash_header.html' %}
+	<!-- ============================================================== -->
+	<!-- END HEADER -->
+	<!-- ============================================================== -->
+	
+
+	<!-- ============================================================== -->
+	<!-- NAVIGATION SIDEBAR - ALL PAGE - ALL -->
+	<!-- ============================================================== -->
+	{% include 'components/dash_sidebar.html' %}
+	<!-- ============================================================== -->
+	<!-- END NAVIGATION SIDEBAR -->
+	<!-- ============================================================== -->
+	
+
+	<!-- ============================================================== -->
+	<!-- MAIN CONTENT - CATEGORY MANAGEMENT - ADMIN -->
+	<!-- ============================================================== -->
+	<div class="main-container">
+		<div class="pd-ltr-20 xs-pd-20-10">
+            <!-- ============================================================== -->
+			<!-- Content Section -->
+			<div class="min-height-200px">
+				<!-- ============================================================== -->
+				<!-- Header Content Section -->
+				<div class="page-header">
+					<div class="row">
+						<!-- ============================================================== -->
+						<!-- Title & Breadcrumb Section -->
+						<div class="col-md-6 col-sm-12">
+							<!-- ============================================================== -->
+							<!-- Title Section -->
+							<div class="title">
+								<h4>Category Management</h4>
+							</div>
+							<!-- End Title -->
+							<!-- ============================================================== -->
+
+							<!-- ============================================================== -->
+							<!-- Breadcrumb Section -->
+							<nav aria-label="breadcrumb" role="navigation">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="{{ url_for('dashboard.index') }}">Home</a></li>
+									<li class="breadcrumb-item active" aria-current="page">Category Management</li>
+								</ol>
+							</nav>
+							<!-- End Breadcrumb -->
+							<!-- ============================================================== -->
+						</div>
+						<!-- End Title & Breadcrumb -->
+						<!-- ============================================================== -->
+
+						<!-- ============================================================== -->
+						<!-- Management Add Button Section -->
+						<div class="col-md-6 col-sm-10 text-right">
+							<a href="{{ url_for('management.category.add') }}" class="btn btn-primary" type="button" role="button">
+								<i class="icon-copy fa fa-plus" aria-hidden="true"></i>  Add
+							</a>
+						</div>
+						<!-- End Management Add Button -->
+						<!-- ============================================================== -->
+					</div>
+				</div>
+				<!-- End Header Content -->
+				<!-- ============================================================== -->
+
+				<!-- ============================================================== -->
+				<!-- Alert Section -->
+				{% with messages = get_flashed_messages(with_categories=true) %}
+				{% include "components/alert.html" %}
+				{% endwith %}
+				<!-- End Alert -->
+				<!-- ============================================================== -->
+				
+				<!-- ============================================================== -->
+				<!-- Category List - Datatable Section -->
+				<div class="card-box mb-30">
+					<!-- ============================================================== -->
+					<!-- Table Title -->
+					<div class="pd-20">
+						<h4 class="text-blue h4">Category List</h4>
+					</div>
+					<!-- End Table Title -->
+					<!-- ============================================================== -->
+					
+					<!-- ============================================================== -->
+					<!-- Table Content -->
+					<div class="pb-20">
+						<table class="data-table table stripe hover nowrap">
+							<!-- ============================================================== -->
+							<!-- Heading Table Column -->
+							<thead>
+								<tr>
+									<th class="table-plus datatable-nosort">Category</th>
+									<th>Format Data</th>
+									<th>Created At</th>
+									<th class="datatable-nosort">Action</th>
+								</tr>
+							</thead>
+							<!-- End Heading Table Column -->
+							<!-- ============================================================== -->
+
+							<!-- ============================================================== -->
+							<!-- Body Table -->
+							<tbody>
+								{% for item in data %}
+								<!-- ============================================================== -->
+								<!-- Template Popular - Row Box Data Section -->
+								<tr>
+									<td class="table-plus">{{ item['category'] }}</td>
+									<td>{% for key in item["format_data"] %} {{ key }}; {% endfor %}</td>
+									<td>{{ item['created_at']['full'] }}</td>
+									<td>
+										<div class="dropdown">
+											<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+												<i class="dw dw-more"></i>
+											</a>
+											<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+												<a class="dropdown-item" href="{{ url_for('management.category.edit', id=item['category_id']) }}"><i class="dw dw-edit2"></i> Edit</a>
+												<a type="button" class="dropdown-item" href="{{ url_for('management.category.delete', id=item['category_id']) }}"><i class="dw dw-delete-3"></i> Delete</a>
+											</div>
+										</div>
+									</td>
+								</tr>
+								<!-- End Template Popular - Row Box Data -->
+								<!-- ============================================================== -->
+								{% endfor %}
+							</tbody>
+							<!-- End Body Table -->
+							<!-- ============================================================== -->
+						</table>
+					</div>
+					<!-- End Table Content -->
+					<!-- ============================================================== -->
+				</div>
+				<!-- End Category List - Datatable -->
+				<!-- ============================================================== -->
+			</div>
+			<!-- End Content -->
+			<!-- ============================================================== -->
+
+			<!-- ============================================================== -->
+			<!-- Footer Section -->
+			{% include 'components/dash_footer.html' %}
+			<!-- End Footer -->
+			<!-- ============================================================== -->
+		</div>
+	</div>
+	<!-- ============================================================== -->
+	<!-- END MAIN CONTENT -->
+	<!-- ============================================================== -->
+
+    
+    <!-- ============================================================== -->
+	<!-- JAVASCRIPT -->
+	<!-- ============================================================== -->
+    <script src="{{ url_for('static', filename='js/Management/Category/deleteCategory.js') }}"></script>
+    <!-- ============================================================== -->
+	<!-- END JAVASCRIPT -->
+	<!-- ============================================================== -->
+
+{% endblock %}
+<!-- ============================================================== -->
+<!-- END PAGE CONTENT -->
+<!-- ============================================================== -->

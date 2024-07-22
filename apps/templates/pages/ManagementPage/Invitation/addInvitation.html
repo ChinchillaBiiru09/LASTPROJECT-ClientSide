@@ -1,0 +1,520 @@
+<!-- ============================================================== -->
+<!-- PAGE CONTENT - GUEST - USER -->
+<!-- ============================================================== -->
+{% extends 'layouts/dash_layout.html' %} {% block content %}
+
+	<!-- ============================================================== -->
+	<!-- PRELOADER - ALL PAGE - ALL -->
+	<!-- ============================================================== -->
+    {% include 'components/preloader.html' %}
+	<!-- ============================================================== -->
+	<!-- END PRELOADER -->
+	<!-- ============================================================== -->
+	
+
+	<!-- ============================================================== -->
+	<!-- HEADER - ALL PAGE - ALL -->
+	<!-- ============================================================== -->
+	{% include 'components/dash_header.html' %}
+	<!-- ============================================================== -->
+	<!-- END HEADER -->
+	<!-- ============================================================== -->
+	
+
+	<!-- ============================================================== -->
+	<!-- NAVIGATION SIDEBAR - ALL PAGE - ALL -->
+	<!-- ============================================================== -->
+	{% include 'components/dash_sidebar.html' %}
+	<!-- ============================================================== -->
+	<!-- END NAVIGATION SIDEBAR -->
+	<!-- ============================================================== -->
+	
+
+	<!-- ============================================================== -->
+	<!-- MAIN CONTENT - GUEST - USER -->
+	<!-- ============================================================== -->
+	<div class="main-container">
+		<div class="pd-ltr-20 xs-pd-20-10">
+            <!-- ============================================================== -->
+			<!-- Content Section -->
+			<div class="min-height-200px">
+                <!-- ============================================================== -->
+				<!-- Header Content Section -->
+				<div class="page-header">
+					<div class="row">
+						<!-- ============================================================== -->
+						<!-- Title & Breadcrumb Section -->
+						<div class="col-md-6 col-sm-12">
+							<div class="title">
+								<h4>Undanganku</h4>
+							</div>
+							<nav aria-label="breadcrumb" role="navigation">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="{{ url_for('dashboard.index') }}">Home</a></li>
+									<li class="breadcrumb-item"><a href="{{ url_for('management.invitation.index') }}">Undanganku</a></li>
+									<li class="breadcrumb-item active" aria-current="page">Buat Baru</li>
+								</ol>
+							</nav>
+						</div>
+						<!-- End Title & Breadcrumb -->
+						<!-- ============================================================== -->
+					</div>
+				</div>
+                <!-- End Header Content -->
+				<!-- ============================================================== -->
+
+				<!-- ============================================================== -->
+				<!-- Alert Section -->
+				{% with messages = get_flashed_messages(with_categories=true) %}
+				{% include "components/alert.html" %}
+				{% endwith %}
+				<!-- End Alert -->
+				<!-- ============================================================== -->
+
+                <!-- ============================================================== -->
+				<!-- Default Basic Forms Start -->
+				<form action="{{ url_for('management.invitation.add_proccess') }}" method="post" enctype="multipart/form-data">
+					<div class="pd-20 card-box mb-30">
+						<div class="clearfix">
+							<div class="pull-left">
+								<h4 class="text-blue h4">Data Undangan</h4>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="col-sm-12 col-md-2 col-form-label">Kategori</label>
+							<div class="col-sm-12 col-md-10">
+								<input class="form-control" type="hidden" name="category_id" id="category_id" value="{{ data['template']['category_id'] }}">
+								<input class="form-control" type="text" name="category" id="category" value="{{ data['template']['category'] }}" readonly>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="col-sm-12 col-md-2 col-form-label">Template</label>
+							<div class="col-sm-12 col-md-10">
+								<input class="form-control" type="hidden" name="template_id" id="template_id" value="{{ data['template']['template_id'] }}">
+								<input class="form-control" type="text" name="template" id="template" value="{{ data['template']['title'] }}" readonly>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="col-sm-12 col-md-2 col-form-label">Judul*</label>
+							<div class="col-sm-12 col-md-10">
+								<input class="form-control" type="text" placeholder="Tulis disini" name="title" id="title">
+							</div>
+						</div>
+					</div>
+
+					{% if data['template']['category'].upper() == "PERNIKAHAN" %}
+					<!-- Data diri mempelai wanita -->
+					<div class="pd-20 card-box mb-30">
+						<div class="clearfix">
+							<div class="pull-left">
+								<h4 class="text-blue h4">Data Pribadi Mempelai Wanita</h4>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="col-sm-12 col-md-2 col-form-label">Nama Lengkap Wanita*</label>
+							<div class="col-sm-12 col-md-10">
+								<input class="form-control" type="text" placeholder="Tulis disini" name="woman_fullname" id="woman_fullname">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="col-sm-12 col-md-2 col-form-label">Nama Panggilan Wanita*</label>
+							<div class="col-sm-12 col-md-10">
+								<input class="form-control" type="text" placeholder="Tulis disini" name="woman_name" id="woman_name">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="col-sm-12 col-md-2 col-form-label">Foto</label>
+							<div class="col-sm-12 col-md-10">
+								<input type="file" class="form-control-file form-control height-auto" accept=".jpg,.jpeg,.png" name="womans_photo" id="womans_photo">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="col-sm-12 col-md-2 col-form-label">Alamat*</label>
+							<div class="col-sm-12 col-md-10">
+								<input class="form-control" type="text" placeholder="Jl. xxxxx" name="woman_address" id="woman_address">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="col-sm-12 col-md-2 col-form-label">Putri ke*</label>
+							<div class="col-sm-12 col-md-10">
+								<input class="form-control" value="1" min="1" max="15" type="number" name="daughter_no" id="daughter_no">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="col-sm-12 col-md-2 col-form-label">Nama Ayah*</label>
+							<div class="col-sm-4 col-md-2">
+								<select class="form-control" name="woman_dad_status" id="woman_dad_status">
+									<option selected="0">Masih hidup</option>
+									<option value="Alm">Meninggal</option>
+								</select>
+							</div>
+							<div class="col-sm-8 col-md-8">
+								<input class="form-control" type="text" placeholder="Tulis disini" name="womans_dad" id="womans_dad">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="col-sm-12 col-md-2 col-form-label">Nama Ibu*</label>
+							<div class="col-sm-4 col-md-2">
+								<select class="form-control" name="woman_mom_status" id="woman_mom_status">
+									<option selected="0">Masih hidup</option>
+									<option value="Almh">Meninggal</option>
+								</select>
+							</div>
+							<div class="col-sm-8 col-md-8">
+								<input class="form-control" type="text" placeholder="Tulis disini" name="womans_mom" id="womans_mom">
+							</div>
+						</div>
+					</div>
+					<!-- Data diri mempelai pria -->
+					<div class="pd-20 card-box mb-30">
+						<div class="clearfix">
+							<div class="pull-left">
+								<h4 class="text-blue h4">Data Pribadi Mempelai Pria</h4>
+							</div>
+						</div>
+						<!-- nama lengkap pria -->
+                        <div class="form-group row">
+							<label class="col-sm-12 col-md-2 col-form-label">Nama Lengkap Pria</label>
+							<div class="col-sm-12 col-md-10">
+								<input class="form-control" type="text" placeholder="Tulis disini" name="man_fullname" id="man_fullname">
+							</div>
+						</div>
+						<!-- nama panggilan pria -->
+						<div class="form-group row">
+							<label class="col-sm-12 col-md-2 col-form-label">Nama Panggilan Pria*</label>
+							<div class="col-sm-12 col-md-10">
+								<input class="form-control" type="text" placeholder="Tulis disini" name="man_name" id="man_name">
+							</div>
+						</div>
+						<!-- foto pria -->
+						<div class="form-group row">
+							<label class="col-sm-12 col-md-2 col-form-label">Foto</label>
+							<div class="col-sm-12 col-md-10">
+								<input type="file" class="form-control-file form-control height-auto" accept=".jpg,.jpeg,.png" name="mans_photo" id="mans_photo">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="col-sm-12 col-md-2 col-form-label">Alamat*</label>
+							<div class="col-sm-12 col-md-10">
+								<input class="form-control" type="text" placeholder="Jl. xxxxx" name="man_address" id="man_address">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="col-sm-12 col-md-2 col-form-label">Putra ke*</label>
+							<div class="col-sm-12 col-md-10">
+								<input class="form-control" value="1" min="1" max="15" type="number" name="son_no" id="son_no">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="col-sm-12 col-md-2 col-form-label">Nama Ayah*</label>
+							<div class="col-sm-4 col-md-2">
+								<select class="form-control" name="man_dad_status" id="man_dad_status">
+									<option selected="0">Masih hidup</option>
+									<option value="Alm">Meninggal</option>
+								</select>
+							</div>
+							<div class="col-sm-8 col-md-8">
+								<input class="form-control" type="text" placeholder="Tulis disini" name="mans_dad" id="mans_dad">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="col-sm-12 col-md-2 col-form-label">Nama Ibu*</label>
+							<div class="col-sm-4 col-md-2">
+								<select class="form-control" name="man_mom_status" id="man_mom_status">
+									<option selected="0">Masih hidup</option>
+									<option value="Almh">Meninggal</option>
+								</select>
+							</div>
+							<div class="col-sm-8 col-md-8">
+								<input class="form-control" type="text" placeholder="Tulis disini" name="mans_mom" id="mans_mom">
+							</div>
+						</div>
+					</div>
+
+					<!-- Data informasi Acara -->
+					<div class="pd-20 card-box mb-30" id="dynamic-form">
+						<div class="clearfix">
+							<div class="pull-left">
+								<h4 class="text-blue h4">Informasi Acara</h4>
+							</div>
+						</div>
+                        <div class="row">
+							<div class="col-md-5 col-sm-12">
+								<div class="form-group">
+									<!-- <label class="col-sm-12 col-md-2 col-form-label">Akad*</label> -->
+									<label>Akad*</label>
+									<input class="form-control date-picker" placeholder="Pilih tanggal" type="text" name="marriage_date" id="marriage_date">
+								</div>
+							</div>
+							<div class="col-md-3 col-sm-12">
+								<div class="form-group">
+									<label>Mulai*</label>
+									<input class="form-control time-picker" placeholder="Pilih waktu" type="text" name="marriage_start" id="marriage_start">
+								</div>
+							</div>
+							<div class="form-group"><p class="text-center col-form-label" style="margin-top: 2rem;">-</p></div>
+							<div class="col-md-3 col-sm-12">
+								<div class="form-group">
+									<label>Selesai*</label>
+									<input class="form-control time-picker" placeholder="Selesai" type="text" name="marriage_end" id="marriage_end">
+								</div>
+							</div>
+						</div>
+                        <div class="row">
+							<div class="col-md-5 col-sm-12">
+								<div class="form-group">
+									<!-- <label class="col-sm-12 col-md-2 col-form-label">Akad*</label> -->
+									<label>Resepsi*</label>
+									<input class="form-control date-picker" placeholder="Pilih tanggal" type="text" name="reception_date" id="reception_date">
+								</div>
+							</div>
+							<div class="col-md-3 col-sm-12">
+								<div class="form-group">
+									<label>Mulai*</label>
+									<input class="form-control time-picker" placeholder="Pilih waktu" type="text" name="reception_start" id="reception_start">
+								</div>
+							</div>
+							<div class="form-group"><p class="text-center col-form-label" style="margin-top: 2rem;">-</p></div>
+							<div class="col-md-3 col-sm-12">
+								<div class="form-group">
+									<label>Selesai*</label>
+									<input class="form-control time-picker" placeholder="selesai" type="text" name="reception_end" id="reception_end">
+								</div>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="col-sm-12 col-md-2 col-form-label">Lokasi*</label>
+							<div class="col-sm-12 col-md-10">
+								<input class="form-control" type="text" placeholder="Tulis disini" name="location" id="location">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="col-sm-12 col-md-2 col-form-label">Maps*</label>
+							<div class="col-sm-12 col-md-10">
+								<input class="form-control" type="text" placeholder="Copy-paste link maps" name="maps" id="maps">
+							</div>
+						</div>
+						<!-- <div class="form-group row" id="galeri-group-1">
+							<label class="col-sm-12 col-md-2 col-form-label" for="galeri-1">Galeri</label>
+							<div class="col-sm-12 col-md-4">
+								<input type="file" class="form-control-file form-control height-auto" accept=".jpg,.jpeg,.png" name="galeri-1" id="galeri-1">
+							</div>
+							<div class="col-md-3 col-sm-12">
+								<button type="button" class="btn btn-outline-danger" onclick="removeFormField(1)">Delete</button>
+								<button type="button" class="btn btn-outline-success" id="rm-format-data" onclick="addFormField()">Add</button>
+							</div>
+						</div> -->
+					</div>
+
+
+					{% elif data['template']['category'].upper() == "ULANG TAHUN" %}
+					<!-- Data diri -->
+					<div class="pd-20 card-box mb-30">
+						<div class="clearfix">
+							<div class="pull-left">
+								<h4 class="text-blue h4">Data Diri</h4>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="col-sm-12 col-md-2 col-form-label">Nama Lengkap*</label>
+							<div class="col-sm-12 col-md-10">
+								<input class="form-control" type="text" placeholder="Tulis disini" name="fullname" id="fullname">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="col-sm-12 col-md-2 col-form-label">Nama Panggilan*</label>
+							<div class="col-sm-12 col-md-10">
+								<input class="form-control" type="text" placeholder="Tulis disini" name="callname" id="callname">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="col-sm-12 col-md-2 col-form-label">Foto*</label>
+							<div class="col-sm-12 col-md-10">
+								<input type="file" class="form-control-file form-control height-auto" accept=".jpg,.jpeg,.png" name="myphoto" id="myphoto">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="col-sm-12 col-md-2 col-form-label">Ulang tahun ke*</label>
+							<div class="col-sm-12 col-md-10">
+								<input class="form-control" value="1" min="1" max="100" type="number" name="birthday" id="birthday">
+							</div>
+						</div>
+					</div>
+
+					<!-- Data informasi Acara -->
+					<div class="pd-20 card-box mb-30" id="dynamic-form">
+						<div class="clearfix">
+							<div class="pull-left">
+								<h4 class="text-blue h4">Informasi Acara</h4>
+							</div>
+						</div>
+                        <div class="row">
+							<div class="col-md-5 col-sm-12">
+								<div class="form-group">
+									<!-- <label class="col-sm-12 col-md-2 col-form-label">Akad*</label> -->
+									<label>Tanggal*</label>
+									<input class="form-control date-picker" placeholder="Pilih tanggal" type="text" name="bd_date" id="bd_date">
+								</div>
+							</div>
+							<div class="col-md-3 col-sm-12">
+								<div class="form-group">
+									<label>Mulai*</label>
+									<input class="form-control time-picker" placeholder="Pilih waktu" type="text" name="bd_start" id="bd_start">
+								</div>
+							</div>
+							<div class="form-group"><p class="text-center col-form-label" style="margin-top: 2rem;">-</p></div>
+							<div class="col-md-3 col-sm-12">
+								<div class="form-group">
+									<label>Selesai*</label>
+									<input class="form-control time-picker" placeholder="Selesai" type="text" name="bd_end" id="bd_end">
+								</div>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="col-sm-12 col-md-2 col-form-label">Dresscode*</label>
+							<div class="col-sm-12 col-md-10">
+								<input class="form-control" type="text" placeholder="Tulis disini" name="dresscode" id="dresscode">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="col-sm-12 col-md-2 col-form-label">Lokasi*</label>
+							<div class="col-sm-12 col-md-10">
+								<input class="form-control" type="text" placeholder="Tulis disini" name="location" id="location">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="col-sm-12 col-md-2 col-form-label">Maps*</label>
+							<div class="col-sm-12 col-md-10">
+								<input class="form-control" type="text" placeholder="Copy-paste link maps" name="maps" id="maps">
+							</div>
+						</div>
+					</div>
+
+
+					{% elif data['template']['category'].upper() == "GRADUATION PARTY" %}
+					<!-- Data diri -->
+					<div class="pd-20 card-box mb-30">
+						<div class="clearfix">
+							<div class="pull-left">
+								<h4 class="text-blue h4">Data Diri</h4>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="col-sm-12 col-md-2 col-form-label">Nama Lengkap*</label>
+							<div class="col-sm-12 col-md-10">
+								<input class="form-control" type="text" placeholder="Tulis disini" name="fullname" id="fullname">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="col-sm-12 col-md-2 col-form-label">Nama Panggilan *</label>
+							<div class="col-sm-12 col-md-10">
+								<input class="form-control" type="text" placeholder="Tulis disini" name="callname" id="callname">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="col-sm-12 col-md-2 col-form-label">Foto</label>
+							<div class="col-sm-12 col-md-10">
+								<input type="file" class="form-control-file form-control height-auto" accept=".jpg,.jpeg,.png" name="myphoto" id="myphoto">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="col-sm-12 col-md-2 col-form-label">Ulang tahun ke*</label>
+							<div class="col-sm-12 col-md-10">
+								<input class="form-control" value="1" min="1" max="15" type="number" name="daughter_no" id="daughter_no">
+							</div>
+						</div>
+					</div>
+
+					<!-- Data informasi Acara -->
+					<div class="pd-20 card-box mb-30" id="dynamic-form">
+						<div class="clearfix">
+							<div class="pull-left">
+								<h4 class="text-blue h4">Informasi Acara</h4>
+							</div>
+						</div>
+                        <div class="row">
+							<div class="col-md-5 col-sm-12">
+								<div class="form-group">
+									<!-- <label class="col-sm-12 col-md-2 col-form-label">Akad*</label> -->
+									<label>Tanggal*</label>
+									<input class="form-control date-picker" placeholder="Pilih tanggal" type="text" name="marriage_date" id="marriage_date">
+								</div>
+							</div>
+							<div class="col-md-3 col-sm-12">
+								<div class="form-group">
+									<label>Mulai*</label>
+									<input class="form-control time-picker" placeholder="Pilih waktu" type="text" name="marriage_start" id="marriage_start">
+								</div>
+							</div>
+							<div class="form-group"><p class="text-center col-form-label" style="margin-top: 2rem;">-</p></div>
+							<div class="col-md-3 col-sm-12">
+								<div class="form-group">
+									<label>Selesai*</label>
+									<input class="form-control time-picker" placeholder="Selesai" type="text" name="marriage_end" id="marriage_end">
+								</div>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="col-sm-12 col-md-2 col-form-label">Lokasi*</label>
+							<div class="col-sm-12 col-md-10">
+								<input class="form-control" type="text" placeholder="Tulis disini" name="location" id="location">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="col-sm-12 col-md-2 col-form-label">Maps*</label>
+							<div class="col-sm-12 col-md-10">
+								<input class="form-control" type="text" placeholder="Copy-paste link maps" name="maps" id="maps">
+							</div>
+						</div>
+					</div>
+
+
+					{% else %}
+					<div class="pd-20 card-box mb-30">
+						<div class="form-group row">
+							<label for="example-datetime-local-input" class="col-sm-12 col-md-2 col-form-label">Contoh kosong</label>
+							<div class="col-sm-12 col-md-10">
+								<input class="form-control datetimepicker" placeholder="Choose Date anf time" type="text">
+							</div>
+						</div>
+                	</div>
+					{% endif %}
+
+					<div class="pd-20 card-box mb-30 text-right">
+						<a href="{{ url_for('management.template.index') }}" type="button" class="btn btn-outline-danger mr-1"> Kembali</a>
+						<button type="submit" id="invitationAddBtn" class="btn btn-outline-primary"> Simpan</button>
+                	</div>
+				</form>
+                <!-- Default Basic Forms End -->
+				<!-- ============================================================== -->
+			</div>
+			<!-- End Content -->
+			<!-- ============================================================== -->
+            
+			<!-- ============================================================== -->
+			<!-- Footer -->
+			<!-- ============================================================== -->
+			{% include 'components/dash_footer.html' %}
+			<!-- End Footer -->
+			<!-- ============================================================== -->
+		</div>
+	</div>
+	<!-- ============================================================== -->
+	<!-- END MAIN CONTENT -->
+	<!-- ============================================================== -->
+
+    
+    <!-- ============================================================== -->
+	<!-- JAVASCRIPT -->
+	<!-- ============================================================== -->
+	<script src="{{ url_for('static', filename='src/plugins/switchery/switchery.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='vendors/scripts/advanced-components.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/Management/Category/addCategory.js') }}"></script>
+    <!-- ============================================================== -->
+	<!-- END JAVASCRIPT -->
+	<!-- ============================================================== -->
+
+{% endblock %}
+<!-- ============================================================== -->
+<!-- END PAGE CONTENT -->
+<!-- ============================================================== -->

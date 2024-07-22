@@ -1,0 +1,351 @@
+<!-- ============================================================== -->
+<!-- PAGE CONTENT - USER PAGE - ADMIN -->
+<!-- ============================================================== -->
+{% extends 'layouts/dash_layout.html' %} {% block content %}
+
+	<!-- ============================================================== -->
+	<!-- PRELOADER - ALL PAGE - ALL -->
+	<!-- ============================================================== -->
+    {% include 'components/preloader.html' %}
+	<!-- ============================================================== -->
+	<!-- End PRELOADER -->
+	<!-- ============================================================== -->
+	
+
+	<!-- ============================================================== -->
+	<!-- HEADER - ALL PAGE - ALL -->
+	<!-- ============================================================== -->
+	{% include 'components/dash_header.html' %}
+	<!-- ============================================================== -->
+	<!-- END HEADER -->
+	<!-- ============================================================== -->
+	
+
+	<!-- ============================================================== -->
+	<!-- NAVIGATION SIDEBAR - ALL PAGE - ALL -->
+	<!-- ============================================================== -->
+	{% include 'components/dash_sidebar.html' %}
+	<!-- ============================================================== -->
+	<!-- END NAVIGATION SIDEBAR -->
+	<!-- ============================================================== -->
+	
+
+	<!-- ============================================================== -->
+	<!-- MAIN CONTENT - USER PAGE - ADMIN -->
+	<!-- ============================================================== -->
+	<div class="main-container">
+		<div class="pd-ltr-20 xs-pd-20-10">
+            <!-- ============================================================== -->
+			<!-- Content Section -->
+			<div class="min-height-200px">
+				<!-- ============================================================== -->
+				<!-- Header Content Section -->
+				<div class="page-header">
+					<div class="row">
+                        <!-- ============================================================== -->
+						<!-- Title & Breadcrumb Section -->
+						<div class="col-md-6 col-sm-12">
+                            <!-- ============================================================== -->
+							<!-- Title Section -->
+							<div class="title">
+								<h4>User Detail</h4>
+							</div>
+                            <!-- End Title -->
+							<!-- ============================================================== -->
+
+                            <!-- ============================================================== -->
+							<!-- Breadcrumb Section -->
+							<nav aria-label="breadcrumb" role="navigation">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="{{ url_for('dashboard.index') }}">Home</a></li>
+									<li class="breadcrumb-item"><a href="{{ url_for('management.user.index') }}">User Management</a></li>
+									<li class="breadcrumb-item active" aria-current="page">Details</li>
+								</ol>
+							</nav>
+                            <!-- End Breadcrumb -->
+							<!-- ============================================================== -->
+						</div>
+                        <!-- End Title & Breadcrumb -->
+						<!-- ============================================================== -->
+					</div>
+				</div>
+				<!-- End Header Content -->
+				<!-- ============================================================== -->
+				
+				<!-- ============================================================== -->
+				<!-- User's Profile Section -->
+                <div class="card-box pd-20 height-100-p mb-30">
+                    <div class="row align-items-center">
+                        <!-- ============================================================== -->
+				        <!-- Photo Profile Section -->
+                        <div class="col-md-4">
+                            <div class="profile-photo">
+								<img src="{{ data['user']['photos'] }}" alt="" class="avatar-photo">
+							</div>
+                        </div>
+                        <!-- End Photo Profile -->
+				        <!-- ============================================================== -->
+
+                        <!-- ============================================================== -->
+				        <!-- Information Profile Section -->
+                        <div class="col-md-8">
+                            <div class="profile-info">
+                                <h4 class="font-20 weight-500 mb-10 text-capitalize">
+                                    <div class="weight-600 font-30 text-blue">{{ data['user']["first_name"] + " " + data['user']["middle_name"] + " " + data['user']["last_name"] }}</div>
+                                </h4>
+                                <ul>
+                                    <li>
+                                        <span>Email Address:</span>
+                                        {{ data['user']["email"] }}
+                                    </li>
+                                    <li>
+                                        <span>Last Sign in:</span>
+                                        {{ data['user']["last_active"]["full"] }}
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- End Information Profile -->
+				        <!-- ============================================================== -->
+                    </div>
+                </div>
+				<!-- End User's Profile -->
+				<!-- ============================================================== -->
+
+                <!-- ============================================================== -->
+				<!-- User's Invitation Section -->
+                <div class="card-box pd-20 height-100-p mb-30">
+                    <h5 class="h4 text-blue mb-20">Invitation Information</h5>
+                    <div class="tab">
+                        <!-- ============================================================== -->
+                        <!-- Navigation Tab Section -->
+                        <ul class="nav nav-tabs customtab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#invitationTabModal" role="tab" aria-selected="true">Invitation</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#guestTabModal" role="tab" aria-selected="false">Guest</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#greetingTabModal" role="tab" aria-selected="false">Greeting</a>
+                            </li>
+                        </ul>
+                        <!-- End Navigation Tab -->
+                        <!-- ============================================================== -->
+
+                        <!-- ============================================================== -->
+                        <!-- Content Tab Section -->
+                        <div class="tab-content">
+                            <!-- ============================================================== -->
+                            <!-- Invitation Tab Section -->
+                            <div class="tab-pane fade show active" id="invitationTabModal" role="tabpanel">
+                                <div class="pd-20">
+                                {# If invitation is not ready #} {% if data['invitation'] == None %}
+                                    {% with
+                                        title = "Invitation(s) are not yet available.",
+                                        pict_size = 350
+                                    %}
+                                    {% include 'components/not_found.html' %}
+                                    {% endwith %}
+                                {# If invitation is ready #} {% else %}
+                                    <!-- ============================================================== -->
+                                    <!-- Invitation List Section -->
+                                    <div class="row">
+                                        {% for item in data['invitation'] %}
+                                        <div class="col-lg-3 col-md-6 col-sm-12 mb-30">
+                                            <div class="da-card">
+                                                <div class="da-card-photo">
+                                                    <img src="{{ item['invitation_wallpaper'] }}" alt="">
+                                                    <div class="da-overlay da-slide-left">
+                                                        <div class="da-social">
+                                                            <ul class="clearfix">
+                                                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                                                <li><a href="#"><i class="fa fa-envelope-o"></i></a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="da-card-content">
+                                                    <h5 class="h5 mb-10">{{ item['invitation_title'] }}</h5>
+                                                    <p class="mb-0">{{ item['category'] }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                    <!-- End Invitation List -->
+                                    <!-- ============================================================== -->
+
+                                    <!-- ============================================================== -->
+                                    <!-- Pagination Tab Section -->
+                                    <div class="blog-pagination mb-30">
+                                        <div class="btn-toolbar justify-content-center mb-15">
+                                            <div class="btn-group">
+                                                <a href="#" class="btn btn-outline-primary prev"><i class="fa fa-angle-double-left"></i></a>
+                                                <a href="#" class="btn btn-outline-primary">1</a>
+                                                <a href="#" class="btn btn-outline-primary">2</a>
+                                                <span class="btn btn-primary current">3</span>
+                                                <a href="#" class="btn btn-outline-primary">4</a>
+                                                <a href="#" class="btn btn-outline-primary">5</a>
+                                                <a href="#" class="btn btn-outline-primary next"><i class="fa fa-angle-double-right"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End Pagination Tab -->
+                                    <!-- ============================================================== -->
+                                {% endif %}
+                                </div>
+                            </div>
+                            <!-- End Invitation Tab -->
+                            <!-- ============================================================== -->
+
+                            <!-- ============================================================== -->
+                            <!-- Guest Tab Section -->
+                            <div class="tab-pane fade" id="guestTabModal" role="tabpanel">
+                                <div class="pd-20">
+                                    {# If invitation is not ready #} {% if data['guest'] == None %}
+                                        {% with
+                                            title = "Guest(s) are not yet available.",
+                                            pict_size = 350
+                                        %}
+                                        {% include 'components/not_found.html' %}
+                                        {% endwith %}
+                                    {# If invitation is ready #} {% else %}
+                                        <!-- ============================================================== -->
+                                        <!-- Table Content -->
+                                        <div class="table-responsive">
+                                            <table class="table table-striped">
+                                                <!-- ============================================================== -->
+                                                <!-- Heading Table -->
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">#</th>
+                                                        <th scope="col">Event</th>
+                                                        <th scope="col">Invitation Code</th>
+                                                        <th scope="col">Count</th>
+                                                    </tr>
+                                                </thead>
+                                                <!-- End Heading Table -->
+                                                <!-- ============================================================== -->
+
+                                                <!-- ============================================================== -->
+                                                <!-- Body Table -->
+                                                <tbody>
+                                                {# Looping data from response request #}{% for item in data['guest'] %}
+                                                    <!-- ============================================================== -->
+                                                    <!-- Row -->
+                                                    <tr>
+                                                        <th scope="row">{{ loop.index }}</th>
+                                                        <td>{{ item['event'] }}</td>
+                                                        <td>{{ item['invitation_code'] }}</td>
+                                                        <td>{{ item['count'] }}</td>
+                                                    </tr>
+                                                    <!-- End Row -->
+                                                    <!-- ============================================================== -->
+                                                {% endfor %}
+                                                </tbody>
+                                                <!-- End Body Table -->
+                                                <!-- ============================================================== -->
+                                            </table>
+                                        </div>
+                                        <!-- End Table Content -->
+                                        <!-- ============================================================== -->
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <!-- End Guest Tab -->
+                            <!-- ============================================================== -->
+
+                            <!-- ============================================================== -->
+                            <!-- Greeting Tab Section -->
+                            <div class="tab-pane fade" id="greetingTabModal" role="tabpanel">
+                                <div class="pd-20">
+                                {# If invitation is not ready #} {% if data['greeting'] == None %}
+                                    {% with
+                                        title = "Greeting(s) are not yet available.",
+                                        pict_size = 350
+                                    %}
+                                    {% include 'components/not_found.html' %}
+                                    {% endwith %}
+                                {# If invitation is ready #} {% else %}
+                                    <!-- ============================================================== -->
+                                    <!-- Table Content -->
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <!-- ============================================================== -->
+                                            <!-- Heading Table -->
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">Event</th>
+                                                    <th scope="col">Invitation Code</th>
+                                                    <th scope="col">Count</th>
+                                                </tr>
+                                            </thead>
+                                            <!-- End Heading Table -->
+                                            <!-- ============================================================== -->
+
+                                            <!-- ============================================================== -->
+                                            <!-- Body Table -->
+                                            <tbody>
+                                            {# Looping data from response request #}{% for item in data['greeting'] %}
+                                                <!-- ============================================================== -->
+                                                <!-- Row -->
+                                                <tr>
+                                                    <th scope="row">{{ loop.index }}</th>
+                                                    <th scope="row"></th>
+                                                    <th scope="row"></th>
+                                                    <th scope="row"></th>
+                                                </tr>
+                                                <!-- End Row -->
+                                                <!-- ============================================================== -->
+                                            {% endfor %}
+                                            </tbody>
+                                            <!-- End Body Table -->
+                                            <!-- ============================================================== -->
+                                        </table>
+                                    </div>
+                                    <!-- End Table Content -->
+                                    <!-- ============================================================== -->
+                                {% endif %}
+                                </div>
+                            </div>
+                            <!-- End Greeting Tab -->
+                            <!-- ============================================================== -->
+                        </div>
+                        <!-- End Content Tab -->
+                        <!-- ============================================================== -->
+                    </div>
+                </div>
+				<!-- End User's Invitation -->
+				<!-- ============================================================== -->
+
+                <!-- ============================================================== -->
+				<!-- User's Manage Button Section -->
+                <div class="card-box pd-20 height-100-p mb-30">
+                    <div class="text-right">
+                        <a href="{{ url_for('management.user.index') }}" type="button" class="btn btn-outline-danger">Close</a>
+                    </div>
+                </div>
+				<!-- End User's Manage Button -->
+				<!-- ============================================================== -->
+			</div>
+			<!-- End Content -->
+			<!-- ============================================================== -->
+
+			<!-- ============================================================== -->
+			<!-- Footer Section -->
+			{% include 'components/dash_footer.html' %}
+			<!-- End Footer -->
+			<!-- ============================================================== -->
+		</div>
+	</div>
+	<!-- ============================================================== -->
+	<!-- END MAIN CONTENT -->
+	<!-- ============================================================== -->
+
+{% endblock %}
+<!-- ============================================================== -->
+<!-- END PAGE CONTENT -->
+<!-- ============================================================== -->

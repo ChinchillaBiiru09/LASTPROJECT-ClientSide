@@ -1,0 +1,290 @@
+<!-- ============================================================== -->
+<!-- PAGE CONTENT - TEMPLATE MANAGEMENT - ADMIN -->
+<!-- ============================================================== -->
+{% extends 'layouts/dash_layout.html' %} {% block content %}
+
+    <!-- ============================================================== -->
+    <!-- PRELOADER - ALL PAGE - ALL -->
+    <!-- ============================================================== -->
+    {% include 'components/preloader.html' %}
+    <!-- ============================================================== -->
+    <!-- END PRELOADER -->
+    <!-- ============================================================== -->
+	
+
+	<!-- ============================================================== -->
+	<!-- HEADER - ALL PAGE - ALL -->
+	<!-- ============================================================== -->
+	{% include 'components/dash_header.html' %}
+	<!-- ============================================================== -->
+	<!-- END HEADER -->
+	<!-- ============================================================== -->
+	
+
+	<!-- ============================================================== -->
+	<!-- NAVIGATION SIDEBAR - ALL PAGE - ALL -->
+	<!-- ============================================================== -->
+	{% include 'components/dash_sidebar.html' %}
+	<!-- ============================================================== -->
+	<!-- END NAVIGATION SIDEBAR -->
+	<!-- ============================================================== -->
+	
+
+	<!-- ============================================================== -->
+	<!-- MAIN CONTENT - TEMPLATE MANAGEMENT - ADMIN -->
+	<!-- ============================================================== -->
+	<div class="main-container">
+		<div class="pd-ltr-20 xs-pd-20-10">
+            <!-- ============================================================== -->
+			<!-- Content Section -->
+			<div class="min-height-200px">
+				<!-- ============================================================== -->
+				<!-- Header COntent Section -->
+				<div class="page-header">
+					<div class="row">
+						<!-- ============================================================== -->
+						<!-- Title & Breadcrumb Section -->
+						<div class="col-md-6 col-sm-12">
+							<!-- ============================================================== -->
+							<!-- Title Section -->
+							<div class="title">
+								{# Set title page header #}
+								{% if session['user']['role'] == "ADMIN" %}<h4>Template Management</h4>{% else %}<h4>Daftar Template</h4>{% endif %}
+							</div>
+							<!-- End Title -->
+							<!-- ============================================================== -->
+
+							<!-- ============================================================== -->
+							<!-- Breadcrumb Section -->
+							<nav aria-label="breadcrumb" role="navigation">
+								<ol class="breadcrumb">
+									{# Set breadcrumb #}{% if session['user']['role'] == "ADMIN" %}
+									<li class="breadcrumb-item"><a href="{{ url_for('dashboard.index') }}">Home</a></li>
+									<li class="breadcrumb-item active" aria-current="page">Template Management</li>
+									{% else %}
+									<li class="breadcrumb-item"><a href="{{ url_for('dashboard.index') }}">Home</a></li>
+									<li class="breadcrumb-item active" aria-current="page">Daftar Template</li>
+									{% endif %}
+								</ol>
+							</nav>
+							<!-- End Breadcrumb -->
+							<!-- ============================================================== -->
+						</div>
+						<!-- End Title & Breadcrumb -->
+						<!-- ============================================================== -->
+
+						<!-- ============================================================== -->
+						<!-- Management Add Button Section -->
+						<div class="col-md-6 col-sm-10 text-right">
+							{% if session['user']['role'] == "ADMIN" %}
+							<a href="{{ url_for('management.template.add') }}" class="btn btn-primary" type="button" role="button">
+								<i class="fa fa-plus pr-2"></i>  Create New
+							</a>
+							{% else %}
+							<a href="{{ url_for('management.template.request_create') }}" class="btn btn-primary" type="button" role="button">
+								<i class="fa fa-plus pr-2"></i> Request
+							</a>
+							{% endif %}
+						</div>
+						<!-- End Management Add Button -->
+						<!-- ============================================================== -->
+					</div>
+				</div>
+				<!-- End Header COntent -->
+				<!-- ============================================================== -->
+				 
+				<!-- ============================================================== -->
+				<!-- Alert Section -->
+				{% with messages = get_flashed_messages(with_categories=true) %}
+				{% include "components/alert.html" %}
+				{% endwith %}
+				<!-- End Alert -->
+				<!-- ============================================================== -->
+
+				<!-- ============================================================== -->
+				<!-- Template Gallery Section -->
+				<div class="row clearfix">
+					<div class="col-lg-12 col-md-12 col-sm-12 mb-30">
+						<div class="pd-20 card-box">
+							{% if data['selected'] == 1 %} <h5 class="h4 text-blue mb-20">Silahkan Pilih Template</h5>{% endif %}
+							<!-- ============================================================== -->
+							<!-- Tab Box Section -->
+							<div class="tab">
+								<!-- ============================================================== -->
+								<!-- Navigation Category Tab List Section -->
+								<ul class="nav nav-tabs customtab" role="tablist">
+									<!-- ============================================================== -->
+									<!-- Tab List Section -->
+									<!-- All Data -->
+									<li class="nav-item">
+										<a class="nav-link active" data-toggle="tab" href="#semuaKategori" role="tab" aria-selected="true">Semua</a>
+									</li>
+									<!-- All Data End -->
+
+									<!-- Specific Data -->
+									{# If Template Null #} {% if data['list_category'] != None %}
+										{# Looping data popular #} {% for item in data['list_category'] %}
+											<li class="nav-item">
+												<a class="nav-link" data-toggle="tab" href="#{{ item['category'].replace(' ', '') }}" role="tab" aria-selected="false">{{ item['category'] }}</a>
+											</li>
+										{% endfor %}
+									{% endif %}
+									<!-- Specific Data End -->
+									<!-- End Tab List -->
+									<!-- ============================================================== -->
+								</ul>
+								<!-- End Navigation Category Tab List -->
+								<!-- ============================================================== -->
+
+								<!-- ============================================================== -->
+								<!-- Category Tab Content Section -->
+								<div class="tab-content">
+									<!-- ============================================================== -->
+									<!-- Content List Section -->
+									<!-- All Data -->
+									<div class="tab-pane fade show active" id="semuaKategori" role="tabpanel">
+										<div class="pd-20">
+											{# If Template Null #} {% if data['list_template'] == None %}
+											<!-- ============================================================== -->
+											<!-- Template Null Section -->
+											<div class="tab-pane fade show active" id="invitationTabModal" role="tabpanel">
+												<div class="pd-20">
+												{% with
+													title = "Template undangan belum tersedia.",
+													pict_size = 350
+												%}
+												{% include 'components/not_found.html' %}
+												{% endwith %}
+												</div>
+											</div>
+											<!-- End Template Null -->
+											<!-- ============================================================== -->
+										
+											{# If template already #} {% else %}
+											<!-- ============================================================== -->
+											<!-- Template Ready Section -->
+											<div class="row clearfix">
+											{# Looping all data template #} {% for item in data['list_template'] %}
+												<div class="col-lg-3 col-md-6 col-sm-12 mb-30">
+													<div class="da-card">
+														<div class="da-card-photo">
+															<img src="{{ item['thumbnail'] }}" alt="">
+															<div class="da-overlay da-slide-left">
+																<div class="da-social">
+																	<ul class="clearfix">
+																		{% if session['user']['role'] == 'ADMIN' %}
+																		<li><a href="{{ url_for('show.show_template', temId=item['template_id']) }}" target="_blank"><i class="fa fa-eye"></i></a></li>
+																		<li><a href="{{ url_for('management.template.edit', temId=item['template_id']) }}"><i class="fa fa-pencil"></i></a></li>
+																		<li><a href="{{ url_for('management.template.delete', temId=item['template_id']) }}"><i class="dw dw-delete-3"></i> </a></li>
+																		{% else %}
+																		<li><a href="{{ url_for('show.show_template', temId=item['template_id']) }}" target="_blank"><i class="fa fa-eye"></i></a></li>
+																		<li><a href="{{ url_for('management.invitation.add', temId=item['template_id']) }}"><i class="fa fa-plus"></i></a></li>
+																		{% endif %}
+																	</ul>
+																</div>
+															</div>
+														</div>
+														<div class="da-card-content">
+															<h5 class="h5 mb-10">{{ item['title'] }}</h5>
+															<p class="mb-0">{{ item['category'] }}</p>
+														</div>
+													</div>
+												</div>
+											{% endfor %}
+											</div>
+											<!-- End Template Ready -->
+											<!-- ============================================================== -->
+											{% endif %}
+										</div>
+									</div>
+									<!-- All Data End -->
+
+									<!-- Specific Data -->
+									{# If Template Null #} {% if data['list_template'] != None %}
+									{# Looping data popular #} {% for items in data['list_category'] %}
+									<div class="tab-pane fade" id="{{ items['category'].replace(' ', '') }}" role="tabpanel">
+										<div class="pd-20">
+											<div class="row clearfix">
+												{# Looping all data template #} {% for item in data['list_template'] if item.category == items.category %}
+												<!-- ============================================================== -->
+												<!-- Template ready Section -->
+												<div class="col-lg-3 col-md-6 col-sm-12 mb-30">
+													<div class="da-card">
+														<div class="da-card-photo">
+															<img src="{{ item['thumbnail'] }}" alt="">
+															<div class="da-overlay da-slide-left">
+																<div class="da-social">
+																	<ul class="clearfix">
+																		{% if session['user']['role'] == 'ADMIN' %}
+																		<li><a href="{{ url_for('show.show_template', temId=item['template_id']) }}"><i class="fa fa-eye"></i></a></li>
+																		<li><a href="{{ url_for('management.template.edit') }}"><i class="fa fa-pencil"></i></a></li>
+																		<li><a href="{{ url_for('management.template.delete', temId=item['template_id']) }}"><i class="dw dw-delete-3"></i> </a></li>
+																		{% else %}
+																		<li><a href="{{ url_for('show.show_template', temId=item['template_id']) }}"><i class="fa fa-eye"></i></a></li>
+																		<li><a href="{{ url_for('management.invitation.add', id=item['template_id']) }}"><i class="fa fa-plus"></i></a></li>
+																		{% endif %}
+																	</ul>
+																</div>
+															</div>
+														</div>
+														<div class="da-card-content">
+															<h5 class="h5 mb-10">{{ item['title'] }}</h5>
+															<p class="mb-0">{{ item['category'] }}</p>
+														</div>
+													</div>
+												</div>
+												<!-- End Template ready -->
+												<!-- ============================================================== -->
+
+												{% else %} {# if data template on this category is null #}
+												<!-- ============================================================== -->
+												<!-- Template Null Section -->
+												<div class="col pd-20">
+													{% with
+														title = "Template undangan belum tersedia.",
+														pict_size = 350
+													%}
+													{% include 'components/not_found.html' %}
+													{% endwith %}
+												</div>
+												<!-- End Template Null -->
+												<!-- ============================================================== -->
+												{% endfor %}
+											</div>
+										</div>
+									</div>
+									{% endfor %}
+									{% endif %}
+									<!-- Specific Data End -->
+									<!-- End Content List -->
+									<!-- ============================================================== -->
+								</div>
+								<!-- End Tab Content -->
+								<!-- ============================================================== -->
+							</div>
+							<!-- End Tab Box -->
+							<!-- ============================================================== -->
+						</div>
+					</div>
+				</div>
+				<!-- End Template Gallery -->
+				<!-- ============================================================== -->
+			</div>
+			<!-- End Content -->
+			<!-- ============================================================== -->
+
+			<!-- ============================================================== -->
+			<!-- Footer Section -->
+			{% include 'components/dash_footer.html' %}
+			<!-- End Footer -->
+			<!-- ============================================================== -->
+		</div>
+	</div>
+    <!-- ============================================================== -->
+	<!-- END MAIN CONTENT -->
+	<!-- ============================================================== -->
+
+{% endblock %}
+<!-- ============================================================== -->
+<!-- END PAGE CONTENT -->
+<!-- ============================================================== -->

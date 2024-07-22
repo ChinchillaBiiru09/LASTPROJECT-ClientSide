@@ -1,0 +1,178 @@
+<!-- ============================================================== -->
+<!-- PAGE CONTENT - REQUEST TEMPLATE - USER -->
+<!-- ============================================================== -->
+{% extends 'layouts/dash_layout.html' %} {% block content %}
+
+    <!-- ============================================================== -->
+    <!-- PRELOADER - ALL PAGE - ALL -->
+    <!-- ============================================================== -->
+    {% include 'components/preloader.html' %}
+    <!-- ============================================================== -->
+    <!-- END PRELOADER -->
+    <!-- ============================================================== -->
+	
+
+	<!-- ============================================================== -->
+	<!-- HEADER - ALL PAGE - ALL -->
+	<!-- ============================================================== -->
+	{% include 'components/dash_header.html' %}
+	<!-- ============================================================== -->
+	<!-- END HEADER -->
+	<!-- ============================================================== -->
+	
+
+	<!-- ============================================================== -->
+	<!-- NAVIGATION SIDEBAR - ALL PAGE - ALL -->
+	<!-- ============================================================== -->
+	{% include 'components/dash_sidebar.html' %}
+	<!-- ============================================================== -->
+	<!-- END NAVIGATION SIDEBAR -->
+	<!-- ============================================================== -->
+	
+
+	<!-- ============================================================== -->
+	<!-- MAIN CONTENT - REQUESTTEMPLATE - USER -->
+	<!-- ============================================================== -->
+	<div class="main-container">
+		<div class="pd-ltr-20 xs-pd-20-10">
+            <!-- ============================================================== -->
+			<!-- Content Section -->
+			<div class="min-height-200px">
+				<!-- ============================================================== -->
+				<!-- Header Content Section -->
+				<div class="page-header">
+					<div class="row">
+						<!-- ============================================================== -->
+						<!-- Title & Breadcrumb Section -->
+						<div class="col-md-6 col-sm-12">
+							<!-- ============================================================== -->
+							<!-- Title Section -->
+							<div class="title">
+								<h4>Request Desain Template</h4>
+							</div>
+							<!-- End Title -->
+							<!-- ============================================================== -->
+
+							<!-- ============================================================== -->
+							<!-- Breadcrumb Section -->
+							<nav aria-label="breadcrumb" role="navigation">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="{{ url_for('dashboard.index') }}">Home</a></li>
+									<li class="breadcrumb-item"><a href="{{ url_for('management.template.index') }}">Daftar Template</a></li>
+									<li class="breadcrumb-item active" aria-current="page">Request Desain</li>
+								</ol>
+							</nav>
+							<!-- End Breadcrumb -->
+							<!-- ============================================================== -->
+						</div>
+						<!-- End Title & Breadcrumb -->
+						<!-- ============================================================== -->
+					</div>
+				</div>
+				<!-- End Header COntent -->
+				<!-- ============================================================== -->
+                 
+				<!-- ============================================================== -->
+				<!-- Alert Section -->
+				{% with messages = get_flashed_messages(with_categories=true) %}
+				{% include "components/alert.html" %}
+				{% endwith %}
+				<!-- End Alert -->
+				<!-- ============================================================== -->
+
+				<!-- ============================================================== -->
+				<!-- Request Template Form Section -->
+				<div class="row clearfix">
+					<div class="col-lg-12 col-md-12 col-sm-12 mb-30">
+						<div class="pd-20 card-box">
+							<!-- ============================================================== -->
+							<!-- Form Section -->
+                            <form action="{{ url_for('management.template.request_create_proccess') }}" method="POST" enctype="multipart/form-data">
+                                <div class="modal-body">
+                                    <!-- Category Input -->
+                                    <div class="form-group row">
+                                        <label class="col-sm-12 col-md-2 col-form-label">Kategori*</label>
+                                        <div class="col-sm-12 col-md-10">
+                                            <select class="custom-select col-12" name="category">
+                                                <option selected="" value="0">Pilih...</option>
+                                                {% for item in data['list_category'] %}
+                                                <option value="{{ item['category_id'] }}">{{ item['category'] }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <!-- Photo Design -->
+                                    <div class="form-group row">
+                                        <label class="col-sm-12 col-md-2 col-form-label">Desain Template*</label>
+                                        <div class="col-sm-12 col-md-10">
+                                            <input type="file" class="form-control-file form-control height-auto" accept=".jpg,.jpeg,.png" id="fileDesign" name="fileDesign">
+                                        </div>
+                                    </div>
+
+                                    <!-- Deadline -->
+                                    <div class="form-group row">
+                                        <label class="col-sm-12 col-md-2 col-form-label">Batas Akhir*</label>
+                                        <div class="col-sm-12 col-md-10">
+                                            <input class="form-control date-picker" placeholder="Pilih tanggal" type="text" name="deadline">
+                                        </div>
+                                    </div>
+
+                                    <!-- Design Type -->
+                                    <div class="form-group row">
+                                        <label class="col-sm-12 col-md-2 col-form-label">Pilih Tipe*</label>
+                                        <div class="col-sm-12 col-md-10">
+                                            <div class="row pt-2">
+                                                <div class="custom-control custom-radio mx-2">
+                                                    <input type="radio" checked id="privateRadio" name="selTypeTemp" class="custom-control-input" value="0">
+                                                    <label class="custom-control-label" for="privateRadio">Privasi</label>
+                                                </div>
+                                                <div class="custom-control custom-radio mx-2">
+                                                    <input type="radio" id="publicRadio" name="selTypeTemp" class="custom-control-input" value="1">
+                                                    <label class="custom-control-label" for="publicRadio">Publik</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Description -->
+                                    <div class="form-group row">
+                                        <label class="col-sm-12 col-md-2 col-form-label">Deskripsi</label>
+                                        <div class="col-sm-12 col-md-10">
+                                            <textarea class="form-control" name="description"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Button -->
+                                <div class="modal-footer">
+                                    <a href="{{ url_for('management.template.index') }}" type="button" class="btn btn-outline-danger" data-dismiss="modal">Kembali</a>
+                                    <button type="submit" class="btn btn-outline-primary">Simpan</button>
+                                </div>
+                            </form>
+							<!-- End Form -->
+							<!-- ============================================================== -->
+						</div>
+					</div>
+				</div>
+				<!-- End Request Template Form -->
+				<!-- ============================================================== -->
+			</div>
+			<!-- End Content -->
+			<!-- ============================================================== -->
+
+			<!-- ============================================================== -->
+			<!-- Footer Section -->
+			{% include 'components/dash_footer.html' %}
+			<!-- End Footer -->
+			<!-- ============================================================== -->
+		</div>
+	</div>
+    <!-- ============================================================== -->
+	<!-- END MAIN CONTENT -->
+	<!-- ============================================================== -->
+
+{% endblock %}
+<!-- ============================================================== -->
+<!-- END PAGE CONTENT -->
+<!-- ============================================================== -->

@@ -1,0 +1,249 @@
+<!-- ============================================================== -->
+<!-- PAGE CONTENT - HOME - USER -->
+<!-- ============================================================== -->
+{% extends 'layouts/dash_layout.html' %} {% block content %}
+
+	<!-- ============================================================== -->
+	<!-- PRELOADER - ALL PAGE - ALL -->
+	<!-- ============================================================== -->
+    {% include 'components/preloader.html' %}
+	<!-- ============================================================== -->
+	<!-- END PRELOADER -->
+	<!-- ============================================================== -->
+
+
+	<!-- ============================================================== -->
+	<!-- HEADER - ALL PAGE - ALL -->
+	<!-- ============================================================== -->
+	{% include 'components/dash_header.html' %}
+	<!-- ============================================================== -->
+	<!-- END HEADER -->
+	<!-- ============================================================== -->
+
+
+	<!-- ============================================================== -->
+	<!-- NAVIGATION SIDEBAR - ALL PAGE - ALL -->
+	<!-- ============================================================== -->
+	{% include 'components/dash_sidebar.html' %}
+	<!-- ============================================================== -->
+	<!-- END NAVIGATION SIDEBAR -->
+	<!-- ============================================================== -->
+
+
+	<!-- ============================================================== -->
+	<!-- MAIN CONTENT - hOME - USER -->
+	<!-- ============================================================== -->
+	<div class="main-container">
+		<div class="pd-ltr-20">
+			<!-- ============================================================== -->
+			<!-- Banner Dashboard Section -->
+			<div class="card-box pd-20 height-100-p mb-30">
+				<div class="row align-items-center">
+					<!-- ============================================================== -->
+					<!-- Image Banner Section -->
+					<div class="col-md-4">
+						<img src="{{ url_for('static', filename='assets/images/cuate_banner.svg') }}" alt="" style="height: 200px; width: 400px;">
+					</div>
+					<!-- End Image Banner -->
+					<!-- ============================================================== -->
+
+					<!-- ============================================================== -->
+					<!-- Text Banner Section -->
+					<div class="col-md-8">
+						<h4 class="font-20 weight-500 mb-10 text-capitalize">
+							Selamat Datang, 
+							<div class="weight-600 font-30 text-blue">
+								{{ session['user']['name'] }}!
+							</div>
+						</h4>
+						<p class="font-18 max-width-600">
+							Selamat datang di website Creavitation. Tempat pembuatan undangan 
+							digital gratis tanpa batas.
+						</p>
+					</div>
+					<!-- End Text Banner -->
+					<!-- ============================================================== -->
+				</div>
+			</div>
+			<!-- End Banner Dashboard -->
+			<!-- ============================================================== -->
+
+			<!-- ============================================================== -->
+			<!-- Row Count Box Section -->
+			<div class="row">
+				<!-- ============================================================== -->
+				<!-- Invitation By User - Row Count Section -->
+				<div class="col-xl-4 mb-30">
+					<div class="card-box height-100-p widget-style1">
+						<div class="d-flex flex-wrap align-items-center">
+							<!-- ============================================================== -->
+							<!-- Icon Row Count Section -->
+							<div class="progress-data">
+								<img src="{{ url_for('static', filename='assets/images/ic-love-letter.png') }}" style="height: 40px; display: block; margin-left: auto; margin-right: auto;" alt="">
+							</div>
+							<!-- End Icon Row Count -->
+							<!-- ============================================================== -->
+
+							<!-- ============================================================== -->
+							<!-- Text Row Count Section -->
+							<div class="widget-data">
+								<div class="h4 mb-0">{{ data['count_invitation'] }}</div>
+								<!-- <div class="weight-600 font-14">My Invitation(s)</div> -->
+								<div class="weight-600 font-14">undanganku</div>
+							</div>
+							<!-- End Text Row Count -->
+							<!-- ============================================================== -->
+						</div>
+					</div>
+				</div>
+				<!-- End Invitation By User - Row Count -->
+				<!-- ============================================================== -->
+
+				<!-- ============================================================== -->
+				<!-- Guest By User - Row Count Section -->
+				<div class="col-xl-4 mb-30">
+					<div class="card-box height-100-p widget-style1">
+						<div class="d-flex flex-wrap align-items-center">
+							<!-- ============================================================== -->
+							<!-- Icon Row Count Section -->
+							<div class="progress-data">
+								<img src="{{ url_for('static', filename='assets/images/ic-user.png') }}" style="height: 40px; display: block; margin-left: auto; margin-right: auto;" alt="">
+							</div>
+							<!-- End Icon Row Count -->
+							<!-- ============================================================== -->
+
+							<!-- ============================================================== -->
+							<!-- Text Row Count Section -->
+							<div class="widget-data">
+								<div class="h4 mb-0">{{ data['count_guest'] }}</div>
+								<!-- <div class="weight-600 font-14">My Guest(s)</div> -->
+								<div class="weight-600 font-14">Tamuku</div>
+							</div>
+							<!-- End Text Row Count -->
+							<!-- ============================================================== -->
+						</div>
+					</div>
+				</div>
+				<!-- End Guest By User - Row Count -->
+				<!-- ============================================================== -->
+
+				<!-- ============================================================== -->
+				<!-- Greeting By User - Row Count Section -->
+				<div class="col-xl-4 mb-30">
+					<div class="card-box height-100-p widget-style1">
+						<div class="d-flex flex-wrap align-items-center">
+							<!-- ============================================================== -->
+							<!-- Icon Row Count Section -->
+							<div class="progress-data">
+								<img src="{{ url_for('static', filename='assets/images/wedding-invitation.png') }}" style="height: 40px; display: block; margin-left: auto; margin-right: auto;" alt="">
+							</div>
+							<!-- End Icon Row Count -->
+							<!-- ============================================================== -->
+
+							<!-- ============================================================== -->
+							<!-- Text Row Count Section -->
+							<div class="widget-data">
+								<div class="h4 mb-0">{{ data['count_greeting'] }}</div>
+								<div class="weight-600 font-14">Ucapan Selamat</div>
+							</div>
+							<!-- End Text Row Count -->
+							<!-- ============================================================== -->
+						</div>
+					</div>
+				</div>
+				<!-- End Greeting By User - Row Count -->
+				<!-- ============================================================== -->
+			</div>
+			<!-- End Row Count Box -->
+			<!-- ============================================================== -->
+			 
+			<!-- ============================================================== -->
+			<!-- Alert Section -->
+			{% with messages = get_flashed_messages(with_categories=true) %}
+			{% include "components/alert.html" %}
+			{% endwith %}
+			<!-- End Alert -->
+			<!-- ============================================================== -->
+
+			<!-- ============================================================== -->
+			<!-- Request Template Section -->
+			<div class="card-box pd-20 height-100-p mb-30">
+				<h2 class="h4 pd-20">Request Template</h2>
+				{# If Template Null #} {% if data['template_request'] == None %}
+				<!-- ============================================================== -->
+				<!-- Template Popular Null Section -->
+				<div class="tab-pane fade show active" id="invitationTabModal" role="tabpanel">
+					<div class="pd-20">
+						{% with
+							title = "Request template undangan belum tersedia.",
+							pict_size = 350
+						%}
+						{% include 'components/not_found.html' %}
+						{% endwith %}
+					</div>
+				</div>
+				<!-- End Template Popular Null -->
+				<!-- ============================================================== -->
+
+				{# If template already #} {% else %}
+				<!-- ============================================================== -->
+				<!-- Request Template Section -->
+				<table class="data-table table nowrap">
+					<thead>
+						<tr>
+							<th class="table-plus datatable-nosort">No</th>
+							<th>Desain</th>
+							<th>Kategori</th>
+							<th>Tipe</th>
+							<th>Status</th>
+							<th class="datatable-nosort">Aksi</th>
+						</tr>
+					</thead>
+					<tbody>
+						{# Looping data request #} {% for item in data['template_request'] %}
+						<tr>
+							<td>{{ loop.index }}</td>
+							<td class="table-plus">
+								<img src="{{ item['design_file'] }}" width="70" height="70" alt="">
+							</td>
+							<td>{{ item['category'] }}</td>
+							<td>{{ item['type_txt'] }}</td>
+							<td>{{ item['status_txt'] }}</td>
+							<td>
+								<a class="dropdown-item" href="{{ url_for('management.template.request_delete', reqId=item['req_id']) }}"><i class="dw dw-delete-3 mr-2"></i> Batalkan</a>
+								<!-- <div class="dropdown">
+									<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+										<i class="dw dw-more"></i>
+									</a>
+									<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list"> -->
+										<!-- <a class="dropdown-item" href="{{ url_for('management.invitation.edit', reqIdd=item['invitation_id']) }}"><i class="fa fa-pencil"></i> Ubah</a> -->
+										<!-- <a class="dropdown-item" href="{{ url_for('management.template.request_detail', reqId=item['invitation_id']) }}"><i class="fa fa-info"></i> Detail</a> -->
+									<!-- </div>
+								</div> -->
+							</td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+				<!-- End Request Template -->
+				<!-- ============================================================== -->
+				{% endif %}
+			</div>
+			<!-- End Request Template -->
+			<!-- ============================================================== -->
+			
+			<!-- ============================================================== -->
+			<!-- Footer -->
+			{% include 'components/dash_footer.html' %}
+			<!-- End Footer -->
+			<!-- ============================================================== -->
+		</div>
+	</div>
+	<!-- ============================================================== -->
+	<!-- END MAIN CONTENT -->
+	<!-- ============================================================== -->
+
+{% endblock %}
+<!-- ============================================================== -->
+<!-- END PAGE CONTENT -->
+<!-- ============================================================== -->

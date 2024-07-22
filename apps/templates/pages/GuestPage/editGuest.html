@@ -1,0 +1,152 @@
+<!-- ============================================================== -->
+<!-- PAGE CONTENT - GUEST - USER -->
+<!-- ============================================================== -->
+{% extends 'layouts/dash_layout.html' %} {% block content %}
+
+	<!-- ============================================================== -->
+	<!-- PRELOADER - ALL PAGE - ALL -->
+	<!-- ============================================================== -->
+    {% include 'components/preloader.html' %}
+	<!-- ============================================================== -->
+	<!-- END PRELOADER -->
+	<!-- ============================================================== -->
+	
+
+	<!-- ============================================================== -->
+	<!-- HEADER - ALL PAGE - ALL -->
+	<!-- ============================================================== -->
+	{% include 'components/dash_header.html' %}
+	<!-- ============================================================== -->
+	<!-- END HEADER -->
+	<!-- ============================================================== -->
+	
+
+	<!-- ============================================================== -->
+	<!-- NAVIGATION SIDEBAR - ALL PAGE - ALL -->
+	<!-- ============================================================== -->
+	{% include 'components/dash_sidebar.html' %}
+	<!-- ============================================================== -->
+	<!-- END NAVIGATION SIDEBAR -->
+	<!-- ============================================================== -->
+	
+
+	<!-- ============================================================== -->
+	<!-- MAIN CONTENT - GUEST - USER -->
+	<!-- ============================================================== -->
+	<div class="main-container">
+		<div class="pd-ltr-20 xs-pd-20-10">
+            <!-- ============================================================== -->
+			<!-- Content Section -->
+			<div class="min-height-200px">
+                <!-- ============================================================== -->
+				<!-- Header Content Section -->
+				<div class="page-header">
+					<div class="row">
+						<!-- ============================================================== -->
+						<!-- Title & Breadcrumb Section -->
+						<div class="col-md-6 col-sm-12">
+							<div class="title">
+								<h4>Data Tamu</h4>
+							</div>
+							<nav aria-label="breadcrumb" role="navigation">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="{{ url_for('dashboard.index') }}">Home</a></li>
+									<li class="breadcrumb-item"><a href="{{ url_for('management.invitation.detail', id=data['invitation']['invitation_id'], code=data['invitation']['invitation_code']) }}">Undanganku</a></li>
+									<li class="breadcrumb-item active" aria-current="page">Ubah Data</li>
+								</ol>
+							</nav>
+						</div>
+						<!-- End Title & Breadcrumb -->
+						<!-- ============================================================== -->
+					</div>
+				</div>
+                <!-- End Header Content -->
+				<!-- ============================================================== -->
+				
+				<!-- ============================================================== -->
+				<!-- Alert -->
+				{% with messages = get_flashed_messages(with_categories=true) %}
+				{% include "components/alert.html" %}
+				{% endwith %}
+				<!-- End Alert -->
+				<!-- ============================================================== -->
+
+                <!-- ============================================================== -->
+				<!-- Default Basic Forms Start -->
+				<form action="{{ url_for('guest.edit_proccess') }}" method="post">
+					<div class="form-group row">
+                        <div class="col-sm-12 col-md-10">
+                            <input class="form-control" type="hidden" name="invitation_id" id="invitation_id" value="{{ data['invitation']['invitation_id'] }}">
+                            <input class="form-control" type="hidden" name="inv_code" id="inv_code" value="{{ data['invitation']['invitation_code'] }}">
+                            <input class="form-control" type="hidden" name="category_id" id="category_id" value="{{ data['invitation']['category_id'] }}">
+                            <input class="form-control" type="hidden" name="template_id" id="template_id" value="{{ data['invitation']['template_id'] }}">
+                            <input class="form-control" type="hidden" name="guest_id" id="guest_id" value="{{ data['guest']['guest_id'] }}">
+                        </div>
+                    </div>
+
+					<!-- Data tamu -->
+					<div class="pd-20 card-box mb-30">
+						<div class="clearfix">
+							<div class="pull-left">
+								<h4 class="text-blue h4">Ubah Data Tamu</h4>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="col-sm-12 col-md-2 col-form-label">Nama*</label>
+							<div class="col-sm-12 col-md-10">
+								<input class="form-control" type="text" placeholder="Tulis nama disini" value="{{ data['guest']['name'] }}" name="name" id="name">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="col-sm-12 col-md-2 col-form-label">Alamat*</label>
+							<div class="col-sm-12 col-md-10">
+								<input class="form-control" type="text" placeholder="Jl.xxxx" value="{{ data['guest']['address'] }}" name="address" id="address">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="col-sm-12 col-md-2 col-form-label">No Hp*</label>
+							<div class="col-sm-12 col-md-10">
+								<input class="form-control" placeholder="1-(111)-111-1111" value="{{ data['guest']['phone'] }}" type="number" name="phone" id="phone">
+							</div>
+						</div>
+						<!-- <div class="form-group row">
+							<label class="col-sm-12 col-md-2 col-form-label">Nama Ayah*</label>
+							<div class="col-sm-12 col-md-10">
+								<input class="form-control" type="text" placeholder="Tulis disini" name="womans_dad" id="womans_dad">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="col-sm-12 col-md-2 col-form-label">Nama Ibu*</label>
+							<div class="col-sm-12 col-md-10">
+								<input class="form-control" type="text" placeholder="Tulis disini" name="womans_mom" id="womans_mom">
+							</div>
+						</div> -->
+					</div>
+
+					<div class="pd-20 card-box mb-30 text-right">
+						<a href="{{ url_for('management.invitation.detail', id=data['invitation']['invitation_id'], code=data['invitation']['invitation_code']) }}" type="button" class="btn btn-outline-danger mr-1" >Kembali</a>
+						<button type="submit" id="invitationAddBtn" class="btn btn-outline-primary">Simpan</button>
+                	</div>
+				</form>
+                <!-- Default Basic Forms End -->
+				<!-- ============================================================== -->
+			</div>
+			<!-- End Content -->
+			<!-- ============================================================== -->
+            
+			<!-- ============================================================== -->
+			<!-- Footer -->
+			<!-- ============================================================== -->
+			{% include 'components/dash_footer.html' %}
+			<!-- End Footer -->
+			<!-- ============================================================== -->
+		</div>
+	</div>
+	<!-- ============================================================== -->
+	<!-- END MAIN CONTENT -->
+	<!-- ============================================================== -->
+
+{% endblock %}
+<!-- ============================================================== -->
+<!-- END PAGE CONTENT -->
+<!-- ============================================================== -->

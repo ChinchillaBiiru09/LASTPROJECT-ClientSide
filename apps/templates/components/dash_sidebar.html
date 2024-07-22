@@ -1,5 +1,9 @@
-
-<div class="left-side-bar" >
+<!-- ============================================================== -->
+<!-- NAVIGATION SIDEBAR - ALL PAGE - ADMIN -->
+<!-- ============================================================== -->
+<div class="left-side-bar">
+    <!-- ============================================================== -->
+    <!-- Logo Section -->
     <div class="brand-logo">
         <a href="index.html">
             <!-- <img src="vendors/images/ic-logo-purp.png" alt="" class="dark-logo"> -->
@@ -9,41 +13,91 @@
             <i class="ion-close-round"></i>
         </div>
     </div>
+    <!-- End Logo -->
+    <!-- ============================================================== -->
+
+    <!-- ============================================================== -->
+    <!-- Menu Section -->
     <div class="menu-block customscroll">
         <div class="sidebar-menu">
             <ul id="accordion-menu">
-                <li>
-                    <a href="{{ url_for('dashboard.index') }}" class="dropdown-toggle no-arrow">
-                        <span class="micon dw dw-house-1"></span><span class="mtext">Dashboard</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ url_for('invitation.index') }}" class="dropdown-toggle no-arrow">
-                        <span class="micon ion-ios-compose-outline"></span><span class="mtext">My Invitation</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ url_for('templates.index') }}" class="dropdown-toggle no-arrow">
-                        <span class="micon dw dw-paperclip"></span><span class="mtext">Templates</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ url_for('guest.index') }}" class="dropdown-toggle no-arrow">
-                        <span class="micon dw dw-notebook"></span><span class="mtext">Guest</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ url_for('faq.index') }}" class="dropdown-toggle no-arrow">
-                        <span class="micon dw dw-information"></span><span class="mtext">Help</span>
-                    </a>
-                </li>
-                <!-- <li>
-                    <a href="{{ url_for('static', filename='') }}#" class="dropdown-toggle no-arrow">
-                        <span class="micon dw dw-house-1"></span><span class="mtext">Service</span>
-                    </a>
-                </li> -->
+                {# Sidebar Admin Level #} {% if session['user']['role'] == 'ADMIN' %}
+                    <!-- ============================================================== -->
+                    <!-- Home Menu Section -->
+                    <li>
+                        <a href="{{ url_for('dashboard.index') }}" class="dropdown-toggle no-arrow">
+                            <span class="micon dw dw-house-1"></span><span class="mtext">Home</span>
+                        </a>
+                    </li>
+                    <!-- End Home Menu -->
+
+                    <!-- Category Menu Section -->
+                    <li>
+                        <a href="{{ url_for('management.category.index') }}" class="dropdown-toggle no-arrow">
+                            <span class="micon dw dw-edit2"></span><span class="mtext">Categories</span>
+                        </a>
+                    </li>
+                    <!-- End Category Menu -->
+
+                    <!-- Template Menu Section -->
+                    <li>
+                        <a href="{{ url_for('management.template.index') }}" class="dropdown-toggle no-arrow">
+                            <span class="micon dw dw-library"></span><span class="mtext">Templates</span>
+                        </a>
+                    </li>
+                    <!-- End Template Menu -->
+
+                    <!-- User Menu Section -->
+                    <li>
+                        <a href="{{ url_for('management.user.index') }}" class="dropdown-toggle no-arrow">
+                            <span class="micon dw dw-calendar1"></span><span class="mtext">Users</span>
+                        </a>
+                    </li>
+                    <!-- End User Menu -->
+                    <!-- ============================================================== -->
+
+                {# Sidebar User Level #} {% else %}
+                    <!-- ============================================================== -->
+                    <!-- Home Menu -->
+                    <li>
+                        <a href="{{ url_for('dashboard.index') }}" class="dropdown-toggle no-arrow">
+                            <span class="micon dw dw-house-1"></span><span class="mtext">Home</span>
+                        </a>
+                    </li>
+                    <!-- End Home Menu -->
+
+                    <!-- Invitation Menu -->
+                    <li>
+                        <a href="{{ url_for('management.invitation.index') }}" class="dropdown-toggle no-arrow">
+                            <span class="micon ion-ios-compose-outline"></span><span class="mtext">Undanganku</span>
+                        </a>
+                    </li>
+                    <!-- End Invitation Menu -->
+
+                    <!-- Template Menu -->
+                    <li>
+                        <a href="{{ url_for('management.template.index') }}" class="dropdown-toggle no-arrow">
+                            <span class="micon dw dw-paperclip"></span><span class="mtext">Daftar Template</span>
+                        </a>
+                    </li>
+                    <!-- End Template Menu -->
+                    
+                    <!-- Guest Menu -->
+                    <li>
+                        <a href="{{ url_for('guest.index') }}" class="dropdown-toggle no-arrow">
+                            <span class="micon dw dw-notebook"></span><span class="mtext">Daftar Tamu</span>
+                        </a>
+                    </li>
+                    <!-- End Guest Menu -->
+                    <!-- ============================================================== -->
+                {% endif %}
             </ul>
         </div>
     </div>
+    <!-- End Menu -->
+    <!-- ============================================================== -->
 </div>
 <div class="mobile-menu-overlay"></div>
+<!-- ============================================================== -->
+<!-- END NAVIGATION SIDEBAR -->
+<!-- ============================================================== -->

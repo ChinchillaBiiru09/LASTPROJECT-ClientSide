@@ -1,0 +1,418 @@
+<!-- ============================================================== -->
+<!-- PAGE CONTENT - DETAIL INVITATION - invitation -->
+<!-- ============================================================== -->
+{% extends 'layouts/dash_layout.html' %} {% block content %}
+
+	<!-- ============================================================== -->
+	<!-- PRELOADER - ALL PAGE - ALL -->
+	<!-- ============================================================== -->
+    {% include 'components/preloader.html' %}
+	<!-- ============================================================== -->
+	<!-- End PRELOADER -->
+	<!-- ============================================================== -->
+	
+
+	<!-- ============================================================== -->
+	<!-- HEADER - ALL PAGE - ALL -->
+	<!-- ============================================================== -->
+	{% include 'components/dash_header.html' %}
+	<!-- ============================================================== -->
+	<!-- END HEADER -->
+	<!-- ============================================================== -->
+	
+
+	<!-- ============================================================== -->
+	<!-- NAVIGATION SIDEBAR - ALL PAGE - ALL -->
+	<!-- ============================================================== -->
+	{% include 'components/dash_sidebar.html' %}
+	<!-- ============================================================== -->
+	<!-- END NAVIGATION SIDEBAR -->
+	<!-- ============================================================== -->
+	
+
+	<!-- ============================================================== -->
+	<!-- MAIN CONTENT - DETAIL INVITATION - invitation -->
+	<!-- ============================================================== -->
+	<div class="main-container">
+		<div class="pd-ltr-20 xs-pd-20-10">
+            <!-- ============================================================== -->
+			<!-- Content Section -->
+			<div class="min-height-200px">
+				<!-- ============================================================== -->
+				<!-- Header Content Section -->
+				<div class="page-header">
+					<div class="row">
+                        <!-- ============================================================== -->
+						<!-- Title & Breadcrumb Section -->
+						<div class="col-md-6 col-sm-12">
+                            <!-- ============================================================== -->
+							<!-- Title Section -->
+							<div class="title">
+								<h4>Detail Undangan</h4>
+							</div>
+                            <!-- End Title -->
+							<!-- ============================================================== -->
+
+                            <!-- ============================================================== -->
+							<!-- Breadcrumb Section -->
+							<nav aria-label="breadcrumb" role="navigation">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="{{ url_for('dashboard.index') }}">Home</a></li>
+									<li class="breadcrumb-item"><a href="{{ url_for('management.invitation.index') }}">Undanganku</a></li>
+									<li class="breadcrumb-item active" aria-current="page">Detail Data</li>
+								</ol>
+							</nav>
+                            <!-- End Breadcrumb -->
+							<!-- ============================================================== -->
+						</div>
+                        <!-- End Title & Breadcrumb -->
+						<!-- ============================================================== -->
+
+						<!-- ============================================================== -->
+						<!-- Management Add Button Section -->
+						<div class="col-md-6 col-sm-10 text-right">
+							<a href="{{ url_for('guest.add', id=data['invitation']['invitation_id']) }}" class="btn btn-primary" type="button" role="button">
+								<i class="fa fa-plus pr-2"></i>  Tambah Data Tamu
+							</a>
+						</div>
+						<!-- End Management Add Button -->
+						<!-- ============================================================== -->
+					</div>
+				</div>
+				<!-- End Header Content -->
+				<!-- ============================================================== -->
+                 
+				<!-- ============================================================== -->
+				<!-- Alert Section -->
+				{% with messages = get_flashed_messages(with_categories=true) %}
+				{% include "components/alert.html" %}
+				{% endwith %}
+				<!-- End Alert -->
+				<!-- ============================================================== -->
+				
+				<!-- ============================================================== -->
+				<!-- invitation Simple Data Section -->
+                <div class="card-box pd-20 height-100-p mb-30">
+                    <div class="row align-items-center">
+						<!-- ============================================================== -->
+						<!-- Photo Profile Section -->
+						<div class="col-lg-4 col-md-12 col-sm-12">
+							<div class="blog-img">
+								<img src="{{ data['invitation']['template_thumb'] }}" alt="" width="250px" height="250px" class="rounded">
+							</div>
+						</div>
+						<!-- End Photo Profile -->
+						<!-- ============================================================== -->
+
+						<!-- ============================================================== -->
+						<!-- Information Profile Section -->
+						<div class="col-lg-8 col-md-12 col-sm-12">
+							<div class="blog-caption">
+								<h4><a href="#">{{ data["invitation"]["invitation_title"] }}</a></h4>
+								<div class="blog-by">
+									<div class="pt-10">
+										<span>Kategori :</span>
+										{{ data["invitation"]["category"] }}
+									</div>
+									<div class="pt-10">
+										<span>Template:</span>
+										{{ data["invitation"]["template_title"] }}
+									</div>
+									<div class="pt-20">
+										<a href="{{ url_for('show.show_invitation', code=data['invitation']['invitation_code'], title=data['invitation']['invitation_title']) }}" class="btn btn-outline-primary" target="_blank">Lihat</a>
+										<a href="{{ url_for('management.invitation.edit', id=data['invitation']['invitation_id']) }}" class="btn btn-outline-primary"> Ubah</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- End Information Profile -->
+						<!-- ============================================================== -->
+                    </div>
+                </div>
+				<!-- End invitation Simple Data -->
+				<!-- ============================================================== -->
+
+                <!-- ============================================================== -->
+				<!-- invitation Detail Data Section -->
+                <div class="card-box pd-20 height-100-p mb-30">
+                    <h5 class="h4 text-blue mb-20">Informasi Undangan</h5>
+                    <div class="tab">
+                        <!-- ============================================================== -->
+                        <!-- Navigation Tab Section -->
+                        <ul class="nav nav-tabs customtab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#invitationTabModal" role="tab" aria-selected="true">Undangan</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#guestTabModal" role="tab" aria-selected="false">Tamu Undangan</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#greetingTabModal" role="tab" aria-selected="false">RSVP</a>
+                            </li>
+                        </ul>
+                        <!-- End Navigation Tab -->
+                        <!-- ============================================================== -->
+
+                        <!-- ============================================================== -->
+                        <!-- Content Tab Section -->
+                        <div class="tab-content">
+                            <!-- ============================================================== -->
+                            <!-- Detail Tab Section -->
+                            <div class="tab-pane fade show active" id="invitationTabModal" role="tabpanel">
+                                <div class="pd-20">
+                                    <!-- ============================================================== -->
+                                    <!-- Invitation List Section -->
+                                    {% if data["invitation"]["category"].upper() == "PERNIKAHAN" %}
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label>col-md-6</label>
+                                                <input type="text" class="form-control" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label>col-md-6</label>
+                                                <input type="text" class="form-control" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% elif data["invitation"]["category"].upper() == "ULANG TAHUN" %}
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label>Nama Lengkap</label>
+                                                <input type="text" class="form-control" disabled value="{{ data['invitation']['personal_data']['fullname'] }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label>Nama Panggilan</label>
+                                                <input type="text" class="form-control" disabled value="{{ data['invitation']['personal_data']['callname'] }}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label>Nama Lengkap</label>
+                                                <input type="text" class="form-control" disabled value="{{ data['invitation']['fullname'] }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label>Nama Panggilan</label>
+                                                <input type="text" class="form-control" disabled value="{{ data['invitation']['callname'] }}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                    <!-- End Invitation List -->
+                                    <!-- ============================================================== -->
+                                </div>
+                            </div>
+                            <!-- End Detail Tab -->
+                            <!-- ============================================================== -->
+
+                            <!-- ============================================================== -->
+                            <!-- Guest Tab Section -->
+                            <div class="tab-pane fade" id="guestTabModal" role="tabpanel">
+                                <div class="pd-20">
+                                    {# If invitation is not ready #} {% if data['guest'] == None %}
+                                        {% with
+                                            title = "Data tamu tidak tersedia.",
+                                            pict_size = 350
+                                        %}
+                                        {% include 'components/not_found.html' %}
+                                        {% endwith %}
+                                    {# If invitation is ready #} {% else %}
+                                    <!-- ============================================================== -->
+                                    <!-- Table Content -->
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <!-- ============================================================== -->
+                                            <!-- Heading Table -->
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">No</th>
+                                                    <th scope="col">Nama</th>
+                                                    <th scope="col">Alamat</th>
+                                                    <th scope="col">No. Hp</th>
+                                                    <th scope="col">Aksi</th>
+                                                </tr>
+                                            </thead>
+                                            <!-- End Heading Table -->
+                                            <!-- ============================================================== -->
+
+                                            <!-- ============================================================== -->
+                                            <!-- Body Table -->
+                                            <tbody>
+                                                {# Looping data from response request #}{% for item in data['guest'] %}
+                                                <!-- ============================================================== -->
+                                                <!-- Row -->
+                                                <tr>
+                                                    <th scope="row">{{ loop.index }}</th>
+                                                    <td>{{ item['name'].title() }}</td>
+                                                    <td>{{ item['address'] }}</td>
+                                                    <td>{{ item['phone'] }}</td>
+                                                    <td>
+                                                        <div class="dropdown">
+                                                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                                                <i class="dw dw-more"></i>
+                                                            </a>
+                                                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                                                <a class="dropdown-item btn-block" data-toggle="modal" data-target="#message-modal" data-phone="{{ item['phone'] }}" data-message="{{ data['message'] }}" type="button" href="#"><i class="fa fa-share"></i> Bagikan</a>
+                                                                <a class="dropdown-item" href="{{ url_for('guest.edit', gueId=item['guest_id'], id=data['invitation']['invitation_id']) }}"><i class="dw dw-edit2"></i> Ubah</a>
+                                                                <a class="dropdown-item" href="{{ url_for('guest.delete', gueId=item['guest_id'], id=data['invitation']['invitation_id']) }}"><i class="dw dw-delete-3"></i> Hapus</a>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <!-- End Row -->
+                                                <!-- ============================================================== -->
+                                                {% endfor %}
+                                            </tbody>
+                                            <!-- End Body Table -->
+                                            <!-- ============================================================== -->
+                                        </table>
+                                    </div>
+                                    <!-- End Table Content -->
+                                    <!-- ============================================================== -->
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <!-- End Guest Tab -->
+                            <!-- ============================================================== -->
+
+                            <!-- ============================================================== -->
+                            <!-- Greeting Tab Section -->
+                            <div class="tab-pane fade" id="greetingTabModal" role="tabpanel">
+                                <div class="pd-20">
+                                    {# If invitation is not ready #} {% if data['greeting'] == None %}
+                                        {% with
+                                            title = "Belum ada data rsvp",
+                                            pict_size = 350
+                                        %}
+                                        {% include 'components/not_found.html' %}
+                                        {% endwith %}
+                                    {# If invitation is ready #} {% else %}
+                                    <!-- ============================================================== -->
+                                    <!-- Table Content -->
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <!-- ============================================================== -->
+                                            <!-- Heading Table -->
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">nama</th>
+                                                    <th scope="col">status</th>
+                                                    <th scope="col">Pesan</th>
+                                                </tr>
+                                            </thead>
+                                            <!-- End Heading Table -->
+                                            <!-- ============================================================== -->
+
+                                            <!-- ============================================================== -->
+                                            <!-- Body Table -->
+                                            <tbody>
+                                            {# Looping data from response request #}{% for item in data['greeting'] %}
+                                                <!-- ============================================================== -->
+                                                <!-- Row -->
+                                                <tr>
+                                                    <th scope="row">{{ loop.index }}</th>
+                                                    <td>{{ item['name'] }}</td>
+                                                    <td>{{ item['status'] }}</td>
+                                                    <td>{{ item['message'] }}</td>
+                                                </tr>
+                                                <!-- End Row -->
+                                                <!-- ============================================================== -->
+                                            {% endfor %}
+                                            </tbody>
+                                            <!-- End Body Table -->
+                                            <!-- ============================================================== -->
+                                        </table>
+                                    </div>
+                                    <!-- End Table Content -->
+                                    <!-- ============================================================== -->
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <!-- End Greeting Tab -->
+                            <!-- ============================================================== -->
+                        </div>
+                        <!-- End Content Tab -->
+                        <!-- ============================================================== -->
+                    </div>
+                </div>
+				<!-- End invitation Detail Data -->
+				<!-- ============================================================== -->
+
+                <!-- ============================================================== -->
+				<!-- invitation Manage Button Section -->
+                <div class="card-box pd-20 height-100-p mb-30">
+                    <div class="text-right">
+                        <a href="{{ url_for('management.invitation.index') }}" type="button" class="btn btn-outline-danger">Kembali</a>
+                    </div>
+                </div>
+				<!-- End invitation Manage Button -->
+				<!-- ============================================================== -->
+			</div>
+			<!-- End Content -->
+			<!-- ============================================================== -->
+
+			<!-- ============================================================== -->
+			<!-- Modal Section -->
+            <div class="modal fade" id="message-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content login-box bg-white box-shadow border-radius-10">
+                        <div class="login-title">
+                            <h2 class="text-center text-primary">Kirim ke WhatsApp</h2>
+                        </div>
+                        <form>
+                            <div class="form-group">
+                                <label>Kepada: </label>
+                                <input type="text" class="form-control" value="" disabled="" name="to" id="to">
+                            </div>
+                            <div class="form-group">
+                                <label>Pesan: </label>
+                                <textarea class="form-control" name="message" id="message"></textarea>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="input-group mb-0">
+                                        <a href="#" class="btn btn-outline-primary btn-lg btn-block" onclick="sendToWhatsApp()">Kirim</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+			<!-- End Modal -->
+			<!-- ============================================================== -->
+
+			<!-- ============================================================== -->
+			<!-- Footer Section -->
+			{% include 'components/dash_footer.html' %}
+			<!-- End Footer -->
+			<!-- ============================================================== -->
+		</div>
+	</div>
+	<!-- ============================================================== -->
+	<!-- END MAIN CONTENT -->
+	<!-- ============================================================== -->
+
+
+    <!-- ============================================================== -->
+	<!-- JAVASCRIPT -->
+	<!-- ============================================================== -->
+    <script src="{{ url_for('static', filename='js/share.js') }}"></script>
+    <!-- ============================================================== -->
+	<!-- END JAVASCRIPT -->
+	<!-- ============================================================== -->
+
+{% endblock %}
+<!-- ============================================================== -->
+<!-- END PAGE CONTENT -->
+<!-- ============================================================== -->

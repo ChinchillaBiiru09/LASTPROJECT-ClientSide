@@ -1,0 +1,173 @@
+<!-- ============================================================== -->
+<!-- PAGE CONTENT - USER LOG - ADMIN -->
+<!-- ============================================================== -->
+{% extends 'layouts/dash_layout.html' %} {% block content %}
+
+	<!-- ============================================================== -->
+	<!-- PRELOADER - ALL PAGE - ALL -->
+	<!-- ============================================================== -->
+    {% include 'components/preloader.html' %}
+	<!-- ============================================================== -->
+	<!-- END PRELOADER -->
+	<!-- ============================================================== -->
+	
+
+	<!-- ============================================================== -->
+	<!-- HEADER - ALL PAGE - ALL -->
+	<!-- ============================================================== -->
+	{% include 'components/dash_header.html' %}
+	<!-- ============================================================== -->
+	<!-- END HEADER -->
+	<!-- ============================================================== -->
+	
+
+	<!-- ============================================================== -->
+	<!-- NAVIGATION SIDEBAR - ALL PAGE - ALL -->
+	<!-- ============================================================== -->
+	{% include 'components/dash_sidebar.html' %}
+	<!-- ============================================================== -->
+	<!-- END NAVIGATION SIDEBAR -->
+	<!-- ============================================================== -->
+	
+
+	<!-- ============================================================== -->
+	<!-- MAIN CONTENT - USER LOG - ADMIN -->
+	<!-- ============================================================== -->
+	<div class="main-container">
+		<div class="pd-ltr-20 xs-pd-20-10">
+            <!-- ============================================================== -->
+			<!-- Content Section -->
+			<div class="min-height-200px">
+				<!-- ============================================================== -->
+				<!-- Header Content Section -->
+				<div class="page-header">
+					<div class="row">
+						<!-- ============================================================== -->
+						<!-- Title & Breadcrumb Section -->
+						<div class="col-md-6 col-sm-12">
+							<!-- ============================================================== -->
+							<!-- Title Section -->
+							<div class="title">
+								<h4>Manajemen User</h4>
+							</div>
+							<!-- End Title -->
+							<!-- ============================================================== -->
+
+							<!-- ============================================================== -->
+							<!-- Breadcrumb Section -->
+							<nav aria-label="breadcrumb" role="navigation">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="{{ url_for('dashboard.index') }}">Home</a></li>
+									<li class="breadcrumb-item active" aria-current="page">User Management</li>
+								</ol>
+							</nav>
+							<!-- End Breadcrumb -->
+							<!-- ============================================================== -->
+						</div>
+						<!-- End Title & Breadcrumb -->
+						<!-- ============================================================== -->
+					</div>
+				</div>
+				<!-- End Header Content -->
+				<!-- ============================================================== -->
+				
+				<!-- ============================================================== -->
+				<!-- User Datatable Section -->
+				<div class="card-box mb-30">
+					<!-- ============================================================== -->
+					<!-- Table Title -->
+					<div class="pd-20">
+						<h4 class="text-blue h4">Daftar User</h4>
+					</div>
+					<!-- End Table Title -->
+					<!-- ============================================================== -->
+				{# If invitation is not ready #} {% if data == None %}
+					{% with
+						title = "User(s) are not yet available.",
+						pict_size = 350
+					%}
+					{% include 'components/not_found.html' %}
+					{% endwith %}
+				{# If invitation is ready #} {% else %}
+					<!-- ============================================================== -->
+					<!-- Table Content -->
+					<div class="pb-20">
+						<table class="data-table table stripe hover nowrap">
+							<!-- ============================================================== -->
+							<!-- Heading Table -->
+							<thead>
+								<tr>
+									<th class="table-plus datatable-nosort">Name</th>
+									<th>Status</th>
+									<th>Last Active</th>
+									<th class="datatable-nosort">Action</th>
+								</tr>
+							</thead>
+							<!-- End Heading Table -->
+							<!-- ============================================================== -->
+
+							<!-- ============================================================== -->
+							<!-- Body Table -->
+							<tbody>
+							{# Looping data from response request #}{% for item in data %}
+								<!-- ============================================================== -->
+								<!-- Row -->
+								<tr>
+									<td class="table-plus">{{ item['username'] }}</td>
+									<td>{{ item['status'] }}</td>
+									<td>{{ item['last_active']['full'] }}</td>
+									<td>
+										<div class="dropdown">
+											<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+												<i class="dw dw-more"></i>
+											</a>
+											<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+												<a href="{{ url_for('management.user.detail', id=item['user_id']) }}" class="dropdown-item"><i class="fa fa-info"></i> Detail</a>
+												<a href="{{ url_for('management.user.delete', id=item['user_id']) }}" type="button" class="dropdown-item btn btn-block"><i class="dw dw-delete-3"></i> Delete</button>
+											</div>
+										</div>
+									</td>
+								</tr>
+								<!-- End Row -->
+								<!-- ============================================================== -->
+							{% endfor %}
+							</tbody>
+							<!-- End Body Table -->
+							<!-- ============================================================== -->
+						</table>
+					</div>
+					<!-- End Table Content -->
+					<!-- ============================================================== -->
+				{% endif %}
+				</div>
+				<!-- End User Datatable -->
+				<!-- ============================================================== -->
+			</div>
+			<!-- End Content -->
+			<!-- ============================================================== -->
+
+			<!-- ============================================================== -->
+			<!-- Footer Section -->
+			{% include 'components/dash_footer.html' %}
+			<!-- End Footer -->
+			<!-- ============================================================== -->
+		</div>
+	</div>
+	<!-- ============================================================== -->
+	<!-- END MAIN CONTENT -->
+	<!-- ============================================================== -->
+
+	
+	<!-- ============================================================== -->
+	<!-- END MAIN CONTENT -->
+	<!-- ============================================================== -->
+	<!-- <script src="{{ url_for('static', filename='src/plugins/sweetalert2/sweetalert2.all.js') }}"></script> -->
+	<script src="{{ url_for('static', filename='js/Management/User/hapusUser.js') }}"></script>
+	<!-- ============================================================== -->
+	<!-- END MAIN CONTENT -->
+	<!-- ============================================================== -->
+
+{% endblock %}
+<!-- ============================================================== -->
+<!-- END PAGE CONTENT -->
+<!-- ============================================================== -->

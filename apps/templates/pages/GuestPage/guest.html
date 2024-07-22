@@ -1,296 +1,184 @@
+<!-- ============================================================== -->
+<!-- PAGE CONTENT - GUEST - USER -->
+<!-- ============================================================== -->
 {% extends 'layouts/dash_layout.html' %} {% block content %}
+
+	<!-- ============================================================== -->
+	<!-- PRELOADER - ALL PAGE - ALL -->
+	<!-- ============================================================== -->
+    {% include 'components/preloader.html' %}
+	<!-- ============================================================== -->
+	<!-- END PRELOADER -->
+	<!-- ============================================================== -->
+	
+
+	<!-- ============================================================== -->
+	<!-- HEADER - ALL PAGE - ALL -->
+	<!-- ============================================================== -->
 	{% include 'components/dash_header.html' %}
+	<!-- ============================================================== -->
+	<!-- END HEADER -->
+	<!-- ============================================================== -->
+	
 
+	<!-- ============================================================== -->
+	<!-- NAVIGATION SIDEBAR - ALL PAGE - ALL -->
+	<!-- ============================================================== -->
 	{% include 'components/dash_sidebar.html' %}
+	<!-- ============================================================== -->
+	<!-- END NAVIGATION SIDEBAR -->
+	<!-- ============================================================== -->
+	
 
+	<!-- ============================================================== -->
+	<!-- MAIN CONTENT - GUEST - USER -->
+	<!-- ============================================================== -->
 	<div class="main-container">
 		<div class="pd-ltr-20 xs-pd-20-10">
+            <!-- ============================================================== -->
+			<!-- Content Section -->
 			<div class="min-height-200px">
+				<!-- ============================================================== -->
+				<!-- Header Content Section -->
 				<div class="page-header">
 					<div class="row">
+						<!-- ============================================================== -->
+						<!-- Title & Breadcrumb Section -->
 						<div class="col-md-6 col-sm-12">
+							<!-- ============================================================== -->
+							<!-- Title Section -->
 							<div class="title">
-								<h4>Tamu</h4>
+								<h4>Daftar Tamu</h4>
 							</div>
+							<!-- End Title -->
+							<!-- ============================================================== -->
+
+							<!-- ============================================================== -->
+							<!-- Breadcrumb Section -->
 							<nav aria-label="breadcrumb" role="navigation">
 								<ol class="breadcrumb">
-									<li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-									<li class="breadcrumb-item active" aria-current="page">Tamu</li>
+									<li class="breadcrumb-item"><a href="{{ url_for('dashboard.index') }}">Home</a></li>
+									<li class="breadcrumb-item active" aria-current="page">Daftar Tamu</li>
 								</ol>
 							</nav>
+							<!-- End Breadcrumb -->
+							<!-- ============================================================== -->
 						</div>
+						<!-- End Title & Breadcrumb -->
+						<!-- ============================================================== -->
+
+						<!-- ============================================================== -->
+						<!-- Management Add Button Section -->
 						<div class="col-md-6 col-sm-12 text-right">
 							<div class="dropdown">
-								<a class="btn btn-primary dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+								<!-- <a class="btn btn-primary dropdown-toggle" href="#" role="button" data-toggle="dropdown">
 									January 2018
 								</a>
 								<div class="dropdown-menu dropdown-menu-right">
 									<a class="dropdown-item" href="#">Export List</a>
 									<a class="dropdown-item" href="#">Policies</a>
 									<a class="dropdown-item" href="#">View Assets</a>
-								</div>
+								</div> -->
 							</div>
 						</div>
+						<!-- End Management Add Button -->
+						<!-- ============================================================== -->
 					</div>
 				</div>
-				<!-- Simple Datatable start -->
+				<!-- End Header Content -->
+				<!-- ============================================================== -->
+
+				<!-- ============================================================== -->
+				<!-- Simple Datatable Section -->
+				{% if data['guest'] == None %}
+				<!-- ============================================================== -->
+				<!-- Template Null Section -->
+				<div class="card-box pd-20 height-100-p mb-30">
+					{% with
+						title = "Data tamu tidak tersedia.",
+						pict_size = 350
+					%}
+					{% include 'components/not_found.html' %}
+					{% endwith %}
+				</div>
+				<!-- End Template Null -->
+				<!-- ============================================================== -->
+				{% else %}
 				<div class="card-box mb-30">
+					<!-- ============================================================== -->
+					<!-- Table Title -->
 					<div class="pd-20">
 						<h4 class="text-blue h4">Daftar Tamu Undangan</h4>
 						<!-- <p class="mb-0">you can find more options <a class="text-primary" href="https://datatables.net/" target="_blank">Click Here</a></p> -->
 					</div>
+					<!-- End Table Title -->
+					<!-- ============================================================== -->
+
+					<!-- ============================================================== -->
+					<!-- Table Content -->
 					<div class="pb-20">
 						<table class="data-table table stripe hover nowrap">
+							<!-- ============================================================== -->
+							<!-- Heading Table Column -->
 							<thead>
 								<tr>
 									<th class="table-plus datatable-nosort">No</th>
-									<th>Name</th>
-									<th>Phone</th>
-									<th>Address</th>
 									<th>Event</th>
+									<th>Invitation Code</th>
+									<th>Guest Count</th>
 									<th class="datatable-nosort">Action</th>
 								</tr>
 							</thead>
+							<!-- End Heading Table Column -->
+							<!-- ============================================================== -->
+
+							<!-- ============================================================== -->
+							<!-- Body Table -->
 							<tbody>
+								{# checking data #} {% if data['guest'] != None %}
+								{# Looping data popular #} {% for item in data['guest'] %}
+								<!-- ============================================================== -->
+								<!-- Template Popular - Row Box Data Section -->
 								<tr>
-									<td class="table-plus">1</td>
-									<td>Nur Khafidah</td>
-									<td>080818182828</td>
-									<td>2829 Trainer Avenue Peoria, IL 61602 </td>
-									<td>Pernikahan</td>
+									<td class="table-plus">{{ loop.index }}</td>
+									<td>{{ item['event'] }}</td>
+									<td>{{ item['invitation_code'] }}</td>
+									<td>{{ item['count'] }}</td>
 									<td>
-										<div class="dropdown">
-											<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-												<i class="dw dw-more"></i>
-											</a>
-											<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-												<a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>
-												<a class="dropdown-item" href="#"><i class="dw dw-edit2"></i> Edit</a>
-												<a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i> Delete</a>
-											</div>
-										</div>
+										<a class="btn btn-link" href="{{ url_for('guest.guest_detail', gueId=item['invitation_id'], code=item['invitation_code']) }}"><i class="fa fa-info mr-2"></i> Detail</a>
 									</td>
 								</tr>
-								<tr>
-									<td class="table-plus">2</td>
-									<td>Nur Khafidah 2</td>
-									<td>080818182828</td>
-									<td>2829 Trainer Avenue Peoria, IL 61602 </td>
-									<td>Pernikahan</td>
-									<td>
-										<div class="dropdown">
-											<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-												<i class="dw dw-more"></i>
-											</a>
-											<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-												<a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>
-												<a class="dropdown-item" href="#"><i class="dw dw-edit2"></i> Edit</a>
-												<a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i> Delete</a>
-											</div>
-										</div>
-									</td>
-								</tr>
-								<tr>
-									<td class="table-plus">3</td>
-									<td>Nur Khafidah 3</td>
-									<td>080818182828</td>
-									<td>2829 Trainer Avenue Peoria, IL 61602 </td>
-									<td>Pernikahan</td>
-									<td>
-										<div class="dropdown">
-											<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-												<i class="dw dw-more"></i>
-											</a>
-											<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-												<a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>
-												<a class="dropdown-item" href="#"><i class="dw dw-edit2"></i> Edit</a>
-												<a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i> Delete</a>
-											</div>
-										</div>
-									</td>
-								</tr>
-								<tr>
-									<td class="table-plus">4</td>
-									<td>Nur Khafidah 4</td>
-									<td>080818182828</td>
-									<td>2829 Trainer Avenue Peoria, IL 61602 </td>
-									<td>Pernikahan</td>
-									<td>
-										<div class="dropdown">
-											<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-												<i class="dw dw-more"></i>
-											</a>
-											<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-												<a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>
-												<a class="dropdown-item" href="#"><i class="dw dw-edit2"></i> Edit</a>
-												<a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i> Delete</a>
-											</div>
-										</div>
-									</td>
-								</tr>
-								<tr>
-									<td class="table-plus">5</td>
-									<td>Nur Khafidah 5</td>
-									<td>080818182828</td>
-									<td>2829 Trainer Avenue Peoria, IL 61602 </td>
-									<td>Pernikahan</td>
-									<td>
-										<div class="dropdown">
-											<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-												<i class="dw dw-more"></i>
-											</a>
-											<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-												<a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>
-												<a class="dropdown-item" href="#"><i class="dw dw-edit2"></i> Edit</a>
-												<a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i> Delete</a>
-											</div>
-										</div>
-									</td>
-								</tr>
-								<tr>
-									<td class="table-plus">6</td>
-									<td>Nur Khafidah 6</td>
-									<td>080818182828</td>
-									<td>2829 Trainer Avenue Peoria, IL 61602 </td>
-									<td>Pernikahan</td>
-									<td>
-										<div class="dropdown">
-											<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-												<i class="dw dw-more"></i>
-											</a>
-											<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-												<a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>
-												<a class="dropdown-item" href="#"><i class="dw dw-edit2"></i> Edit</a>
-												<a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i> Delete</a>
-											</div>
-										</div>
-									</td>
-								</tr>
-								<tr>
-									<td class="table-plus">7</td>
-									<td>Nur Khafidah 7</td>
-									<td>080818182828</td>
-									<td>2829 Trainer Avenue Peoria, IL 61602 </td>
-									<td>Pernikahan</td>
-									<td>
-										<div class="dropdown">
-											<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-												<i class="dw dw-more"></i>
-											</a>
-											<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-												<a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>
-												<a class="dropdown-item" href="#"><i class="dw dw-edit2"></i> Edit</a>
-												<a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i> Delete</a>
-											</div>
-										</div>
-									</td>
-								</tr>
-								<tr>
-									<td class="table-plus">8</td>
-									<td>Nur Khafidah 8</td>
-									<td>080818182828</td>
-									<td>2829 Trainer Avenue Peoria, IL 61602 </td>
-									<td>Pernikahan</td>
-									<td>
-										<div class="dropdown">
-											<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-												<i class="dw dw-more"></i>
-											</a>
-											<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-												<a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>
-												<a class="dropdown-item" href="#"><i class="dw dw-edit2"></i> Edit</a>
-												<a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i> Delete</a>
-											</div>
-										</div>
-									</td>
-								</tr>
-								<tr>
-									<td class="table-plus">9</td>
-									<td>Nur Khafidah 9</td>
-									<td>080818182828</td>
-									<td>2829 Trainer Avenue Peoria, IL 61602 </td>
-									<td>Pernikahan</td>
-									<td>
-										<div class="dropdown">
-											<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-												<i class="dw dw-more"></i>
-											</a>
-											<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-												<a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>
-												<a class="dropdown-item" href="#"><i class="dw dw-edit2"></i> Edit</a>
-												<a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i> Delete</a>
-											</div>
-										</div>
-									</td>
-								</tr>
-								<tr>
-									<td class="table-plus">10</td>
-									<td>Nur Khafidah 10</td>
-									<td>080818182828</td>
-									<td>2829 Trainer Avenue Peoria, IL 61602 </td>
-									<td>Pernikahan</td>
-									<td>
-										<div class="dropdown">
-											<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-												<i class="dw dw-more"></i>
-											</a>
-											<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-												<a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>
-												<a class="dropdown-item" href="#"><i class="dw dw-edit2"></i> Edit</a>
-												<a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i> Delete</a>
-											</div>
-										</div>
-									</td>
-								</tr>
-								<tr>
-									<td class="table-plus">11</td>
-									<td>Nur Khafidah 11</td>
-									<td>080818182828</td>
-									<td>2829 Trainer Avenue Peoria, IL 61602 </td>
-									<td>Pernikahan</td>
-									<td>
-										<div class="dropdown">
-											<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-												<i class="dw dw-more"></i>
-											</a>
-											<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-												<a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>
-												<a class="dropdown-item" href="#"><i class="dw dw-edit2"></i> Edit</a>
-												<a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i> Delete</a>
-											</div>
-										</div>
-									</td>
-								</tr>
-								<tr>
-									<td class="table-plus">12</td>
-									<td>Nur Khafidah 12</td>
-									<td>080818182828</td>
-									<td>2829 Trainer Avenue Peoria, IL 61602 </td>
-									<td>Pernikahan</td>
-									<td>
-										<div class="dropdown">
-											<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-												<i class="dw dw-more"></i>
-											</a>
-											<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-												<a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>
-												<a class="dropdown-item" href="#"><i class="dw dw-edit2"></i> Edit</a>
-												<a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i> Delete</a>
-											</div>
-										</div>
-									</td>
-								</tr>
+								<!-- End Template Popular - Row Box Data -->
+								<!-- ============================================================== -->
+								{% endfor %}
+								{% endif %}
 							</tbody>
+							<!-- End Body Table -->
+							<!-- ============================================================== -->
 						</table>
 					</div>
+					<!-- End Table Content -->
+					<!-- ============================================================== -->
 				</div>
-				<!-- Simple Datatable End -->
+				{% endif %}
+				<!-- End Simple Datatable -->
+				<!-- ============================================================== -->
 			</div>
-            
+            <!-- End Content -->
 			<!-- ============================================================== -->
-			<!-- Footer -->
+
 			<!-- ============================================================== -->
+			<!-- Footer Section -->
 			{% include 'components/dash_footer.html' %}
+			<!-- End Footer -->
+			<!-- ============================================================== -->
 		</div>
 	</div>
+	<!-- ============================================================== -->
+	<!-- END MAIN CONTENT -->
+	<!-- ============================================================== -->
+
 {% endblock %}
+<!-- ============================================================== -->
+<!-- END PAGE CONTENT -->
+<!-- ============================================================== -->

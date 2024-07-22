@@ -1,0 +1,165 @@
+<!-- ============================================================== -->
+<!-- PAGE CONTENT - GUEST - USER -->
+<!-- ============================================================== -->
+{% extends 'layouts/dash_layout.html' %} {% block content %}
+
+	<!-- ============================================================== -->
+	<!-- PRELOADER - ALL PAGE - ALL -->
+	<!-- ============================================================== -->
+    {% include 'components/preloader.html' %}
+	<!-- ============================================================== -->
+	<!-- END PRELOADER -->
+	<!-- ============================================================== -->
+	
+
+	<!-- ============================================================== -->
+	<!-- HEADER - ALL PAGE - ALL -->
+	<!-- ============================================================== -->
+	{% include 'components/dash_header.html' %}
+	<!-- ============================================================== -->
+	<!-- END HEADER -->
+	<!-- ============================================================== -->
+	
+
+	<!-- ============================================================== -->
+	<!-- NAVIGATION SIDEBAR - ALL PAGE - ALL -->
+	<!-- ============================================================== -->
+	{% include 'components/dash_sidebar.html' %}
+	<!-- ============================================================== -->
+	<!-- END NAVIGATION SIDEBAR -->
+	<!-- ============================================================== -->
+	
+
+	<!-- ============================================================== -->
+	<!-- MAIN CONTENT - GUEST - USER -->
+	<!-- ============================================================== -->
+	<div class="main-container">
+		<div class="pd-ltr-20 xs-pd-20-10">
+            <!-- ============================================================== -->
+			<!-- Content Section -->
+			<div class="min-height-200px">
+                <!-- ============================================================== -->
+				<!-- Header Content Section -->
+				<div class="page-header">
+					<div class="row">
+						<!-- ============================================================== -->
+						<!-- Title & Breadcrumb Section -->
+						<div class="col-md-6 col-sm-12">
+							<div class="title">
+								<h4>Undanganku</h4>
+							</div>
+							<nav aria-label="breadcrumb" role="navigation">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="{{ url_for('dashboard.index') }}">Home</a></li>
+									<li class="breadcrumb-item active" aria-current="page">Undanganku</li>
+								</ol>
+							</nav>
+						</div>
+						<!-- End Title & Breadcrumb -->
+						<!-- ============================================================== -->
+
+						<!-- ============================================================== -->
+						<!-- Management Add Button Section -->
+						<div class="col-md-6 col-sm-10 text-right">
+							<a href="{{ url_for('management.invitation.select_template')}}" class="btn btn-primary" type="button" role="button">
+								<i class="fa fa-plus pr-2"></i>  Buat Baru
+							</a>
+						</div>
+						<!-- End Management Add Button -->
+						<!-- ============================================================== -->
+					</div>
+				</div>
+                <!-- End Header Content -->
+				<!-- ============================================================== -->
+				 
+				<!-- ============================================================== -->
+				<!-- Alert Section -->
+				{% with messages = get_flashed_messages(with_categories=true) %}
+				{% include "components/alert.html" %}
+				{% endwith %}
+				<!-- End Alert -->
+				<!-- ============================================================== -->
+
+                <!-- ============================================================== -->
+				<!-- Invitation Galery Section -->
+				{% if data['list_invitation'] == None %}
+				<!-- ============================================================== -->
+				<!-- Template Null Section -->
+				<div class="card-box pd-20 height-100-p mb-30">
+					{% with
+						title = "Templates are not yet available.",
+						pict_size = 350
+					%}
+					{% include 'components/not_found.html' %}
+					{% endwith %}
+				</div>
+				<!-- End Template Null -->
+				<!-- ============================================================== -->
+				{% else %}
+				<div class="card-box mb-30">
+					<h2 class="h4 pd-20">Daftar Undanganku</h2>
+					<table class="data-table table nowrap">
+						<thead>
+							<tr>
+								<th class="table-plus datatable-nosort">Thumbnail</th>
+								<th>Judul</th>
+								<th>Tamu</th>
+								<th>Ucapan</th>
+								<th>Tanggal Dibuat</th>
+								<th class="datatable-nosort">Aksi</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for item in data['list_invitation'] %}
+							<tr>
+								<td class="table-plus">
+									<img src="{{ item['template_thumb'] }}" width="70" height="70" alt="">
+								</td>
+								<td>
+									<h5 class="font-16">{{ item['invitation_title'] }}</h5>
+									{{ item['category'] }}
+								</td>
+								<td>{{ item['guest_count'] }}</td>
+								<td>{{ item['greeting_count'] }}</td>
+								<td>{{ item['created_at']['date'] }}</td>
+								<td>
+									<div class="dropdown">
+										<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+											<i class="dw dw-more"></i>
+										</a>
+										<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+											<a class="dropdown-item" href="{{ url_for('show.show_invitation', code=item['invitation_code'], title=item['invitation_title']) }}" target="_blank"><i class="dw dw-eye"></i> Lihat</a>
+											<a class="dropdown-item" href="{{ url_for('management.invitation.edit', id=item['invitation_id']) }}"><i class="dw dw-edit2"></i> Ubah</a>
+											<a class="dropdown-item" href="{{ url_for('management.invitation.detail', id=item['invitation_id'], code=item['invitation_code']) }}"><i class="fa fa-info"></i> Detail</a>
+											<a class="dropdown-item" href="{{ url_for('management.invitation.delete', id=item['invitation_id']) }}"><i class="dw dw-delete-3"></i> Hapus</a>
+										</div>
+									</div>
+								</td>
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+				{% endif %}
+				<!-- End Invitation Galery -->
+				<!-- ============================================================== -->
+			</div>
+			<!-- End Content -->
+			<!-- ============================================================== -->
+            
+			<!-- ============================================================== -->
+			<!-- Footer -->
+			<!-- ============================================================== -->
+			{% include 'components/dash_footer.html' %}
+			<!-- End Footer -->
+			<!-- ============================================================== -->
+		</div>
+	</div>
+	<!-- ============================================================== -->
+	<!-- END MAIN CONTENT -->
+	<!-- ============================================================== -->
+
+{% endblock %}
+<!-- ============================================================== -->
+<!-- END PAGE CONTENT -->
+<!-- ============================================================== -->

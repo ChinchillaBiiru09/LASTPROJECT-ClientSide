@@ -1,0 +1,22 @@
+{# 
+    js variable store
+    tempat pertukaran variable antara flask dan javascript
+
+    variabel config pada jinja akan menyimpan 
+    seluruh variabel yang sudah didefinisikan pada app.config[$namakonfigurasi]
+#}
+<meta 
+    id="jsVarStore" 
+    data-base-url = "{{config['BASE_URL']}}"
+    data-backend-url = "{{config['BE_URL']}}"
+>
+
+<script>
+    const BASE_URL = jsVarStore.dataset['baseUrl']
+    const BE_URL = jsVarStore.dataset['backendUrl']
+</script>
+
+{# 
+    contoh penggunaan pada javascript
+    jsVarStore.dataset['baseUrl']
+#}

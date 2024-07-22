@@ -1,0 +1,119 @@
+<!-- ============================================================== -->
+<!-- PAGE CONTENT - CATEGORY MANAGEMENT - ADMIN -->
+<!-- ============================================================== -->
+{% extends 'layouts/dash_layout.html' %} {% block content %}
+
+	<!-- ============================================================== -->
+	<!-- PRELOADER - ALL PAGE - ALL -->
+	<!-- ============================================================== -->
+    {% include 'components/preloader.html' %}
+	<!-- ============================================================== -->
+	<!-- END PRELOADER -->
+	<!-- ============================================================== -->
+	
+
+	<!-- ============================================================== -->
+	<!-- HEADER - ALL PAGE - ALL -->
+	<!-- ============================================================== -->
+	{% include 'components/dash_header.html' %}
+	<!-- ============================================================== -->
+	<!-- END HEADER -->
+	<!-- ============================================================== -->
+	
+
+	<!-- ============================================================== -->
+	<!-- NAVIGATION SIDEBAR - ALL PAGE - ALL -->
+	<!-- ============================================================== -->
+	{% include 'components/dash_sidebar.html' %}
+	<!-- ============================================================== -->
+	<!-- END NAVIGATION SIDEBAR -->
+	<!-- ============================================================== -->
+	
+
+	<!-- ============================================================== -->
+	<!-- MAIN CONTENT - CATEGORY MANAGEMENT - ADMIN -->
+	<!-- ============================================================== -->
+	<div class="main-container">
+		<div class="pd-ltr-20 xs-pd-20-10">
+            <!-- ============================================================== -->
+			<!-- Content Section -->
+			<div class="min-height-200px pb-30">
+				<!-- ============================================================== -->
+				<!-- Header Content Section -->
+				<div class="page-header">
+					<div class="row">
+						<!-- ============================================================== -->
+						<!-- Title & Breadcrumb Section -->
+						<div class="col-md-6 col-sm-12">
+							<!-- ============================================================== -->
+							<!-- Title Section -->
+							<div class="title">
+								<h4>Hapus Tamu</h4>
+							</div>
+							<!-- End Title -->
+							<!-- ============================================================== -->
+
+							<!-- ============================================================== -->
+							<!-- Breadcrumb Section -->
+							<nav aria-label="breadcrumb" role="navigation">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="{{ url_for('dashboard.index') }}">Home</a></li>
+									<li class="breadcrumb-item"><a href="{{ url_for('management.invitation.detail', id=data['invitation']['invitation_id'], code=data['invitation']['invitation_code']) }}">Detail Undangan</a></li>
+									<li class="breadcrumb-item active" aria-current="page">Hapus Data</li>
+								</ol>
+							</nav>
+							<!-- End Breadcrumb -->
+							<!-- ============================================================== -->
+						</div>
+						<!-- End Title & Breadcrumb -->
+						<!-- ============================================================== -->
+					</div>
+				</div>
+				<!-- End Header Content -->
+				<!-- ============================================================== -->
+				 
+				<!-- ============================================================== -->
+				<!-- Alert -->
+				{% with messages = get_flashed_messages(with_categories=true) %}
+				{% include "components/alert.html" %}
+				{% endwith %}
+				<!-- End Alert -->
+				<!-- ============================================================== -->
+				
+				<!-- ============================================================== -->
+				<!-- Simple Datatable Section -->
+				<div class="pd-20 card-box mb-30">
+                    <div class="clearfix">
+                        <div class="pull-left">
+                            <h4 class="text-blue h4">Peringatan!</h4>
+                        </div>
+                    </div>
+                    <div class="modal-body" id="dynamic-form">
+                        <p class="mb-30">Apakah anda yakin akan menghapus tamu <b>"{{ data['guest']['name'] }}"</b> ??</p>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="{{ url_for('management.invitation.detail', id=data['invitation']['invitation_id'], code=data['invitation']['invitation_code']) }} " type="button" class="btn btn-outline-danger mr-1">Kembali</a>
+                        <a href="{{ url_for('guest.delete_proccess', gueId=data['guest']['guest_id'], id=data['invitation']['invitation_id'], code=data['invitation']['invitation_code']) }}" type="button" class="btn btn-outline-primary" >Simpan</a>
+                    </div>
+                </div>
+				<!-- End Simple Datatable -->
+				<!-- ============================================================== -->
+			</div>
+			<!-- End Content -->
+			<!-- ============================================================== -->
+
+			<!-- ============================================================== -->
+			<!-- Footer Section -->
+			{% include 'components/dash_footer.html' %}
+			<!-- End Footer -->
+			<!-- ============================================================== -->
+		</div>
+	</div>
+	<!-- ============================================================== -->
+	<!-- END MAIN CONTENT -->
+	<!-- ============================================================== -->
+
+{% endblock %}
+<!-- ============================================================== -->
+<!-- END PAGE CONTENT -->
+<!-- ============================================================== -->

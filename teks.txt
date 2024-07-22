@@ -29,6 +29,20 @@ o> PARTITION
 <!-- Title -->
 <!-- End Title -->
 
+o> MAIN BLOCK JS
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+// ............................   TITLE    .............................
+// ...........................   END TITLE   ...........................
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+o> SECTION BLOCK JS
+// =============================   Title   =============================
+// ===========================   End Title   ===========================
+
+o> DESCRIPTION BLOCK JS
+// =====  Title  .......................................................
+// =====  End Title  ...................................................
+
 o> FOLDER ROUTES NAME
 routes/FolderName
 
@@ -55,8 +69,11 @@ o>> BLUEPRINT
 smallletter = Blueprint()
 
 o>> FUNCTION CRUD
-def create_data() -> for api create
-def get_all_data() -> for api get all 
+def name_index() -> for render template
+def name_create() -> for create template
+def name_create_proccess() -> for create proccess
+def name_view() -> for api get detail
+
 def get_detail_data() -> for api get detail
 def update_data() -> for api update
 def delete_data() -> for api delete
@@ -71,4 +88,33 @@ def create_specificfunction()
 etc..
 
 o> REQUEST FIELD
-smallcase+_underscore
+smallcase_underscore
+
+
+
+    <!-- Code Logic For Button - 始まり -->
+    {# When need a button #}
+    {% if button_active %}
+        <a href="{{ button_link }}" class="btn btn-primary mt-3">
+            {{ button_text }}
+        </a>
+    {% endif %}
+    <!-- Code Logic For Button - 終わり -->
+
+
+
+<li>
+    <a href="{{ url_for('faq.index') }}" class="dropdown-toggle no-arrow">
+        <span class="micon dw dw-information"></span><span class="mtext">Help</span>
+    </a>
+</li> -->
+<!-- <li>
+    <a href="{{ url_for('static', filename='') }}#" class="dropdown-toggle no-arrow">
+        <span class="micon dw dw-house-1"></span><span class="mtext">Service</span>
+    </a>
+</li> -->
+
+
+											<!-- use code for form submit -->
+											<input class="btn btn-primary btn-lg btn-block" type="submit" value="Sign In">
+										

@@ -1,0 +1,206 @@
+<!-- ============================================================== -->
+<!-- PAGE CONTENT - TEMPLATE MANAGEMENT - ADMIN -->
+<!-- ============================================================== -->
+{% extends 'layouts/dash_layout.html' %} {% block content %}
+
+    <!-- ============================================================== -->
+    <!-- PRELOADER - ALL PAGE - ALL -->
+    <!-- ============================================================== -->
+    {% include 'components/preloader.html' %}
+    <!-- ============================================================== -->
+    <!-- END PRELOADER -->
+    <!-- ============================================================== -->
+	
+
+	<!-- ============================================================== -->
+	<!-- HEADER - ALL PAGE - ALL -->
+	<!-- ============================================================== -->
+	{% include 'components/dash_header.html' %}
+	<!-- ============================================================== -->
+	<!-- END HEADER -->
+	<!-- ============================================================== -->
+	
+
+	<!-- ============================================================== -->
+	<!-- NAVIGATION SIDEBAR - ALL PAGE - ALL -->
+	<!-- ============================================================== -->
+	{% include 'components/dash_sidebar.html' %}
+	<!-- ============================================================== -->
+	<!-- END NAVIGATION SIDEBAR -->
+	<!-- ============================================================== -->
+	
+
+	<!-- ============================================================== -->
+	<!-- MAIN CONTENT - TEMPLATE MANAGEMENT - ADMIN -->
+	<!-- ============================================================== -->
+	<div class="main-container">
+		<div class="pd-ltr-20 xs-pd-20-10">
+            <!-- ============================================================== -->
+			<!-- Content Section -->
+			<div class="min-height-200px">
+				<!-- ============================================================== -->
+				<!-- Header COntent Section -->
+				<div class="page-header">
+					<div class="row">
+						<!-- ============================================================== -->
+						<!-- Title & Breadcrumb Section -->
+						<div class="col-md-6 col-sm-12">
+							<!-- ============================================================== -->
+							<!-- Title Section -->
+							<div class="title">
+								<h4>Template Management</h4>
+							</div>
+							<!-- End Title -->
+							<!-- ============================================================== -->
+
+							<!-- ============================================================== -->
+							<!-- Breadcrumb Section -->
+							<nav aria-label="breadcrumb" role="navigation">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="{{ url_for('dashboard.index') }}">Home</a></li>
+									<li class="breadcrumb-item"><a href="{{ url_for('management.template.index') }}">Template</a></li>
+									<li class="breadcrumb-item active" aria-current="page">Update</li>
+								</ol>
+							</nav>
+							<!-- End Breadcrumb -->
+							<!-- ============================================================== -->
+						</div>
+						<!-- End Title & Breadcrumb -->
+						<!-- ============================================================== -->
+					</div>
+				</div>
+				<!-- End Header COntent -->
+				<!-- ============================================================== -->
+
+				<!-- ============================================================== -->
+				<!-- Alert Section -->
+				{% with messages = get_flashed_messages(with_categories=true) %}
+				{% include "components/alert.html" %}
+				{% endwith %}
+				<!-- End Alert -->
+				<!-- ============================================================== -->
+
+				<!-- ============================================================== -->
+				<!-- Template Gallery Section -->
+                <div class="pd-20 card-box mb-30">
+					<div class="clearfix">
+						<div class="pull-left">
+							<h4 class="text-blue h4 mb-30">Edit Template Forms</h4>
+						</div>
+					</div>
+                    <!-- ============================================================== -->
+                    <!-- Tab Box Section -->
+                    <form action="{{ url_for('management.template.edit_proccess') }}" method="post" enctype="multipart/form-data">
+                        <div class="modal-body">
+							<!-- Other Data -->
+							<div class="form-group row">
+								<input class="form-control" type="hidden" placeholder="Tulis disini" name="template_id" id="template_id" value="{{ data['template']['template_id'] }}">
+							</div>
+							<!-- title -->
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-2 col-form-label">Title</label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input class="form-control" type="text" placeholder="Type a title" name="title" id="title" value="{{ data['template']['title'] }}">
+                                </div>
+                            </div>
+							<!-- thumbnail -->
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-2 col-form-label">Thumbnail</label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input type="file" class="form-control-file form-control height-auto" accept=".jpg,.jpeg,.png" name="thumbnail" id="thumbnail">
+									<input type="hidden" class="form-control-file form-control height-auto" accept=".jpg,.jpeg,.png" name="thumbnail_old" id="thumbnail_old" value="{{ data['template']['thumb_fname'] }}">
+									<small class="form-text text-muted">
+										{{ data['template']['thumb_fname'] }}
+									</small>
+                                </div>
+                            </div>
+							<!-- css -->
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-2 col-form-label">CSS file</label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input type="file" class="form-control-file form-control height-auto" accept=".css"  name="css_file" id="css_file">
+									<input type="hidden" class="form-control-file form-control height-auto" accept=".jpg,.jpeg,.png" name="css_old" id="css_old" value="{{ data['template']['css_fname'] }}">
+									<small class="form-text text-muted">
+										{{ data['template']['css_fname'] }}
+									</small>
+                                </div>
+                            </div>
+							<!-- js -->
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-2 col-form-label">Javascript file</label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input type="file" class="form-control-file form-control height-auto" accept=".js"  name="js_file" id="js_file">
+									<input type="hidden" class="form-control-file form-control height-auto" accept=".jpg,.jpeg,.png" name="js_old" id="js_old" value="{{ data['template']['js_fname'] }}">
+									<small class="form-text text-muted">
+										{{ data['template']['js_fname'] }}
+									</small>
+                                </div>
+                            </div>
+							<!-- wallpaper -->
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-2 col-form-label">Wallpaper*</label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input type="file" class="form-control-file form-control height-auto" accept=".jpg,.jpeg,.png" name="wallpaper" id="wallpaper">
+									<input type="hidden" class="form-control-file form-control height-auto" accept=".jpg,.jpeg,.png" name="wallpaper_old" id="wallpaper_old" value="{{ data['template']['wp_fname'] }}">
+									<small class="form-text text-muted">
+										{{ data['template']['wp_fname'] }}
+									</small>
+                                </div>
+                            </div>
+							<!-- wallpaper 2 -->
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-2 col-form-label">Wallpaper 2*</label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input type="file" class="form-control-file form-control height-auto" accept=".jpg,.jpeg,.png" name="wallpaper_2" id="wallpaper_2">
+									<input type="hidden" class="form-control-file form-control height-auto" accept=".jpg,.jpeg,.png" name="wallpaper_2_old" id="wallpaper_2_old" value="{{ data['template']['wp2_fname'] }}">
+									<small class="form-text text-muted">
+										{{ data['template']['wp2_fname'] }}
+									</small>
+                                </div>
+                            </div>
+							<!-- category -->
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-2 col-form-label">Category</label>
+                                <div class="col-sm-12 col-md-10">
+                                    <select class="custom-select col-12" name="category" id="category">
+                                        <option value="0">Choose...</option>
+                                        {% for item in data['category'] %}
+										{% if data['template']['category_id'] == item['category_id'] %}
+                                        <option selected value="{{ item['category_id'] }}">{{ item['category'] }}</option>
+										{% else %}
+                                        <option value="{{ item['category_id'] }}">{{ item['category'] }}</option>
+										{% endif %}
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="{{ url_for('management.template.index') }}" type="button" class="btn btn-outline-danger">Close</a>
+                            <button type="submit" id="categoryAddBtn" class="btn btn-outline-primary">Save changes</button>
+                        </div>
+                    </form>
+                    <!-- End Tab Box -->
+                    <!-- ============================================================== -->
+				</div>
+				<!-- End Template Gallery -->
+				<!-- ============================================================== -->
+			</div>
+			<!-- End Content -->
+			<!-- ============================================================== -->
+
+			<!-- ============================================================== -->
+			<!-- Footer Section -->
+			{% include 'components/dash_footer.html' %}
+			<!-- End Footer -->
+			<!-- ============================================================== -->
+		</div>
+	</div>
+    <!-- ============================================================== -->
+	<!-- END MAIN CONTENT -->
+	<!-- ============================================================== -->
+
+{% endblock %}
+<!-- ============================================================== -->
+<!-- END PAGE CONTENT -->
+<!-- ============================================================== --> 
