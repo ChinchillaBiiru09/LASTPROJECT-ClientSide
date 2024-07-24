@@ -471,10 +471,49 @@ def request_delete_proccess():
 @mngtemplate.get('/request/detail')
 def request_detail():
     data = dict()
-    data['request'] = get_detail_template()
+    data['request'] = get_detail_request_template()
 
     return render_template(
         title=TITLE_DASHBD,
         data=data,
         template_name_or_list='Request/detailRequest.html'
     )
+
+
+@mngtemplate.post('/request/update/status')
+def update_reqstatus():
+    dataInput = request.form.to_dict()
+    reqId = dataInput['req_id']
+    dataInput = {
+        "req_id" : dataInput['req_id'],
+        "status" : dataInput['status']
+    }
+
+    print(dataInput)
+    payload = json.dumps(dataInput)
+    url = app.config['BE_URL'] + '/template/request/status'
+
+    headers = {
+        'Authorization' : f'Bearer {session["user"]["access_token"]}',
+        'Content-Type' : 'application/json'
+    }
+    
+    response = requests.request (
+        method='PUT',
+        url=url,
+        headers=headers,
+        data=payload
+    )
+
+    if (response.status_code != 200):
+        flash(
+            message=response.json().get('message'),
+            category='danger'
+        )
+        return redirect(url_for('management.template.request_detail', reqId=reqId))
+    else:
+        flash(
+            message=response.json().get('message'),
+            category='success'
+        )
+        return redirect(url_for('management.template.request_detail', reqId=reqId))

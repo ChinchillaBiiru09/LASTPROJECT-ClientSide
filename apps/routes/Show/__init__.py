@@ -150,9 +150,9 @@ def show_template():
             template_name_or_list='base_wedding.html'
         )
     
-    if data['template']['category'].upper() == "ULANG TAHUN": 
+    elif data['template']['category'].upper() == "ULANG TAHUN": 
         data['invitation'] = {
-            "category": "Pernikahan",
+            "category": "Ulang Tahun",
             "category_id": 1,
             "detail_info": {
                 "date": "01 January 2024",
@@ -223,6 +223,81 @@ def show_template():
             background1_url= wall1_url,
             background2_url= wall2_url,
             template_name_or_list='base_birthday.html'
+        )
+    
+    elif data['template']['category'].upper() == "GRADUATION PARTY": 
+        data['invitation'] = {
+            "category": "Graduation Party",
+            "category_id": 1,
+            "detail_info": {
+                "date": "01 January 2024",
+                "start": {
+                    "date": "01 Jan 2024",
+                    "date_time": "01 Jan 2024 07:00 AM",
+                    "dates": "01",
+                    "day": "Senin",
+                    "day_month": "01 Jan",
+                    "edate_time": "01 January 2024 07:00 AM",
+                    "etime": "07:00 AM",
+                    "full": "Senin, 01 Jan 2024, 07:00:00",
+                    "fullmonth": "Januari",
+                    "hour": "07",
+                    "minute": "00",
+                    "month": "Jan",
+                    "month_year": "Jan 2024",
+                    "no_month": "01",
+                    "time": "07:00",
+                    "year": "2024"
+                },
+                "end": {
+                    "date": "01 Jan 2024",
+                    "date_time": "01 Jan 2024 10:00 AM",
+                    "dates": "01",
+                    "day": "Senin",
+                    "day_month": "01 Jan",
+                    "edate_time": "01 January 2024 10:00 AM",
+                    "etime": "10:00 AM",
+                    "full": "Senin, 01 Jan 2024, 10:00:00",
+                    "fullmonth": "Januari",
+                    "hour": "10",
+                    "minute": "00",
+                    "month": "Jan",
+                    "month_year": "Jan 2024",
+                    "no_month": "01",
+                    "time": "07:00",
+                    "year": "2024"
+                },
+                "dresscode": "White & Cream",
+                "location": "Hotel ABC, Kota A",
+                "maps": "https://maps.app.goo.gl/",
+            },
+            "invitation_code": "xxxxxx",
+            "invitation_id": 1,
+            "invitation_link": "xxxxxx",
+            "invitation_title": "Template Ulang Tahun",
+            "personal_data": {
+                "fullname": "Nama Lengkap",
+                "callname": "Nama",
+                "myphoto": "http://127.0.0.1:5000/invitation/media/2024-07-21_043130_QzXuiE_man_photo_5.jpg",
+                "birthday": "17",
+            },
+            "template_css": data['template']['css_file'],
+            "template_id": 14,
+            "template_js": data['template']['js_file'],
+            "template_thumb": data['template']['thumbnail'],
+            "template_title": "Sepia Floral Orange",
+            "template_wall": data['template']['wallpaper'],
+            "template_wall2": data['template']['wallpaper_2'],
+            "user_id": 5
+        }
+        wall1_url = data['invitation']['template_wall']
+        wall2_url = data['invitation']['template_wall2']
+        return render_template(
+            title=data['template']['title'],
+            data=data,
+            background1_url= wall1_url,
+            background2_url= wall2_url,
+            template_name_or_list='base_graduation.html'
         )
 
 
