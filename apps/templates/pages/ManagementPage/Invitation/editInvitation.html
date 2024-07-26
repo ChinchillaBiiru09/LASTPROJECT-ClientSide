@@ -102,9 +102,14 @@
 							<label class="col-sm-12 col-md-2 col-form-label">Judul*</label>
 							<div class="col-sm-12 col-md-10">
 								<input class="form-control" type="text" placeholder="Tulis disini" name="title" id="title" value="{{ data['invitation']['invitation_title'] }}">
+								<small class="form-text text-muted">
+									*Judul bisa berupa nama acara atau nama pemilik acara.
+									(Contoh: Budi&Ani, Our_wedding, Ani's_Day, My_graduation)
+								</small>
 							</div>
 						</div>
 					</div>
+
 					{% if data['invitation']['category'].upper() == "PERNIKAHAN" %}
 					<!-- Data diri mempelai wanita -->
 					<div class="pd-20 card-box mb-30">
@@ -418,13 +423,97 @@
 					</div>
 
 
+					{% elif data['invitation']['category'].upper() == "GRADUATION PARTY" %}
+					<!-- Data diri -->
+					<div class="pd-20 card-box mb-30">
+						<div class="clearfix">
+							<div class="pull-left">
+								<h4 class="text-blue h4">Data Diri</h4>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="col-sm-12 col-md-2 col-form-label">Nama Lengkap*</label>
+							<div class="col-sm-12 col-md-10">
+								<input class="form-control" type="text" placeholder="Tulis disini" name="fullname" id="fullname" value="{{ data['invitation']['personal_data']['fullname'] }}">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="col-sm-12 col-md-2 col-form-label">Nama Sekolah *</label>
+							<div class="col-sm-12 col-md-10">
+								<input class="form-control" type="text" placeholder="Tulis disini" name="school" id="school" value="{{ data['invitation']['personal_data']['school'] }}">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="col-sm-12 col-md-2 col-form-label">Tahun Lulus*</label>
+							<div class="col-sm-12 col-md-10">
+								<input class="form-control" min="1999" type="number" name="graduate" id="graduate" value="{{ data['invitation']['personal_data']['graduate'] }}">
+							</div>
+						</div>
+					</div>
+
+					<!-- Data informasi Acara -->
+					<div class="pd-20 card-box mb-30" id="dynamic-form">
+						<div class="clearfix">
+							<div class="pull-left">
+								<h4 class="text-blue h4">Informasi Acara</h4>
+							</div>
+						</div>
+                        <div class="row">
+							<div class="col-md-5 col-sm-12">
+								<div class="form-group">
+									<!-- <label class="col-sm-12 col-md-2 col-form-label">Akad*</label> -->
+									<label>Tanggal*</label>
+									<input class="form-control date-picker" placeholder="Pilih tanggal" type="text" name="gd_date" id="gd_date" value="{{ data['invitation']['detail_info']['date'] }}">
+								</div>
+							</div>
+							<div class="col-md-3 col-sm-12">
+								<div class="form-group">
+									<label>Mulai*</label>
+									<input class="form-control time-picker" placeholder="Pilih waktu" type="text" name="gd_start" id="gd_start" value="{{ data['invitation']['detail_info']['start']['etime'] }}">
+								</div>
+							</div>
+							<div class="form-group"><p class="text-center col-form-label" style="margin-top: 2rem;">-</p></div>
+							<div class="col-md-3 col-sm-12">
+								<div class="form-group">
+									<label>Selesai*</label>
+									<input class="form-control time-picker" placeholder="Selesai" type="text" name="gd_end" id="gd_end" value="{{ data['invitation']['detail_info']['end']['etime'] }}">
+								</div>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="col-sm-12 col-md-2 col-form-label">Dresscode*</label>
+							<div class="col-sm-12 col-md-10">
+								<input class="form-control" type="text" placeholder="Tulis disini" name="dresscode" id="dresscode" value="{{ data['invitation']['detail_info']['dresscode'] }}">
+								<small class="form-text text-muted">
+									*Pakaian yang wajib dikenakan saat menghadiri acara.
+								</small>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="col-sm-12 col-md-2 col-form-label">Lokasi*</label>
+							<div class="col-sm-12 col-md-10">
+								<input class="form-control" type="text" placeholder="Tulis disini" name="location" id="location" value="{{ data['invitation']['detail_info']['location'] }}">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="col-sm-12 col-md-2 col-form-label">Maps*</label>
+							<div class="col-sm-12 col-md-8">
+								<input class="form-control" type="text" placeholder="Copy-paste link maps" name="maps" id="maps" value="{{ data['invitation']['detail_info']['maps'] }}">
+							</div>
+							<div class="col-sm-12 col-md-2">
+								<a href="https://maps.app.goo.gl/" class="btn btn-light" target="_blank">Maps</a>
+								<!-- <input class="form-control" type="text" placeholder="Copy-paste link maps" name="maps" id="maps"> -->
+							</div>
+						</div>
+					</div>
+
 
 					{% else %}
 					<div class="pd-20 card-box mb-30">
 						<div class="form-group row">
-							<label for="example-datetime-local-input" class="col-sm-12 col-md-2 col-form-label">Contoh kosong</label>
+							<label for="example-datetime-local-input" class="col-sm-12 col-md-2 col-form-label">Dumps</label>
 							<div class="col-sm-12 col-md-10">
-								<input class="form-control datetimepicker" placeholder="Choose Date anf time" type="text">
+								<input class="form-control datetimepicker" placeholder="Choose Date anf time" type="text" disabled>
 							</div>
 						</div>
                 	</div>

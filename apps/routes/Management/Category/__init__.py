@@ -18,6 +18,7 @@ mngcategory = Blueprint(
 def index():
     if session['user']['role'] == "USER":
         return app.errorhandler(403)
+    
     data = get_category()
     return render_template(
         title=TITLE_DASHBD,

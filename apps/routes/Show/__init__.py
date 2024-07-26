@@ -153,7 +153,7 @@ def show_template():
     elif data['template']['category'].upper() == "ULANG TAHUN": 
         data['invitation'] = {
             "category": "Ulang Tahun",
-            "category_id": 1,
+            "category_id": 2,
             "detail_info": {
                 "date": "01 January 2024",
                 "start": {
@@ -228,7 +228,7 @@ def show_template():
     elif data['template']['category'].upper() == "GRADUATION PARTY": 
         data['invitation'] = {
             "category": "Graduation Party",
-            "category_id": 1,
+            "category_id": 3,
             "detail_info": {
                 "date": "01 January 2024",
                 "start": {
@@ -301,8 +301,8 @@ def show_template():
         )
 
 
-@show.get('<code>/<title>')
-def show_invitation(code, title):
+@show.get('<code>/<link>')
+def show_invitation(code, link):
     data = dict()
     data['invitation'] = get_detail_code_invitation(code) # code
     # data['template'] = get_detail_template()
@@ -326,5 +326,13 @@ def show_invitation(code, title):
             background1_url= wall1_url,
             background2_url= wall2_url,
             template_name_or_list='base_birthday.html'
+        )
+    elif data['invitation']['category'].upper() == "GRADUATION PARTY":
+        return render_template(
+            title=invTitle,
+            data = data,
+            background1_url= wall1_url,
+            background2_url= wall2_url,
+            template_name_or_list='base_graduation.html'
         )
 

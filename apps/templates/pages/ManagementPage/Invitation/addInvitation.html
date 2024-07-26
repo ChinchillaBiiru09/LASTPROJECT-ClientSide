@@ -98,6 +98,10 @@
 							<label class="col-sm-12 col-md-2 col-form-label">Judul*</label>
 							<div class="col-sm-12 col-md-10">
 								<input class="form-control" type="text" placeholder="Tulis disini" name="title" id="title">
+								<small class="form-text text-muted">
+									*Judul bisa berupa nama acara atau nama pemilik acara.
+									(Contoh: Budi&Ani, Our_wedding, Ani's_Day, My_graduation, dsb.)
+								</small>
 							</div>
 						</div>
 					</div>
@@ -374,6 +378,9 @@
 							<label class="col-sm-12 col-md-2 col-form-label">Dresscode*</label>
 							<div class="col-sm-12 col-md-10">
 								<input class="form-control" type="text" placeholder="Tulis disini" name="dresscode" id="dresscode">
+								<small class="form-text text-muted">
+									*Pakaian yang wajib dikenakan saat menghadiri acara.
+								</small>
 							</div>
 						</div>
 						<div class="form-group row">
@@ -406,21 +413,15 @@
 							</div>
 						</div>
 						<div class="form-group row">
-							<label class="col-sm-12 col-md-2 col-form-label">Nama Panggilan *</label>
+							<label class="col-sm-12 col-md-2 col-form-label">Nama Sekolah *</label>
 							<div class="col-sm-12 col-md-10">
-								<input class="form-control" type="text" placeholder="Tulis disini" name="callname" id="callname">
+								<input class="form-control" type="text" placeholder="Tulis disini" name="school" id="school">
 							</div>
 						</div>
 						<div class="form-group row">
-							<label class="col-sm-12 col-md-2 col-form-label">Foto</label>
+							<label class="col-sm-12 col-md-2 col-form-label">Tahun Lulus*</label>
 							<div class="col-sm-12 col-md-10">
-								<input type="file" class="form-control-file form-control height-auto" accept=".jpg,.jpeg,.png" name="myphoto" id="myphoto">
-							</div>
-						</div>
-						<div class="form-group row">
-							<label class="col-sm-12 col-md-2 col-form-label">Ulang tahun ke*</label>
-							<div class="col-sm-12 col-md-10">
-								<input class="form-control" value="1" min="1" max="15" type="number" name="daughter_no" id="daughter_no">
+								<input class="form-control" value="1" min="1" type="number" name="graduate" id="graduate">
 							</div>
 						</div>
 					</div>
@@ -437,21 +438,30 @@
 								<div class="form-group">
 									<!-- <label class="col-sm-12 col-md-2 col-form-label">Akad*</label> -->
 									<label>Tanggal*</label>
-									<input class="form-control date-picker" placeholder="Pilih tanggal" type="text" name="marriage_date" id="marriage_date">
+									<input class="form-control date-picker" placeholder="Pilih tanggal" type="text" name="gd_date" id="gd_date">
 								</div>
 							</div>
 							<div class="col-md-3 col-sm-12">
 								<div class="form-group">
 									<label>Mulai*</label>
-									<input class="form-control time-picker" placeholder="Pilih waktu" type="text" name="marriage_start" id="marriage_start">
+									<input class="form-control time-picker" placeholder="Pilih waktu" type="text" name="gd_start" id="gd_start">
 								</div>
 							</div>
 							<div class="form-group"><p class="text-center col-form-label" style="margin-top: 2rem;">-</p></div>
 							<div class="col-md-3 col-sm-12">
 								<div class="form-group">
 									<label>Selesai*</label>
-									<input class="form-control time-picker" placeholder="Selesai" type="text" name="marriage_end" id="marriage_end">
+									<input class="form-control time-picker" placeholder="Selesai" type="text" name="gd_end" id="gd_end">
 								</div>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="col-sm-12 col-md-2 col-form-label">Dresscode*</label>
+							<div class="col-sm-12 col-md-10">
+								<input class="form-control" type="text" placeholder="Tulis disini" name="dresscode" id="dresscode">
+								<small class="form-text text-muted">
+									*Pakaian yang wajib dikenakan saat menghadiri acara.
+								</small>
 							</div>
 						</div>
 						<div class="form-group row">
@@ -462,8 +472,12 @@
 						</div>
 						<div class="form-group row">
 							<label class="col-sm-12 col-md-2 col-form-label">Maps*</label>
-							<div class="col-sm-12 col-md-10">
+							<div class="col-sm-12 col-md-8">
 								<input class="form-control" type="text" placeholder="Copy-paste link maps" name="maps" id="maps">
+							</div>
+							<div class="col-sm-12 col-md-2">
+								<a href="https://www.google.com/maps/" class="btn btn-light" target="_blank">Maps</a>
+								<!-- <input class="form-control" type="text" placeholder="Copy-paste link maps" name="maps" id="maps"> -->
 							</div>
 						</div>
 					</div>
@@ -472,9 +486,9 @@
 					{% else %}
 					<div class="pd-20 card-box mb-30">
 						<div class="form-group row">
-							<label for="example-datetime-local-input" class="col-sm-12 col-md-2 col-form-label">Contoh kosong</label>
+							<label for="example-datetime-local-input" class="col-sm-12 col-md-2 col-form-label">Dumps</label>
 							<div class="col-sm-12 col-md-10">
-								<input class="form-control datetimepicker" placeholder="Choose Date anf time" type="text">
+								<input class="form-control datetimepicker" placeholder="Choose Date anf time" type="text" disabled>
 							</div>
 						</div>
                 	</div>

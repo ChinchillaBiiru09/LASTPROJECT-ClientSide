@@ -48,7 +48,7 @@
 							<!-- ============================================================== -->
 							<!-- Title Section -->
 							<div class="title">
-								<h4>Category Management</h4>
+								<h4>User Management</h4>
 							</div>
 							<!-- End Title -->
 							<!-- ============================================================== -->
@@ -58,7 +58,7 @@
 							<nav aria-label="breadcrumb" role="navigation">
 								<ol class="breadcrumb">
 									<li class="breadcrumb-item"><a href="{{ url_for('dashboard.index') }}">Home</a></li>
-									<li class="breadcrumb-item active" aria-current="page">Category Management</li>
+									<li class="breadcrumb-item active" aria-current="page">User Management</li>
 								</ol>
 							</nav>
 							<!-- End Breadcrumb -->
@@ -69,6 +69,14 @@
 					</div>
 				</div>
 				<!-- End Header Content -->
+				<!-- ============================================================== -->
+				 
+				<!-- ============================================================== -->
+				<!-- Alert Section -->
+				{% with messages = get_flashed_messages(with_categories=true) %}
+				{% include "components/alert.html" %}
+				{% endwith %}
+				<!-- End Alert -->
 				<!-- ============================================================== -->
 				
 				<!-- ============================================================== -->
@@ -84,7 +92,7 @@
                     </div>
                     <div class="modal-footer">
                         <a href="{{ url_for('management.user.index') }}" type="button" class="btn btn-outline-danger" >Close</a>
-                        <a href="{{ url_for('management.user.delete_proccess', id=data['category_id']) }}" type="button" class="btn btn-outline-primary" >Save</a>
+                        <a href="{{ url_for('management.user.delete_proccess', id=data['user_id']) }}" type="button" class="btn btn-outline-primary" >Save</a>
                     </div>
                 </div>
 				<!-- End Simple Datatable -->

@@ -155,7 +155,7 @@
                                         <div class="col-lg-3 col-md-6 col-sm-12 mb-30">
                                             <div class="da-card">
                                                 <div class="da-card-photo">
-                                                    <img src="{{ item['invitation_wallpaper'] }}" alt="">
+                                                    <img src="{{ item['template_thumb'] }}" alt="">
                                                     <div class="da-overlay da-slide-left">
                                                         <div class="da-social">
                                                             <ul class="clearfix">
@@ -202,7 +202,7 @@
                                                 <!-- Heading Table -->
                                                 <thead>
                                                     <tr>
-                                                        <th scope="col">#</th>
+                                                        <th scope="col">No</th>
                                                         <th scope="col">Event</th>
                                                         <th scope="col">Invitation Code</th>
                                                         <th scope="col">Count</th>
@@ -259,10 +259,12 @@
                                             <!-- Heading Table -->
                                             <thead>
                                                 <tr>
-                                                    <th scope="col">#</th>
+                                                    <th scope="col">No</th>
                                                     <th scope="col">Event</th>
                                                     <th scope="col">Invitation Code</th>
-                                                    <th scope="col">Count</th>
+                                                    <th scope="col">Present</th>
+                                                    <th scope="col">Absent</th>
+                                                    <th scope="col">Total</th>
                                                 </tr>
                                             </thead>
                                             <!-- End Heading Table -->
@@ -276,9 +278,11 @@
                                                 <!-- Row -->
                                                 <tr>
                                                     <th scope="row">{{ loop.index }}</th>
-                                                    <th scope="row"></th>
-                                                    <th scope="row"></th>
-                                                    <th scope="row"></th>
+                                                    <td>{{ item['category'] }}</td>
+                                                    <td>{{ item['invitation_code'] }}</td>
+                                                    <td>{{ item['present'] }}</td>
+                                                    <td>{{ item['absent'] }}</td>
+                                                    <td>{{ item['count'] }}</td>
                                                 </tr>
                                                 <!-- End Row -->
                                                 <!-- ============================================================== -->

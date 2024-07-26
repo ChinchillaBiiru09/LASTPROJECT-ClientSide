@@ -72,6 +72,14 @@
 				<!-- ============================================================== -->
 				
 				<!-- ============================================================== -->
+				<!-- Alert Section -->
+				{% with messages = get_flashed_messages(with_categories=true) %}
+				{% include "components/alert.html" %}
+				{% endwith %}
+				<!-- End Alert -->
+				<!-- ============================================================== -->
+
+				<!-- ============================================================== -->
 				<!-- User Datatable Section -->
 				<div class="card-box mb-30">
 					<!-- ============================================================== -->
@@ -81,14 +89,14 @@
 					</div>
 					<!-- End Table Title -->
 					<!-- ============================================================== -->
-				{# If invitation is not ready #} {% if data == None %}
-					{% with
-						title = "User(s) are not yet available.",
-						pict_size = 350
-					%}
-					{% include 'components/not_found.html' %}
-					{% endwith %}
-				{# If invitation is ready #} {% else %}
+					{# If invitation is not ready #} {% if data == None %}
+						{% with
+							title = "User(s) are not yet available.",
+							pict_size = 350
+						%}
+						{% include 'components/not_found.html' %}
+						{% endwith %}
+					{# If invitation is ready #} {% else %}
 					<!-- ============================================================== -->
 					<!-- Table Content -->
 					<div class="pb-20">

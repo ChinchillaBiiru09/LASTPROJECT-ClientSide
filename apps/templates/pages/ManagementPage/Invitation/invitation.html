@@ -128,7 +128,7 @@
 											<i class="dw dw-more"></i>
 										</a>
 										<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-											<a class="dropdown-item" href="{{ url_for('show.show_invitation', code=item['invitation_code'], title=item['invitation_title']) }}" target="_blank"><i class="dw dw-eye"></i> Lihat</a>
+											<a class="dropdown-item" href="{{ url_for('show.show_invitation', code=item['invitation_code'], link=item['invitation_link']) }}" target="_blank"><i class="dw dw-eye"></i> Lihat</a>
 											<a class="dropdown-item" href="{{ url_for('management.invitation.edit', id=item['invitation_id']) }}"><i class="dw dw-edit2"></i> Ubah</a>
 											<a class="dropdown-item" href="{{ url_for('management.invitation.detail', id=item['invitation_id'], code=item['invitation_code']) }}"><i class="fa fa-info"></i> Detail</a>
 											<a class="dropdown-item" href="{{ url_for('management.invitation.delete', id=item['invitation_id']) }}"><i class="dw dw-delete-3"></i> Hapus</a>

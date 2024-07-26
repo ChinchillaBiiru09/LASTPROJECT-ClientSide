@@ -15,6 +15,7 @@
 		<!-- Simply Countdown -->
 		<!-- <link rel="stylesheet" href="countdown/simplyCountdown.theme.default.css"/> -->
 		<!-- <script src="countdown/simplyCountdown.min.js"></script> -->
+		<script src="{{ data['invitation']['template_js'] }}"></script>
 		<!-- icons -->
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 		<!-- css -->
@@ -22,10 +23,10 @@
 	</head>
 	<body>
 		<!-- Hero -->
-		<section id="hero" class="hero w-100 h-100 p-3 mx-auto text-center d-flex justify-content-center align-items-center text-white" style="background-image: url('{{background1_url}}'); background-size: cover;">
+		<section id="hero" class="hero w-100 h-100 p-3 mx-auto text-center d-flex justify-content-center align-items-center text-white" style="background-image: url('{{background1_url}}'); background-size: cover; background-position: center;">
 			<main>
 				<h4>Dear friend, You are invited to celebrate</h4>
-				<h1>Budi's Day</h1>
+				<h1>{{ data['invitation']['personal_data']['callname'] }}'s Day</h1>
 				<!-- <p>Which is held in:</p> -->
 					<!-- <div class="simply-countdown"></div> -->
 				<a href="#home" class="btn btn-lg mt-4" onclick="enableScroll()"><i class="bi bi-envelope-paper-heart"></i> Invitation</a>
@@ -42,7 +43,7 @@
 				</button>
 				<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
 					<div class="offcanvas-header">
-						<h5 class="offcanvas-title" id="offcanvasNavbarLabel">Budi's Day</h5>
+						<h5 class="offcanvas-title" id="offcanvasNavbarLabel">{{ data['invitation']['personal_data']['callname'] }}'s Day</h5>
 						<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 					</div>
 					<div class="offcanvas-body">
@@ -161,29 +162,33 @@
 					</div>
 				</div>
 
-				<form class="row g-3 align-items-center justify-content-center" action="" method="post">
+				<form class="row g-3 align-items-center justify-content-center" action="{{ url_for('greeting.add_proccess') }}" method="post">
+					<!-- <input type="hidden" class="form-control" id="tem_id" name="tem_id" value="{{ data['invitation']['template_id'] }}">
+					<input type="hidden" class="form-control" id="inv_id" name="inv_id" value="{{ data['invitation']['invitation_id'] }}"> -->
+					<input type="hidden" class="form-control" id="inv_code" name="inv_code" value="{{ data['invitation']['invitation_code'] }}">
+					<input type="hidden" class="form-control" id="inv_title" name="inv_title" value="{{ data['invitation']['invitation_title'] }}">
 					<div class="col-lg-auto">
 						<div class="row">
 							<div class="col-6">
 								<div class="mb-4">
-									<label for="name" class="form-label">Name*</label>
+									<label for="name" class="form-label">Nama</label>
 									<input type="text" class="form-control" id="name" name="name">
 								</div>
 							</div>
 							<div class="col-6">
 								<div class="mb-4">
-									<label for="status" class="form-label">Confirm*</label>
+									<label for="status" class="form-label">Konfirmasi</label>
 									<select name="status" id="status" class="form-select">
-										<option value="none" selected>Choose one</option>
-										<option value="1">Present</option>
-										<option value="0">Not Present</option>
+										<option value="none" selected>Pilih Salah Satu</option>
+										<option value="1">Hadir</option>
+										<option value="0">Tidak Hadir</option>
 									</select>
 								</div>
 							</div>
 						</div>
 						<div class="col-12">
 							<div class="mb-3">
-								<label for="greeting" class="form-label">Greeting*</label>
+								<label for="greeting" class="form-label">Ucapan & Doa</label>
 								<textarea type="text" class="form-control" id="greeting" name="greeting"></textarea>
 							</div>
 						 </div>
@@ -197,7 +202,7 @@
 		<!-- End RSVP -->
 
 		<!-- Gifts -->
-		<section id="gifts" class="gifts">
+		<section id="gifts" class="gifts" style="background-image: url('{{background2_url}}');">
 			<div class="container">
 				<div class="row justify-content-center">
 					<div class="col-md-8 col-10 text-center">
@@ -214,8 +219,8 @@
 								<img src="{{ data['invitation']['personal_data']['myphoto'] }}" alt="Pria" class="img-responsive rounded-circle" width="200px" height="200px">
 							</li>
 							<li class="list-group-item">
-								<div class="fw-bold">Signed</div>
-								<p>Budi</p>
+								<div class="fw-bold mb-2">Signed</div>
+								<p>{{ data['invitation']['personal_data']['fullname'] }}</p>
 							</li>
 						</ul>
 					</div>

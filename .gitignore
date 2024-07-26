@@ -4,4 +4,4 @@ venv
 venv/*
 .flaskenv
 .env
-apps/oke.txt
+apps/teks.txt

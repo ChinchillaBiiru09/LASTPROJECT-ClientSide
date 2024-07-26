@@ -9,7 +9,7 @@ CORS(app)  # Mengizinkan semua asal secara default
 
 # CONFIGURATION APP ============================================================ Begin
 ### Set Config ======================================== 
-app.config['BASE_URL'] = os.getenv('BASE_URL')
+# app.config['BASE_URL'] = os.getenv('BASE_URL')
 app.config['SECRET_KEY'] = os.getenv('JWT_SECRET_KEY')
 app.config['BE_URL'] = os.getenv('BE_URL')
 app.config['FE_URL'] = os.getenv('FE_URL')

@@ -100,7 +100,6 @@ def add_proccess():
         # else:
         #     gpf_base64 = ""
 
-        print(dataInput)
         dataInput = {
             "category_id" : dataInput['category_id'],
             "template_id" : dataInput['template_id'],
@@ -141,6 +140,7 @@ def add_proccess():
             },
             "inv_setting" : {}
         }
+    
     elif category.upper() == "ULANG TAHUN":
         myphoto = request.files.get('myphoto')
         if myphoto:
@@ -166,6 +166,28 @@ def add_proccess():
                 "date": dataInput['bd_date'],
                 "start": dataInput['bd_start'],
                 "end": dataInput['bd_end'],
+                "dresscode": dataInput['dresscode'],
+                "location": dataInput['location'],
+                "maps": dataInput['maps'],
+            },
+            "inv_setting" : {}
+        }
+    
+    elif category.upper() == "GRADUATION PARTY":
+        dataInput = {
+            "category_id" : dataInput['category_id'],
+            "template_id" : dataInput['template_id'],
+            "title" : dataInput['title'],
+            "personal_data" : {
+                # My info
+                "fullname": dataInput['fullname'],
+                "school": dataInput['school'],
+                "graduate": dataInput['graduate']
+            },
+            "detail_info" : {
+                "date": dataInput['gd_date'],
+                "start": dataInput['gd_start'],
+                "end": dataInput['gd_end'],
                 "dresscode": dataInput['dresscode'],
                 "location": dataInput['location'],
                 "maps": dataInput['maps'],
@@ -214,6 +236,7 @@ def add_proccess():
 def edit():
     data = dict()
     data['invitation'] = get_detail_invitation()
+
 
     return render_template(
         title="Creavitation",
@@ -323,6 +346,29 @@ def edit_proccess():
             "inv_setting" : {}
         }
     
+    elif category.upper() == "GRADUATION PARTY":
+        dataInput = {
+            "invitation_id" : dataInput['invitation_id'],
+            "category_id" : dataInput['category_id'],
+            "template_id" : dataInput['template_id'],
+            "title" : dataInput['title'],
+            "personal_data" : {
+                # man info
+                "fullname": dataInput['fullname'],
+                "school": dataInput['school'],
+                "graduate": dataInput['graduate']
+            },
+            "detail_info" : {
+                "date": dataInput['gd_date'],
+                "start": dataInput['gd_start'],
+                "end": dataInput['gd_end'],
+                "dresscode": dataInput['dresscode'],
+                "location": dataInput['location'],
+                "maps": dataInput['maps'],
+            },
+            "inv_setting" : {}
+        }
+    
     # Payload 
     payload = json.dumps(dataInput)
 
@@ -412,10 +458,9 @@ def detail():
     data['invitation'] = get_detail_invitation() # id
     data['guest'] = get_detail_guest() # code
     data['greeting'] = get_detail_greeting() # code
-    print(data)
     data['message'] = set_message("","")
     if data['invitation'] != None:
-        data['message'] = set_message(data['invitation']['invitation_code'], data['invitation']['invitation_title'])
+        data['message'] = set_message(data['invitation']['invitation_code'], data['invitation']['invitation_link'])
 
     return render_template(
         title="Creavitation",
