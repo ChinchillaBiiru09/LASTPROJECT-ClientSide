@@ -166,34 +166,35 @@
 					<!-- <input type="hidden" class="form-control" id="tem_id" name="tem_id" value="{{ data['invitation']['template_id'] }}">
 					<input type="hidden" class="form-control" id="inv_id" name="inv_id" value="{{ data['invitation']['invitation_id'] }}"> -->
 					<input type="hidden" class="form-control" id="inv_code" name="inv_code" value="{{ data['invitation']['invitation_code'] }}">
-					<input type="hidden" class="form-control" id="inv_title" name="inv_title" value="{{ data['invitation']['invitation_title'] }}">
+					<input type="hidden" class="form-control" id="inv_link" name="inv_link" value="{{ data['invitation']['invitation_link'] }}">
 					<div class="col-lg-auto">
 						<div class="row">
 							<div class="col-6">
 								<div class="mb-4">
-									<label for="name" class="form-label">Nama</label>
+									<label for="name" class="form-label">Name*</label>
 									<input type="text" class="form-control" id="name" name="name">
 								</div>
 							</div>
 							<div class="col-6">
 								<div class="mb-4">
-									<label for="status" class="form-label">Konfirmasi</label>
+									<label for="status" class="form-label">Confirm*</label>
 									<select name="status" id="status" class="form-select">
-										<option value="none" selected>Pilih Salah Satu</option>
-										<option value="1">Hadir</option>
-										<option value="0">Tidak Hadir</option>
+										<option value="none" selected>Choose one</option>
+										<option value="1">Present</option>
+										<option value="0">Absent</option>
 									</select>
 								</div>
 							</div>
 						</div>
 						<div class="col-12">
 							<div class="mb-3">
-								<label for="greeting" class="form-label">Ucapan & Doa</label>
+								<label for="greeting" class="form-label">Greetings*</label>
 								<textarea type="text" class="form-control" id="greeting" name="greeting"></textarea>
+								<small style="color:rgba(255, 255, 255, 0.5); font-size: 12px;">*Type the (-) sign if you want to clear the message.</small>
 							</div>
 						 </div>
 						<div class="col-12">
-							<button type="submit" class="btn btn--primary">Kirim</button>
+							<button type="submit" class="btn btn-primary">Send</button>
 						</div>
 					</div>
 				</form>

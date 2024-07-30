@@ -154,13 +154,13 @@ def get_template_popular(): # Clear
     except Exception as e:
         return str(e)
 
-def get_category_popular():
-    try:
-        pass
-    except Exception as e:
-        return str(e)
+# def get_category_popular():
+#     try:
+#         pass
+#     except Exception as e:
+#         return str(e)
 
-def get_recent_invitation():
+# def get_recent_invitation():
     try:
         pass
     except Exception as e:
@@ -377,7 +377,7 @@ def get_detail_category(): # Clear
     except Exception as e:
         return str(e)
 
-def get_template(is_param=False): # Clear
+def get_template(): # Clear
     try:
         # Membuat URL
         url = app.config['BE_URL'] + '/template/'

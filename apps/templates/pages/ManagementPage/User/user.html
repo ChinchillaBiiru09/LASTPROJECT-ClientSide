@@ -106,6 +106,8 @@
 							<thead>
 								<tr>
 									<th class="table-plus datatable-nosort">Name</th>
+									<th>invitation</th>
+									<th>Request</th>
 									<th>Status</th>
 									<th>Last Active</th>
 									<th class="datatable-nosort">Action</th>
@@ -122,6 +124,8 @@
 								<!-- Row -->
 								<tr>
 									<td class="table-plus">{{ item['username'] }}</td>
+									<td>{{ item['invitation_count'] }}</td>
+									<td>{{ item['request_count'] }}</td>
 									<td>{{ item['status'] }}</td>
 									<td>{{ item['last_active']['full'] }}</td>
 									<td>

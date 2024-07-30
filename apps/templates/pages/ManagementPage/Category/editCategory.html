@@ -97,7 +97,7 @@
 							</div>
 						</div>
 						{% for key, value in data['format_data'].items() %}
-						<div class="form-group row" id="form-group-{{ loop.index }}" data-index="{{ loop.index }}">
+						<!-- <div class="form-group row" id="form-group-{{ loop.index }}" data-index="{{ loop.index }}">
 							{% if loop.index <= 1 %}
 							<label class="col-sm-12 col-md-2 col-form-label" for="input-fd-{{ loop.index }}">Format Data</label>
 							{% else %}
@@ -116,7 +116,7 @@
 								<button type="button" class="btn btn-outline-success" id="rm-format-data" onclick="addFormField()">Add</button>
 								{% endif %}
 							</div>
-						</div>
+						</div> -->
 						{% endfor %}
 						<div class="modal-footer">
 							<a href="{{ url_for('management.category.index') }}" type="button" class="btn btn-outline-danger">Close</a>

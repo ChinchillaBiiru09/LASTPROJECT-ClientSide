@@ -19,7 +19,7 @@ def add_proccess(): # Clear
     # id = dataInput['inv_id']
     # temId = dataInput['tem_id']
     code = dataInput['inv_code']
-    title = dataInput['inv_title']
+    title = dataInput['inv_link']
     dataInput = {
         "invitation_code" : dataInput['inv_code'],
         "name" : dataInput['name'],
@@ -36,7 +36,7 @@ def add_proccess(): # Clear
         'Content-Type' : 'application/json'
     }
 
-    # Payload
+    # Payload 
     payload = json.dumps(dataInput)
 
 
@@ -49,9 +49,9 @@ def add_proccess(): # Clear
 
     if (response.status_code != 200):
         # return redirect(url_for('show.show_invitation', id=id, code=code, temId=temId))
-        return redirect(url_for('show.show_invitation', code=code, title=title))
+        return redirect(url_for('show.show_invitation', code=code, link=title))
     else:
-        return redirect(url_for('show.show_invitation', code=code, title=title))
+        return redirect(url_for('show.show_invitation', code=code, link=title))
 
 
 # clear

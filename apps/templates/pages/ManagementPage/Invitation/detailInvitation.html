@@ -111,11 +111,11 @@
 								<h4><a href="#">{{ data["invitation"]["invitation_title"] }}</a></h4>
 								<div class="blog-by">
 									<div class="pt-10">
-										<span>Kategori :</span>
+										<span><b>Kategori:</b> </span>
 										{{ data["invitation"]["category"] }}
 									</div>
 									<div class="pt-10">
-										<span>Template:</span>
+										<span><b>Template:</b> </span>
 										{{ data["invitation"]["template_title"] }}
 									</div>
 									<div class="pt-20">
@@ -163,75 +163,338 @@
                                     <!-- ============================================================== -->
                                     <!-- Invitation List Section -->
                                     {% if data["invitation"]["category"].upper() == "PERNIKAHAN" %}
+                                    <!-- woman area -->
+                                    <div class="clearfix">
+                                        <div class="pull-left">
+                                            <h4 class="text-blue text-center h4 mb-30">Data Diri Mempelai Wanita</h4>
+                                        </div>
+                                    </div>
                                     <div class="row">
-                                        <div class="col-md-6 col-sm-12">
+                                        <div class="col-md-4 col-sm-12">
                                             <div class="form-group">
-                                                <label>col-md-6</label>
-                                                <input type="text" class="form-control" disabled>
+                                                <img src="{{ data['invitation']['personal_data']['womans_photo'] }}" alt="{{ data['invitation']['personal_data']['woman_fullname'] }}" width="250px" height="250px" class="rounded-circle">
                                             </div>
                                         </div>
-                                        <div class="col-md-6 col-sm-12">
+                                        <div class="col-md-8 col-sm-12">
                                             <div class="form-group">
-                                                <label>col-md-6</label>
-                                                <input type="text" class="form-control" disabled>
+                                                <label><b>Nama Lengkap</b></label>
+                                                <p class="border border-secondary rounded-lg" style="padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;">
+                                                    {{ data['invitation']['personal_data']['woman_fullname'] }} ({{ data['invitation']['personal_data']['woman_name'] }})
+                                                </p>
+                                            </div>
+                                            <div class="form-group">
+                                                <label><b>Alamat</b></label>
+                                                <p class="border border-secondary rounded-lg" style="padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;">
+                                                    {{ data['invitation']['personal_data']['woman_address'] }}
+                                                </p>
+                                            </div>
+                                            <div class="form-group">
+                                                <label><b>Putri ke {{ data['invitation']['personal_data']['daughter_no'] }} dari</b></label>
+                                                <div class="row ml-1">
+                                                    <p class="border border-secondary rounded-lg col-md-5 mr-2" style="padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;">
+                                                        {{ data['invitation']['personal_data']['womans_dad'] }} {% if data['invitation']['personal_data']['woman_dad_status'] == 1 %} (Alm) {% endif %}
+                                                    </p>
+                                                    <p class="text-center col-md-1 mr-2" style="padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;">
+                                                        <b>&</b>
+                                                    </p>
+                                                    <p class="border border-secondary rounded-lg col-md-5" style="padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;">
+                                                        {{ data['invitation']['personal_data']['womans_mom'] }} {% if data['invitation']['personal_data']['woman_mom_status'] == 1 %} (Almh) {% endif %}
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <!-- Man Area -->
+                                    <div class="clearfix">
+                                        <div class="pull-left">
+                                            <h4 class="text-blue text-center h4 mb-30 mt-5">Data Diri Mempelai Pria</h4>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4 col-sm-12">
+                                            <div class="form-group">
+                                                <img src="{{ data['invitation']['personal_data']['mans_photo'] }}" alt="{{ data['invitation']['personal_data']['man_fullname'] }}" width="250px" height="250px" class="rounded-circle">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8 col-sm-12">
+                                            <div class="form-group">
+                                                <label><b>Nama Lengkap</b></label>
+                                                <p class="border border-secondary rounded-lg" style="padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;">
+                                                    {{ data['invitation']['personal_data']['man_fullname'] }} ({{ data['invitation']['personal_data']['man_name'] }})
+                                                </p>
+                                            </div>
+                                            <div class="form-group">
+                                                <label><b>Alamat</b></label>
+                                                <p class="border border-secondary rounded-lg" style="padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;">
+                                                    {{ data['invitation']['personal_data']['man_address'] }}
+                                                </p>
+                                            </div>
+                                            <div class="form-group">
+                                                <label><b>Putra ke {{ data['invitation']['personal_data']['son_no'] }} dari</b></label>
+                                                <div class="row ml-1">
+                                                    <p class="border border-secondary rounded-lg col-md-5 mr-2" style="padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;">
+                                                        {{ data['invitation']['personal_data']['mans_dad'] }} {% if data['invitation']['personal_data']['man_dad_status'] == 1 %} (Alm) {% endif %}
+                                                    </p>
+                                                    <p class="text-center col-md-1 mr-2" style="padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;">
+                                                        <b>&</b>
+                                                    </p>
+                                                    <p class="border border-secondary rounded-lg col-md-5" style="padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;">
+                                                        {{ data['invitation']['personal_data']['mans_mom'] }} {% if data['invitation']['personal_data']['man_mom_status'] == 1 %} (Almh) {% endif %}
+                                                    </p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
+                                    
+                                    <!-- Info area -->
+                                    <div class="clearfix">
+                                        <div class="pull-left">
+                                            <h4 class="text-blue text-center h4 mb-30 mt-5">Informasi Acara</h4>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label><b>Akad</b></label>
+                                                <p class="border border-secondary rounded-lg" style="padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;">
+                                                    {{ data['invitation']['detail_info']['marriage_start']['day'] }}, {{ data['invitation']['detail_info']['marriage_start']['dates'] }} {{ data['invitation']['detail_info']['marriage_start']['fullmonth'] }} {{ data['invitation']['detail_info']['marriage_start']['year'] }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label><b>Pukul</b></label>
+                                                <div class="row ml-1">
+                                                    <p class="border border-secondary rounded-lg col-md-5" style="padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;">
+                                                        {{ data['invitation']['detail_info']['marriage_start']['time'] }}
+                                                    </p>
+                                                    <p class="text-center col-md-1 mr-3 pl-4" style="padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;">
+                                                        <b>-</b>
+                                                    </p>
+                                                    <p class="border border-secondary rounded-lg col-md-5" style="padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;">
+                                                        {{ data['invitation']['detail_info']['marriage_end']['time'] }}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label><b>Resepsi</b></label>
+                                                <p class="border border-secondary rounded-lg" style="padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;">
+                                                    {{ data['invitation']['detail_info']['reception_start']['day'] }}, {{ data['invitation']['detail_info']['marriage_start']['dates'] }} {{ data['invitation']['detail_info']['marriage_start']['fullmonth'] }} {{ data['invitation']['detail_info']['marriage_start']['year'] }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label><b>Pukul</b></label>
+                                                <div class="row ml-1">
+                                                    <p class="border border-secondary rounded-lg col-md-5" style="padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;">
+                                                        {{ data['invitation']['detail_info']['reception_start']['time'] }}
+                                                    </p>
+                                                    <p class="text-center col-md-1 mr-3 pl-4" style="padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;">
+                                                        <b>-</b>
+                                                    </p>
+                                                    <p class="border border-secondary rounded-lg col-md-5" style="padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;">
+                                                        {{ data['invitation']['detail_info']['reception_end']['time'] }}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-10 col-sm-12">
+                                            <div class="form-group">
+                                                <label><b>Lokasi</b></label>
+                                                <p class="border border-secondary rounded-lg" style="padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;">
+                                                    {{ data['invitation']['detail_info']['location'] }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 col-sm-12">
+                                            <div class="form-group mt-4">
+                                                <a href="{{ data['invitation']['detail_info']['maps'] }}" target="_blank" class="btn btn-outline-primary m-2">Maps</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
                                     {% elif data["invitation"]["category"].upper() == "ULANG TAHUN" %}
+                                    <!-- Personal area -->
+                                    <div class="clearfix">
+                                        <div class="pull-left">
+                                            <h4 class="text-blue text-center h4 mb-30">Data Diri</h4>
+                                        </div>
+                                    </div>
                                     <div class="row">
-                                        <div class="col-md-6 col-sm-12">
+                                        <div class="col-md-4 col-sm-12">
                                             <div class="form-group">
-                                                <label>Nama Lengkap</label>
-                                                <input type="text" class="form-control" disabled value="{{ data['invitation']['personal_data']['fullname'] }}">
+                                                <img src="{{ data['invitation']['personal_data']['myphoto'] }}" alt="{{ data['invitation']['personal_data']['fullname'] }}" width="250px" height="250px" class="rounded-circle">
                                             </div>
                                         </div>
-                                        <div class="col-md-6 col-sm-12">
+                                        <div class="col-md-8 col-sm-12">
                                             <div class="form-group">
-                                                <label>Nama Panggilan</label>
-                                                <input type="text" class="form-control" disabled value="{{ data['invitation']['personal_data']['callname'] }}">
+                                                <label><b>Nama Lengkap</b></label>
+                                                <p class="border border-secondary rounded-lg" style="padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;">
+                                                    {{ data['invitation']['personal_data']['fullname'] }} ({{ data['invitation']['personal_data']['callname'] }})
+                                                </p>
                                             </div>
+                                            <div class="form-group">
+                                                <label><b>Usia</b></label>
+                                                <p class="border border-secondary rounded-lg" style="padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;">
+                                                    {{ data['invitation']['personal_data']['birthday'] }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Info area -->
+                                    <div class="clearfix">
+                                        <div class="pull-left">
+                                            <h4 class="text-blue text-center h4 mb-30 mt-5">Informasi Acara</h4>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6 col-sm-12">
                                             <div class="form-group">
-                                                <label>Nama Lengkap</label>
-                                                <input type="text" class="form-control" disabled value="{{ data['invitation']['fullname'] }}">
+                                                <label><b>Tanggal</b></label>
+                                                <p class="border border-secondary rounded-lg" style="padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;">
+                                                    {{ data['invitation']['detail_info']['start']['day'] }}, {{ data['invitation']['detail_info']['start']['dates'] }} {{ data['invitation']['detail_info']['start']['fullmonth'] }} {{ data['invitation']['detail_info']['start']['year'] }}
+                                                </p>
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-sm-12">
                                             <div class="form-group">
-                                                <label>Nama Panggilan</label>
-                                                <input type="text" class="form-control" disabled value="{{ data['invitation']['callname'] }}">
+                                                <label><b>Pukul</b></label>
+                                                <div class="row ml-1">
+                                                    <p class="border border-secondary rounded-lg col-md-5" style="padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;">
+                                                        {{ data['invitation']['detail_info']['start']['time'] }}
+                                                    </p>
+                                                    <p class="text-center col-md-1 mr-3 pl-4" style="padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;">
+                                                        <b>-</b>
+                                                    </p>
+                                                    <p class="border border-secondary rounded-lg col-md-5" style="padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;">
+                                                        {{ data['invitation']['detail_info']['end']['time'] }}
+                                                    </p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="col-md-12 col-sm-12">
+                                            <div class="form-group">
+                                                <label><b>Dresscode</b></label>
+                                                <p class="border border-secondary rounded-lg" style="padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;">
+                                                    {{ data['invitation']['detail_info']['dresscode'] }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-10 col-sm-12">
+                                            <div class="form-group">
+                                                <label><b>Lokasi</b></label>
+                                                <p class="border border-secondary rounded-lg" style="padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;">
+                                                    {{ data['invitation']['detail_info']['location'] }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 col-sm-12">
+                                            <div class="form-group mt-4">
+                                                <a href="{{ data['invitation']['detail_info']['maps'] }}" target="_blank" class="btn btn-outline-primary m-2">Maps</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
                                     {% elif data["invitation"]["category"].upper() == "GRADUATION PARTY" %}
+                                    <!-- Personal Area -->
+                                    <div class="clearfix">
+                                        <div class="pull-left">
+                                            <h4 class="text-blue text-center h4 mb-30">Data Diri</h4>
+                                        </div>
+                                    </div>
                                     <div class="row">
-                                        <div class="col-md-6 col-sm-12">
+                                        <div class="col-md-12 col-sm-12">
                                             <div class="form-group">
-                                                <label>Nama Lengkap</label>
-                                                <input type="text" class="form-control" disabled value="{{ data['invitation']['personal_data']['fullname'] }}">
+                                                <label><b>Nama Lengkap</b></label>
+                                                <p class="border border-secondary rounded-lg" style="padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;">
+                                                    {{ data['invitation']['personal_data']['fullname'] }}
+                                                </p>
+                                            </div>
+                                            <div class="form-group">
+                                                <label><b>Nama Sekolah</b></label>
+                                                <p class="border border-secondary rounded-lg" style="padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;">
+                                                    {{ data['invitation']['personal_data']['school'] }}
+                                                </p>
+                                            </div>
+                                            <div class="form-group">
+                                                <label><b>Tahun Lulus</b></label>
+                                                <p class="border border-secondary rounded-lg" style="padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;">
+                                                    {{ data['invitation']['personal_data']['graduate'] }}
+                                                </p>
                                             </div>
                                         </div>
-                                        <div class="col-md-6 col-sm-12">
-                                            <div class="form-group">
-                                                <label>Nama Panggilan</label>
-                                                <input type="text" class="form-control" disabled value="{{ data['invitation']['personal_data']['callname'] }}">
-                                            </div>
+                                    </div>
+
+                                    <!-- Info area -->
+                                    <div class="clearfix">
+                                        <div class="pull-left">
+                                            <h4 class="text-blue text-center h4 mb-30 mt-5">Informasi Acara</h4>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6 col-sm-12">
                                             <div class="form-group">
-                                                <label>Nama Lengkap</label>
-                                                <input type="text" class="form-control" disabled value="{{ data['invitation']['fullname'] }}">
+                                                <label><b>Tanggal</b></label>
+                                                <p class="border border-secondary rounded-lg" style="padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;">
+                                                    {{ data['invitation']['detail_info']['start']['day'] }}, {{ data['invitation']['detail_info']['start']['dates'] }} {{ data['invitation']['detail_info']['start']['fullmonth'] }} {{ data['invitation']['detail_info']['start']['year'] }}
+                                                </p>
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-sm-12">
                                             <div class="form-group">
-                                                <label>Nama Panggilan</label>
-                                                <input type="text" class="form-control" disabled value="{{ data['invitation']['callname'] }}">
+                                                <label><b>Pukul</b></label>
+                                                <div class="row ml-1">
+                                                    <p class="border border-secondary rounded-lg col-md-5" style="padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;">
+                                                        {{ data['invitation']['detail_info']['start']['time'] }}
+                                                    </p>
+                                                    <p class="text-center col-md-1 mr-3 pl-4" style="padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;">
+                                                        <b>-</b>
+                                                    </p>
+                                                    <p class="border border-secondary rounded-lg col-md-5" style="padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;">
+                                                        {{ data['invitation']['detail_info']['end']['time'] }}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 col-sm-12">
+                                            <div class="form-group">
+                                                <label><b>Dresscode</b></label>
+                                                <p class="border border-secondary rounded-lg" style="padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;">
+                                                    {{ data['invitation']['detail_info']['dresscode'] }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-10 col-sm-12">
+                                            <div class="form-group">
+                                                <label><b>Lokasi</b></label>
+                                                <p class="border border-secondary rounded-lg" style="padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;">
+                                                    {{ data['invitation']['detail_info']['location'] }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 col-sm-12">
+                                            <div class="form-group mt-4">
+                                                <a href="{{ data['invitation']['detail_info']['maps'] }}" target="_blank" class="btn btn-outline-primary m-2">Maps</a>
                                             </div>
                                         </div>
                                     </div>
@@ -333,9 +596,9 @@
                                             <!-- Heading Table -->
                                             <thead>
                                                 <tr>
-                                                    <th scope="col">#</th>
-                                                    <th scope="col">nama</th>
-                                                    <th scope="col">status</th>
+                                                    <th scope="col">No</th>
+                                                    <th scope="col">Nama</th>
+                                                    <th scope="col">Status</th>
                                                     <th scope="col">Pesan</th>
                                                 </tr>
                                             </thead>
