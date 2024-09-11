@@ -1,5 +1,5 @@
 <!-- ============================================================== -->
-<!-- PAGE CONTENT - CATEGORY MANAGEMENT - ADMIN -->
+<!-- PAGE CONTENT - GUEST - USER -->
 <!-- ============================================================== -->
 {% extends 'layouts/dash_layout.html' %} {% block content %}
 
@@ -31,56 +31,49 @@
 	
 
 	<!-- ============================================================== -->
-	<!-- MAIN CONTENT - CATEGORY MANAGEMENT - ADMIN -->
+	<!-- MAIN CONTENT - GUEST - USER -->
 	<!-- ============================================================== -->
 	<div class="main-container">
 		<div class="pd-ltr-20 xs-pd-20-10">
             <!-- ============================================================== -->
 			<!-- Content Section -->
-			<div class="min-height-200px pb-30">
-				<!-- ============================================================== -->
+			<div class="min-height-200px">
+                <!-- ============================================================== -->
 				<!-- Header Content Section -->
 				<div class="page-header">
 					<div class="row">
 						<!-- ============================================================== -->
 						<!-- Title & Breadcrumb Section -->
 						<div class="col-md-6 col-sm-12">
-							<!-- ============================================================== -->
-							<!-- Title Section -->
 							<div class="title">
-								<h4>Request Template</h4>
+								<h4>Data Tamu</h4>
 							</div>
-							<!-- End Title -->
-							<!-- ============================================================== -->
-
-							<!-- ============================================================== -->
-							<!-- Breadcrumb Section -->
 							<nav aria-label="breadcrumb" role="navigation">
 								<ol class="breadcrumb">
 									<li class="breadcrumb-item"><a href="{{ url_for('dashboard.index') }}">Home</a></li>
-									<li class="breadcrumb-item active" aria-current="page">Hapus Data</li>
+									<li class="breadcrumb-item"><a href="{{ url_for('management.invitation.index') }}">Undanganku</a></li>
+									<li class="breadcrumb-item"><a href="{{ url_for('management.invitation.detail', id=data['invitation']['invitation_id'], code=data['invitation']['invitation_code']) }}">Detail</a></li>
+									<li class="breadcrumb-item active" aria-current="page">Buat Baru</li>
 								</ol>
 							</nav>
-							<!-- End Breadcrumb -->
-							<!-- ============================================================== -->
 						</div>
 						<!-- End Title & Breadcrumb -->
 						<!-- ============================================================== -->
 					</div>
 				</div>
-				<!-- End Header Content -->
+                <!-- End Header Content -->
 				<!-- ============================================================== -->
-			 
+				
 				<!-- ============================================================== -->
-				<!-- Alert Section -->
+				<!-- Alert -->
 				{% with messages = get_flashed_messages(with_categories=true) %}
 				{% include "components/alert.html" %}
 				{% endwith %}
 				<!-- End Alert -->
 				<!-- ============================================================== -->
-				
-				<!-- ============================================================== -->
-				<!-- Simple Datatable Section -->
+
+                <!-- ============================================================== -->
+				<!-- Default Basic Forms Start -->
 				<div class="pd-20 card-box mb-30">
                     <div class="clearfix">
                         <div class="pull-left">
@@ -88,21 +81,23 @@
                         </div>
                     </div>
                     <div class="modal-body" id="dynamic-form">
-                        <p class="mb-30">Apakah anda yakin akan menghapus request template <b>"{{ data['request']['category'] }}"</b> anda??</p>
+                        <p class="mb-30">Data telah berhasil di export. SIlahkan klik tombol "Download" untuk mengunduh.</p>
+						<a href="{{ data['export']['url_file'] }}" type="button" class="btn btn-outline-primary mr-2" download="{{ data['export']['filename']}}">Download</a>
                     </div>
                     <div class="modal-footer">
-                        <a href="{{ url_for('dashboard.index') }}" type="button" class="btn btn-outline-danger mr-1">Kembali</a>
-                        <a href="{{ url_for('management.template.request_delete_proccess', reqId=data['request']['req_id']) }}" type="button" class="btn btn-outline-primary">Simpan</a>
+                        <a href="{{ url_for('management.invitation.detail', id=data['invitation']['invitation_id'], code=data['invitation']['invitation_code']) }}" type="button" class="btn btn-outline-danger mr-2" >Kembali</a>
+                        <!-- <a href="{{ url_for('management.invitation.delete_proccess', id=data['invitation']['invitation_id']) }}" type="button" class="btn btn-outline-primary">Simpan</a> -->
                     </div>
                 </div>
-				<!-- End Simple Datatable -->
+                <!-- Default Basic Forms End -->
 				<!-- ============================================================== -->
 			</div>
 			<!-- End Content -->
 			<!-- ============================================================== -->
-
+            
 			<!-- ============================================================== -->
-			<!-- Footer Section -->
+			<!-- Footer -->
+			<!-- ============================================================== -->
 			{% include 'components/dash_footer.html' %}
 			<!-- End Footer -->
 			<!-- ============================================================== -->

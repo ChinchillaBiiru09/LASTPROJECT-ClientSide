@@ -1,5 +1,5 @@
 from turtle import title
-from flask import Blueprint, render_template, make_response, request, redirect, url_for, session, flash, current_app as app
+from flask import Blueprint, render_template, request, redirect, url_for, session, flash, current_app as app
 
 from .... import TITLE_DASHBD
 from ...utilities import get_category, get_detail_category

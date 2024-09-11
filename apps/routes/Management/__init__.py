@@ -29,9 +29,11 @@ from .Invitation import mnginvitation
 from .Template import mngtemplate
 from .User import mnguser
 from .Profile import mngprofile
+from .ReqTemplate import mngreqtemp
 
 management.register_blueprint(mngcategory)
 management.register_blueprint(mnginvitation)
 management.register_blueprint( mngtemplate)
 management.register_blueprint(mnguser)
 management.register_blueprint(mngprofile)
+management.register_blueprint(mngreqtemp)

@@ -46,34 +46,26 @@
 						<!-- Title & Breadcrumb Section -->
 						<div class="col-md-6 col-sm-12">
 							<div class="title">
-								<h4>Undanganku</h4>
+								<h4>Data Tamu</h4>
 							</div>
 							<nav aria-label="breadcrumb" role="navigation">
 								<ol class="breadcrumb">
 									<li class="breadcrumb-item"><a href="{{ url_for('dashboard.index') }}">Home</a></li>
-									<li class="breadcrumb-item active" aria-current="page">Undanganku</li>
+									<li class="breadcrumb-item"><a href="{{ url_for('management.invitation.index') }}">Undanganku</a></li>
+									<li class="breadcrumb-item"><a href="{{ url_for('management.invitation.detail', id=data['invitation']['invitation_id'], code=data['invitation']['invitation_code']) }}">Detail</a></li>
+									<li class="breadcrumb-item active" aria-current="page">Buat Baru</li>
 								</ol>
 							</nav>
 						</div>
 						<!-- End Title & Breadcrumb -->
 						<!-- ============================================================== -->
-
-						<!-- ============================================================== -->
-						<!-- Management Add Button Section -->
-						<div class="col-md-6 col-sm-10 text-right">
-							<a href="{{ url_for('management.invitation.select_template')}}" class="btn btn-primary" type="button" role="button">
-								<i class="fa fa-plus pr-2"></i>  Buat Baru
-							</a>
-						</div>
-						<!-- End Management Add Button -->
-						<!-- ============================================================== -->
 					</div>
 				</div>
                 <!-- End Header Content -->
 				<!-- ============================================================== -->
-				 
+				
 				<!-- ============================================================== -->
-				<!-- Alert Section -->
+				<!-- Alert -->
 				{% with messages = get_flashed_messages(with_categories=true) %}
 				{% include "components/alert.html" %}
 				{% endwith %}
@@ -81,67 +73,45 @@
 				<!-- ============================================================== -->
 
                 <!-- ============================================================== -->
-				<!-- Invitation Galery Section -->
-				{% if data['list_invitation'] == None %}
-				<!-- ============================================================== -->
-				<!-- Template Null Section -->
-				<div class="card-box pd-20 height-100-p mb-30">
-					{% with
-						title = "Daftar undangan belum tersedia.",
-						pict_size = 350
-					%}
-					{% include 'components/not_found.html' %}
-					{% endwith %}
-				</div>
-				<!-- End Template Null -->
-				<!-- ============================================================== -->
-				{% else %}
-				<div class="card-box mb-30">
-					<h2 class="h4 pd-20">Daftar Undanganku</h2>
-					<table class="data-table table nowrap">
-						<thead>
-							<tr>
-								<th class="table-plus datatable-nosort">Thumbnail</th>
-								<th>Judul</th>
-								<th>Tamu</th>
-								<th>Ucapan</th>
-								<th>Tanggal Dibuat</th>
-								<th class="datatable-nosort">Aksi</th>
-							</tr>
-						</thead>
-						<tbody>
-							{% for item in data['list_invitation'] %}
-							<tr>
-								<td class="table-plus">
-									<img src="{{ item['template_thumb'] }}" width="70" height="70" alt="">
-								</td>
-								<td>
-									<h5 class="font-16">{{ item['invitation_title'] }}</h5>
-									{{ item['category'] }}
-								</td>
-								<td>{{ item['guest_count'] }}</td>
-								<td>{{ item['greeting_count'] }}</td>
-								<td>{{ item['created_at']['date'] }}</td>
-								<td>
-									<div class="dropdown">
-										<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-											<i class="dw dw-more"></i>
-										</a>
-										<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-											<a class="dropdown-item" href="{{ url_for('show.show_invitation', code=item['invitation_code'], link=item['invitation_link']) }}" target="_blank"><i class="dw dw-eye"></i> Lihat</a>
-											<a class="dropdown-item" href="{{ url_for('management.invitation.edit', id=item['invitation_id']) }}"><i class="dw dw-edit2"></i> Ubah</a>
-											<a class="dropdown-item" href="{{ url_for('management.invitation.detail', id=item['invitation_id'], code=item['invitation_code']) }}"><i class="fa fa-info"></i> Detail</a>
-											<a class="dropdown-item" href="{{ url_for('management.invitation.delete', id=item['invitation_id']) }}"><i class="dw dw-delete-3"></i> Hapus</a>
-										</div>
-									</div>
-								</td>
-							</tr>
-							{% endfor %}
-						</tbody>
-					</table>
-				</div>
-				{% endif %}
-				<!-- End Invitation Galery -->
+				<!-- Default Basic Forms Start -->
+				<form action="{{ url_for('guest.importExcel_process') }}" method="post" enctype="multipart/form-data">
+					<div class="form-group row">
+                        <div class="col-sm-12 col-md-10">
+                            <input class="form-control" type="hidden" name="invitation_id" id="invitation_id" value="{{ data['invitation']['invitation_id'] }}">
+                            <input class="form-control" type="hidden" name="inv_code" id="inv_code" value="{{ data['invitation']['invitation_code'] }}">
+                            <input class="form-control" type="hidden" name="category_id" id="category_id" value="{{ data['invitation']['category_id'] }}">
+                        </div>
+                    </div>
+
+					<!-- Data tamu -->
+					<div class="pd-20 card-box mb-30">
+						<div class="clearfix">
+							<div class="pull-left">
+								<h4 class="text-blue h4">Import File Excel</h4>
+							</div>
+						</div>
+                        <div class="form-group row">
+                            <div class="col-sm-12 col-md-12">
+								<p>{{ data['export'] }}</p>
+                                <p>Download template excel:</p>
+                                <a href="{{ url_for('static', filename='assets/Files/template_daftar_tamu.xlsx') }}" type="button" class="btn btn-outline-primary mr-2" download="template_daftar_tamu.xlsx">Download</a>
+							</div>
+						</div>
+						<div class="form-group row mt-3">
+							<label class="col-sm-12 col-md-2 col-form-label">File Excel*</label>
+							<div class="col-sm-12 col-md-10">
+                                <input type="file" class="form-control-file form-control height-auto" accept=".xlx,.xlsx" name="excel" id="excel">
+							</div>
+						</div>
+						<div class="form-group row mt-5">
+                            <div class="col-sm-12 col-md-12 text-right">
+                                <a href="{{ url_for('management.invitation.detail', id=data['invitation']['invitation_id'], code=data['invitation']['invitation_code']) }}" type="button" class="btn btn-outline-danger mr-2" >Kembali</a>
+                                <button type="submit" id="invitationAddBtn" class="btn btn-outline-primary">Simpan</button>
+							</div>
+						</div>
+					</div>
+				</form>
+                <!-- Default Basic Forms End -->
 				<!-- ============================================================== -->
 			</div>
 			<!-- End Content -->

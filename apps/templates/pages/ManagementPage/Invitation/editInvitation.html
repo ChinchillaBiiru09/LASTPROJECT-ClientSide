@@ -156,12 +156,12 @@
 							<label class="col-sm-12 col-md-2 col-form-label">Nama Ayah*</label>
 							<div class="col-sm-4 col-md-2">
 								<select class="form-control" name="woman_dad_status" id="woman_dad_status">
-									{% if data['invitation']['personal_data']['woman_dad_status'] == "0" %}
-									<option selected="0">Masih hidup</option>
+									{% if data['invitation']['personal_data']['man_dad_status'] == "0" %}
+									<option value="0" selected>Masih hidup</option>
 									<option value="Alm">Meninggal</option>
 									{% else %}
 									<option value="0">Masih hidup</option>
-									<option selected="Alm">Meninggal</option>
+									<option value="Alm" selected>Meninggal</option>
 									{% endif %}
 								</select>
 							</div>
@@ -173,12 +173,12 @@
 							<label class="col-sm-12 col-md-2 col-form-label">Nama Ibu*</label>
 							<div class="col-sm-4 col-md-2">
 								<select class="form-control" name="woman_mom_status" id="woman_mom_status" value="{{ data['invitation']['personal_data']['woman_mom_status'] }}">
-									{% if data['invitation']['personal_data']['woman_mom_status'] == "0" %}
-									<option selected="0">Masih hidup</option>
+									{% if data['invitation']['personal_data']['man_dad_status'] == "0" %}
+									<option value="0" selected>Masih hidup</option>
 									<option value="Almh">Meninggal</option>
 									{% else %}
 									<option value="0">Masih hidup</option>
-									<option selected="Almh">Meninggal</option>
+									<option value="Almh" selected>Meninggal</option>
 									{% endif %}
 								</select>
 							</div>
@@ -233,11 +233,11 @@
 							<div class="col-sm-4 col-md-2">
 								<select class="form-control" name="man_dad_status" id="man_dad_status" value="{{ data['invitation']['personal_data']['man_dad_status'] }}">
 									{% if data['invitation']['personal_data']['man_dad_status'] == "0" %}
-									<option selected="0">Masih hidup</option>
+									<option value="0" selected>Masih hidup</option>
 									<option value="Alm">Meninggal</option>
 									{% else %}
 									<option value="0">Masih hidup</option>
-									<option selected="Alm">Meninggal</option>
+									<option value="Alm" selected>Meninggal</option>
 									{% endif %}
 								</select>
 							</div>
@@ -249,12 +249,12 @@
 							<label class="col-sm-12 col-md-2 col-form-label">Nama Ibu*</label>
 							<div class="col-sm-4 col-md-2">
 								<select class="form-control" name="man_mom_status" id="man_mom_status" value="{{ data['invitation']['personal_data']['man_mom_status'] }}">
-									{% if data['invitation']['personal_data']['woman_dad_status'] == "0" %}
-									<option selected="0">Masih hidup</option>
+									{% if data['invitation']['personal_data']['man_dad_status'] == "0" %}
+									<option value="0" selected>Masih hidup</option>
 									<option value="Almh">Meninggal</option>
 									{% else %}
 									<option value="0">Masih hidup</option>
-									<option selected="Almh">Meninggal</option>
+									<option value="Almh" selected>Meninggal</option>
 									{% endif %}
 								</select>
 							</div>
@@ -438,7 +438,7 @@
 							</div>
 						</div>
 						<div class="form-group row">
-							<label class="col-sm-12 col-md-2 col-form-label">Nama Sekolah *</label>
+							<label class="col-sm-12 col-md-2 col-form-label">Nama Sekolah*</label>
 							<div class="col-sm-12 col-md-10">
 								<input class="form-control" type="text" placeholder="Tulis disini" name="school" id="school" value="{{ data['invitation']['personal_data']['school'] }}">
 							</div>

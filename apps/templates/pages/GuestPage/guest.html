@@ -123,9 +123,10 @@
 							<thead>
 								<tr>
 									<th class="table-plus datatable-nosort">No</th>
-									<th>Event</th>
-									<th>Invitation Code</th>
-									<th>Guest Count</th>
+									<th>Nama</th>
+									<th>No. Handphone</th>
+									<th>Acara</th>
+									<th>Kode Undangan</th>
 									<th class="datatable-nosort">Action</th>
 								</tr>
 							</thead>
@@ -141,11 +142,12 @@
 								<!-- Template Popular - Row Box Data Section -->
 								<tr>
 									<td class="table-plus">{{ loop.index }}</td>
+									<td>{{ item['guest_name'] }}</td>
+									<td>{{ item['guest_phone'] }}</td>
 									<td>{{ item['event'] }}</td>
 									<td>{{ item['invitation_code'] }}</td>
-									<td>{{ item['count'] }}</td>
 									<td>
-										<a class="btn btn-link" href="{{ url_for('guest.guest_detail', gueId=item['invitation_id'], code=item['invitation_code']) }}"><i class="fa fa-info mr-2"></i> Detail</a>
+										<a class="btn btn-link" href="{{ url_for('guest.delete', gueId=item['invitation_id'], id=item['invitation_id']) }}"><i class="fa fa-trash-o mr-2"></i> Hapus</a>
 									</td>
 								</tr>
 								<!-- End Template Popular - Row Box Data -->

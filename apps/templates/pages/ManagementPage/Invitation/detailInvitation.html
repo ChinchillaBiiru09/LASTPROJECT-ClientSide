@@ -70,11 +70,19 @@
 
 						<!-- ============================================================== -->
 						<!-- Management Add Button Section -->
-						<div class="col-md-6 col-sm-10 text-right">
-							<a href="{{ url_for('guest.add', id=data['invitation']['invitation_id']) }}" class="btn btn-primary" type="button" role="button">
-								<i class="fa fa-plus pr-2"></i>  Tambah Data Tamu
-							</a>
-						</div>
+                        <div class="col-md-6 col-sm-10 text-right">
+                            <div class="dropdown">
+                                <a class="btn btn-primary dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                    Tambah Data Tamu
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item " href="{{ url_for('guest.add', id=data['invitation']['invitation_id']) }}">Input Data Tamu</a>
+                                    <a class="dropdown-item " href="{{ url_for('guest.copy', id=data['invitation']['invitation_id']) }}">Salin Data Tamu</a>
+                                    <a class="dropdown-item " href="{{ url_for('guest.importExcel', id=data['invitation']['invitation_id']) }}">Import Excel</a>
+                                    <a class="dropdown-item " href="{{ url_for('guest.exportExcel', id=data['invitation']['invitation_id'], code=data['invitation']['invitation_code']) }}">Export Excel</a>
+                                </div>
+                            </div>
+                        </div>
 						<!-- End Management Add Button -->
 						<!-- ============================================================== -->
 					</div>
@@ -172,7 +180,7 @@
                                     <div class="row">
                                         <div class="col-md-4 col-sm-12">
                                             <div class="form-group">
-                                                <img src="{{ data['invitation']['personal_data']['womans_photo'] }}" alt="{{ data['invitation']['personal_data']['woman_fullname'] }}" width="250px" height="250px" class="rounded-circle">
+                                                <img src="{{ data['invitation']['personal_data']['womans_photo'] }}" alt="{{ data['invitation']['personal_data']['woman_fullname'] }}" width="200px" height="250px" class="rounded-circle">
                                             </div>
                                         </div>
                                         <div class="col-md-8 col-sm-12">
@@ -331,9 +339,9 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-4 col-sm-12">
+                                        <div class="col-md-3 col-sm-12">
                                             <div class="form-group">
-                                                <img src="{{ data['invitation']['personal_data']['myphoto'] }}" alt="{{ data['invitation']['personal_data']['fullname'] }}" width="250px" height="250px" class="rounded-circle">
+                                                <img src="{{ data['invitation']['personal_data']['myphoto'] }}" alt="{{ data['invitation']['personal_data']['fullname'] }}" width="200px" height="250px" class="rounded-circle">
                                             </div>
                                         </div>
                                         <div class="col-md-8 col-sm-12">

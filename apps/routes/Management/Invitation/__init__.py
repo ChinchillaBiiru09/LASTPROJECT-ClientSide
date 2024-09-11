@@ -459,7 +459,6 @@ def detail():
     data['guest'] = get_detail_guest() # code
     data['greeting'] = get_detail_greeting() # code
     data['message'] = set_message("","")
-    print(data['invitation'])
     if data['invitation'] != None:
         data['message'] = set_message(data['invitation']['invitation_code'], data['invitation']['invitation_link'])
 

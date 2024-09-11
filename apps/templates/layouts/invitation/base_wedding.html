@@ -11,6 +11,8 @@
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Sacramento&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css2?family=Playwrite+VN:wght@100..400&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Satisfy&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playwrite+CZ:wght@100..400&family=Playwrite+NL:wght@100..400&family=Satisfy&display=swap" rel="stylesheet">
 		<!-- Simply Countdown -->
 		<script src="{{ data['invitation']['template_js'] }}"></script>
 		<!-- icons -->
@@ -64,7 +66,7 @@
 				<div class="row justify-content-center">
 					<div class="col-md-8 text-center">
 						<h2>Acara Pernikahan</h2>
-						<h3>Diselenggarakan pada {{ data['invitation']['detail_info']['reception_start']['date'] }} di {{ data['invitation']['detail_info']['location'] }}</h3>
+						<h3>Diselenggarakan pada {{ data['invitation']['detail_info']['reception_start']['dates'] }} {{ data['invitation']['detail_info']['reception_start']['fullmonth'] }} {{ data['invitation']['detail_info']['reception_start']['year'] }} di {{ data['invitation']['detail_info']['location'] }}</h3>
 						<p>Oleh karena itu, dengan sekgala hormat, kami mengundang Bapak/Ibu/Saudara/i, untuk hadir pada acara pernikahan kami</p>
 					</div>
 				</div>
@@ -76,9 +78,9 @@
 								<h3>{{ data['invitation']['personal_data']['man_fullname'].title() }}</h3>
 								<p>{{ data['invitation']['personal_data']['man_address'] }}</p>
 								<p>Putra ke {{ data['invitation']['personal_data']['son_no'] }} dari 
-									Bpk. {{ data['invitation']['personal_data']['mans_dad'].title() }} {% if data['invitation']['personal_data']['man_dad_status'] != 0 %} ({{ data['invitation']['personal_data']['man_dad_status'] }}) {% endif %}
+									Bpk. {{ data['invitation']['personal_data']['mans_dad'].title() }} {% if data['invitation']['personal_data']['man_dad_status'] != 0 %} (Alm) {% endif %}
 									<br>&<br> 
-									Ibu {{ data['invitation']['personal_data']['mans_mom'].title() }} {% if data['invitation']['personal_data']['man_mom_status'] != 0 %} ({{ data['invitation']['personal_data']['man_mom_status'] }}) {% endif %}</p>
+									Ibu {{ data['invitation']['personal_data']['mans_mom'].title() }} {% if data['invitation']['personal_data']['man_mom_status'] != 0 %} (Almh) {% endif %}</p>
 							</div>
 							<div class="col-4">
 								<img src="{{ data['invitation']['personal_data']['mans_photo']}}" alt="{{ data['invitation']['personal_data']['man_fullname'] }}" class="img-responsive rounded-circle">
@@ -99,9 +101,9 @@
 								<h3>{{ data['invitation']['personal_data']['woman_fullname'].title() }}</h3>
 								<p>{{ data['invitation']['personal_data']['woman_address'] }}</p>
 								<p>Putri ke {{ data['invitation']['personal_data']['daughter_no'] }} dari 
-									Bpk. {{ data['invitation']['personal_data']['womans_dad'].title() }} {% if data['invitation']['personal_data']['woman_dad_status'] != 0 %} ({{ data['invitation']['personal_data']['woman_dad_status'] }}) {% endif %}
+									Bpk. {{ data['invitation']['personal_data']['womans_dad'].title() }} {% if data['invitation']['personal_data']['woman_dad_status'] != 0 %} (Alm) {% endif %}
 									 <br>&<br> 
-									 Ibu {{ data['invitation']['personal_data']['womans_mom'].title() }} {% if data['invitation']['personal_data']['woman_mom_status'] != 0 %} ({{ data['invitation']['personal_data']['woman_mom_status'] }}) {% endif %}</p>
+									 Ibu {{ data['invitation']['personal_data']['womans_mom'].title() }} {% if data['invitation']['personal_data']['woman_mom_status'] != 0 %} (Almh) {% endif %}</p>
 							</div>
 						</div>
 					</div>

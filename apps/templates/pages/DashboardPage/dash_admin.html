@@ -175,6 +175,31 @@
 			<!-- ============================================================== -->
 			<!-- Popularity Section -->
 			<div class="row">
+				<div class="col-lg-4 col-md-6 col-sm-12 mb-30">
+					<div class="card-box pd-30 pt-10 height-100-p">
+						<h2 class="mb-30 h4">Most Popular Templates</h2>
+						<div class="browser-visits">
+							<ul>
+								{# Looping data request #} {% for item in data['template_popular'] %}
+								{% if loop.index < 6 %}
+								<li class="d-flex flex-wrap align-items-center">
+									<!-- <div class="icon"><img src="{{ url_for('static', filename='vendors/images/chrome.png') }}" alt=""></div> -->
+									<div class="icon"><img src="{{ item['thumbnail'] }}" class="rounded" width="45px" height="30px" alt=""></div>
+									<div class="browser-name">{{ item['title'] }}</div>
+									<div class="visit"><span class="badge badge-pill badge-primary">{{ item['count'] }}</span></div>
+								</li>
+								{% endif %}
+								{% endfor %}
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-8 col-md-6 col-sm-12 mb-30">
+					<div class="card-box pd-30 pt-10 height-100-p">
+						<h2 class="mb-30 h4">Category</h2>
+						<!-- <div id="browservisit" style="width:100%!important; height:380px"></div> -->
+					</div>
+				</div>
 			</div>
 			<!-- End Popularity Section -->
 			<!-- ============================================================== -->
@@ -226,7 +251,7 @@
 								<td>{{ item['type_txt'] }}</td>
 								<td>{{ item['status_txt'] }}</td>
 								<td>
-									<a class="btn btn-link" href="{{ url_for('management.template.request_detail', reqId=item['req_id']) }}"><i class="fa fa-info pr-2"></i> Detail</a>
+									<a class="btn btn-link" href="{{ url_for('management.reqtemp.request_detail', reqId=item['req_id']) }}"><i class="fa fa-info pr-2"></i> Detail</a>
 								</td>
 							</tr>
 						{% endfor %}

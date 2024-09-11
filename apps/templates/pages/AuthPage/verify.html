@@ -1,0 +1,80 @@
+<!-- ============================================================== -->
+<!-- PAGE CONTENT - HOME - USER -->
+<!-- ============================================================== -->
+{% extends 'layouts/auth_layout.html' %} {% block content %}
+
+	<div class="login-header box-shadow">
+		<div class="container-fluid d-flex justify-content-between align-items-center">
+			<div class="brand-logo">
+				<a href="{{ url_for('auth.sign_in') }}">
+					<img src="{{ url_for('static', filename='assets/images/ic_logo_purp.png') }}" alt="">
+				</a>
+			</div>
+			<div class="login-menu">
+				<ul>
+					<li><a href="{{ url_for('auth.sign_in') }}">Sign In</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="login-wrap d-flex align-items-center flex-wrap justify-content-center">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-md-6">
+					<img src="{{ url_for('static', filename='assets/images/cuate_confirmed.svg') }}" height="550px" width="550px" alt="">
+				</div>
+				<div class="col-md-6">
+					<div class="login-box bg-white box-shadow border-radius-10">
+						<div class="login-title">
+							<h2 class="text-center text-primary">New Account Verification</h2>
+						</div>
+						<!-- ============================================================== -->
+						<!-- Alert -->
+						{% with messages = get_flashed_messages(with_categories=true) %}
+						{% include "components/alert.html" %}
+						{% endwith %}
+						<!-- End Alert -->
+						<!-- ============================================================== -->
+
+						{% if expired %}
+						<h6 class="mb-20">Your token has expired! <br>You need to recover your token. Click the "Resend" button to get a new token.</h6>
+						<form action="{{ url_for('auth.update_token') }}" method="POST">
+						{% else %}
+						<h6 class="mb-20">You need to activate your account first before signing in. Click the "Verify" button to activate your account.</h6>
+						<form action="{{ url_for('auth.activate') }}" method="POST">
+						{% endif %}
+							<div class="input-group custom">
+								<input type="hidden" class="form-control form-control-lg" value="{{ data['token'] }}" name="token" id="token">
+								<input type="hidden" class="form-control form-control-lg" value="{{ data['user_id'] }}" name="user_id" id="user_id">
+								<input type="hidden" class="form-control form-control-lg" value="{{ data['user_leve'] }}" name="user_level" id="user_level">
+							</div>
+							<div class="row align-items-center">
+								<div class="col-5">
+									<div class="input-group mb-0">
+										{% if expired %}
+										<input class="btn btn-primary btn-lg btn-block" type="submit" value="Resend">
+										{% else %}
+										<input class="btn btn-primary btn-lg btn-block" type="submit" value="Verify">
+										{% endif %}
+									</div>
+								</div>
+								<div class="col-2">
+									<div class="font-16 weight-600 text-center" data-color="#707373">OR</div>
+								</div>
+								<div class="col-5">
+									<div class="input-group mb-0">
+										<a class="btn btn-outline-primary btn-lg btn-block" href="{{ url_for('auth.sign_in') }}">Login</a>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
+<!-- ============================================================== -->
+<!-- END PAGE CONTENT -->
+<!-- ============================================================== -->

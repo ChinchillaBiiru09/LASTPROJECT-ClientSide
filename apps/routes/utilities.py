@@ -132,8 +132,23 @@ def get_count_invitation(): # Clear
 
 def get_template_popular(): # Clear
     try:
+        # Params
+        dataInput = request.args.get('category')
+        print("data input = ", dataInput)
+        if dataInput != '0':
+            # id = request.args.get('id')
+            dataInput = {
+                "category": dataInput
+            }
+            activate = dataInput
+        else :
+            dataInput = None
+            activate = {
+                "category": None
+            }
+
         # Membuat URL
-        url = app.config['BE_URL'] + '/template/'
+        url = app.config['BE_URL'] + '/template/popular'
 
         # Set headers url
         headers = {
@@ -141,16 +156,19 @@ def get_template_popular(): # Clear
             'Content-Type' : 'application/json'
         }
         
+        print(dataInput)
         # request response ke BE api
         response = requests.request(
             method='GET',
             url=url,
-            headers=headers
+            headers=headers,
+            params=dataInput
         )
 
         data = response.json().get('data')
 
-        return None
+        return data, activate
+    
     except Exception as e:
         return str(e)
 
@@ -581,6 +599,7 @@ def get_invitation(is_param=False): # Clear
         
         # Create URL
         url = app.config['BE_URL'] + '/invitation/'
+        # http://127.0.0.1:5000/invitation/
 
         # Set headers url
         headers = {
@@ -711,8 +730,6 @@ def get_detail_code_invitation(code): # Clear
         dataInput = {
             "invitation_code": code
         }
-        print(code)
-        print(dataInput)
         
         # Create URL
         url = app.config['BE_URL'] + '/invitation/detail/code'
@@ -772,11 +789,47 @@ def get_detail_greeting():
 # UTILITIES INVITATION PAGE ============================================================ End
 
 
+# UTILITIES GUEST PAGE ============================================================ Begin
+def export_guest(): # Clear
+    try:
+        code = request.args.get('code')
+        dataInput = {
+            "invitation_code": code
+        }
+
+        # Set URL
+        url = app.config['BE_URL'] + '/guest/export'
+
+        # Set Header
+        headers = {
+            'Authorization' : f'Bearer {session["user"]["access_token"]}',
+            'Content-Type' : 'application/json'
+        }
+
+        # Payload
+        response = requests.request (
+            method='GET',
+            url=url,
+            headers=headers,
+            params=dataInput
+        )
+        print("why")
+        data = response.json().get('data')
+        print("data guest -> ", data)
+
+        return data
+
+    except Exception as e:
+        return make_response(jsonify({"statusCode":400, "message":str(e)}), 400)
+    
+# UTILITIES GUEST PAGE ============================================================ End
+
+
 # UTILITIES SHARE INVITATION ============================================================ Begin
 def set_message(code, title): # Clear
     try:
         # print(link)
-        link = app.config['FE_URL']+"/"+code+"/"+title
+        link = app.config['FE_URL']+code+"/"+title
         message = f"""Assalamualaikum Warahmatullahi Wabarakatuh
 
 Tanpa mengurangi rasa hormat, perkenankan kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri acara kami.

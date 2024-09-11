@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request, redirect, url_for, sessio
 
 from ..utilities import *
 
-import json, requests
+import json, requests, base64
 
 
 guest = Blueprint(
@@ -48,7 +48,7 @@ def guest_detail():
     return render_template(
         title="Creavitation",
         data=data,
-        template_name_or_list='detailguest.html'
+        template_name_or_list='detailGuest.html'
     )
 
 
@@ -63,7 +63,6 @@ def add():
         data=data,
         template_name_or_list='addGuest.html'
     )
-
 
 # clear
 @guest.post('/add')
@@ -110,6 +109,196 @@ def add_proccess():
             category='success'
         )
         return redirect(url_for('management.invitation.detail', id=id, code=code))
+
+# clear
+@guest.get('/copy')
+def copy():
+    data = dict()
+    data['invitation'] = get_detail_invitation() # user_id
+    data['list_invitation'] = get_invitation() # user_id
+    
+    return render_template(
+        title="Creavitation",
+        data=data,
+        template_name_or_list='copyListGuest.html'
+    )
+
+# clear
+@guest.post('/copy')
+def copy_process():
+    dataInput = request.form.to_dict()
+    id = dataInput['invitation_id']
+    code = dataInput['inv_code']
+    dataInput = {
+        "invitation_code" : dataInput['inv_code'],
+        "reference_code": dataInput['ref_code']
+    }
+
+    # Set URL
+    url = app.config['BE_URL'] + '/guest/duplicate'
+
+    # Set Header
+    headers = {
+        'Authorization' : f'Bearer {session["user"]["access_token"]}',
+        'Content-Type' : 'application/json'
+    }
+
+    # Payload
+    payload = json.dumps(dataInput)
+
+    response = requests.request (
+        method='POST',
+        url=url,
+        headers=headers,
+        data=payload
+    )
+
+    if (response.status_code != 200):
+        flash(
+            message=response.json().get('message'),
+            category='danger'
+        )
+        return redirect(url_for('guest.copy', id=id))
+    else:
+        flash(
+            message=response.json().get('message'),
+            category='success'
+        )
+        return redirect(url_for('management.invitation.detail', id=id, code=code))
+
+
+# clear
+@guest.get('/import')
+def importExcel():
+    data = dict()
+    data['invitation'] = get_detail_invitation()
+    data['list_invitation'] = get_invitation()
+    
+    return render_template(
+        title="Creavitation",
+        data=data,
+        template_name_or_list='importExcelGuest.html'
+    )
+
+
+# clear
+@guest.post('/import')
+def importExcel_process():
+    try:
+        dataInput = request.form.to_dict()
+        id = dataInput['invitation_id']
+        code = dataInput['inv_code']
+        excel = request.files.get('excel')
+        
+        if excel:
+            excelFile = excel.read()
+            excelMime = excel.mimetype
+            excelFile = base64.b64encode(excelFile).decode('utf-8')
+            excel_base64 = f"data:{excelMime};base64,{excelFile}"
+        else:
+            excel_base64 = ""
+
+        dataInput = {
+            "invitation_code" : dataInput['inv_code'],
+            "file" : excelFile
+        }
+
+        # Set URL
+        url = app.config['BE_URL'] + '/guest/import'
+
+        # Set Header
+        headers = {
+            'Authorization' : f'Bearer {session["user"]["access_token"]}',
+            'Content-Type' : 'application/json'
+        }
+
+        # Payload
+        payload = json.dumps(dataInput)
+        response = requests.request (
+            method='POST',
+            url=url,
+            headers=headers,
+            data=payload
+        )
+
+        if (response.status_code != 200):
+            flash(
+                message=response.json().get('message'),
+                category='danger'
+            )
+            return redirect(url_for('guest.importExcel', id=id))
+        else:
+            flash(
+                message=response.json().get('message'),
+                category='success'
+            )
+            return redirect(url_for('management.invitation.detail', id=id, code=code))
+    except Exception as e:
+        return make_response(jsonify({"statusCode":400, "message":str(e)}), 400)
+
+
+# clear
+@guest.get('/export')
+def exportExcel():
+    data = dict()
+    data['invitation'] = get_detail_invitation()
+    # data['list_invitation'] = get_invitation()
+    data['export'] = export_guest()
+    print("data => ", data)
+    
+    return render_template(
+        title="Creavitation",
+        data=data,
+        template_name_or_list='exportExcelGuest.html'
+    )
+
+
+# clear
+@guest.get('/export')
+def exportExcel_process():
+    try:
+        id = request.args.get('id')
+        code = request.args.get('code')
+        dataInput = {
+            "invitation_code": code
+        }
+
+        # Set URL
+        url = app.config['BE_URL'] + '/guest/export'
+
+        # Set Header
+        headers = {
+            'Authorization' : f'Bearer {session["user"]["access_token"]}',
+            'Content-Type' : 'application/json'
+        }
+
+        # Payload
+        payload = json.dumps(dataInput)
+        response = requests.request (
+            method='GET',
+            url=url,
+            headers=headers,
+            params=code
+        )
+        print(response)
+        
+        data = response.json().get('data')
+        print("data exp = ", data)
+
+        if (response.status_code != 200):
+            flash(
+                message=response.json().get('message'),
+                category='danger'
+            )
+            return redirect(url_for('management.invitation.detail', id=id, code=code))
+        else:
+            flash(
+                message=response.json().get('message'),
+                category='success'
+            )
+            return redirect(url_for('guest.exportExcel', data=data, id=id, code=code))
+    except Exception as e:
+        return make_response(jsonify({"statusCode":400, "message":str(e)}), 400)
 
 
 # clear
@@ -178,8 +367,8 @@ def edit_proccess():
 @guest.get('/delete')
 def delete():
     data = dict()
-    data['guest'] = get_guest_by_id()
-    data['invitation'] = get_detail_invitation()
+    data['guest'] = get_guest_by_id() # gueId
+    data['invitation'] = get_detail_invitation() # id
     
     return render_template(
         title="Creavitation",

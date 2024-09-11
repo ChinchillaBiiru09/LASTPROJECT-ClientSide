@@ -74,15 +74,22 @@ def signout():
         return redirect(url_for('auth.sign_in'))
 ## Route LogOut ---------------------------------------- Finish
 
+## Route Unauthorization ---------------------------------------- Start
+@app.errorhandler(403)
+def unauthorization(e):
+    return render_template("pages/ErrorPage/403.html")
+## Route Unauthorization ---------------------------------------- Finish
+
 ## Route Not Found ---------------------------------------- Start
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template("pages/ErrorPage/404.html")
 ## Route Not Found ---------------------------------------- Finish
 
-## Route Unauthorization ---------------------------------------- Start
-@app.errorhandler(403)
-def unauthorization(e):
-    return render_template("pages/ErrorPage/403.html")
-## Route Unauthorization ---------------------------------------- Finish
+# ## Route Authorization Timeout ---------------------------------------- Start
+# @app.errorhandler(419)
+# def authorization_timeout(e):
+#     return render_template("pages/ErrorPage/419.html")
+# ## Route Authorization Timeout ---------------------------------------- Finish
+
 # ROUTING ============================================================ End

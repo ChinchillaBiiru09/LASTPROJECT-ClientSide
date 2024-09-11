@@ -87,7 +87,7 @@
 						<div class="pd-20 card-box">
 							<!-- ============================================================== -->
 							<!-- Form Section -->
-                            <form action="{{ url_for('management.template.request_create_proccess') }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ url_for('management.reqtemp.request_create_proccess') }}" method="POST" enctype="multipart/form-data">
                                 <div class="modal-body">
                                     <!-- Category Input -->
                                     <div class="form-group row">
@@ -137,7 +137,7 @@
 
                                     <!-- Description -->
                                     <div class="form-group row">
-                                        <label class="col-sm-12 col-md-2 col-form-label">Deskripsi</label>
+                                        <label class="col-sm-12 col-md-2 col-form-label">Deskripsi*</label>
                                         <div class="col-sm-12 col-md-10">
                                             <textarea class="form-control" name="description"></textarea>
                                         </div>

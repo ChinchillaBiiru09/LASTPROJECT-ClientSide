@@ -81,7 +81,7 @@
 								<i class="fa fa-plus pr-2"></i>  Create New
 							</a>
 							{% else %}
-							<a href="{{ url_for('management.template.request_create') }}" class="btn btn-primary" type="button" role="button">
+							<a href="{{ url_for('management.reqtemp.request_create') }}" class="btn btn-primary" type="button" role="button">
 								<i class="fa fa-plus pr-2"></i> Request Template
 							</a>
 							{% endif %}
@@ -186,7 +186,8 @@
 														</div>
 														<div class="da-card-content">
 															<h5 class="h5 mb-10">{{ item['title'] }}</h5>
-															<p class="mb-0">{{ item['category'] }}</p>
+															<p class="mb-1">{{ item['category'] }}</p>
+															<p class="mb-0 blockquote-footer">{{ item['type_txt'] }} by <cite title="Source Title">{{ item['owner_txt'] }}</cite></p>
 														</div>
 													</div>
 												</div>
@@ -216,12 +217,12 @@
 																<div class="da-social">
 																	<ul class="clearfix">
 																		{% if session['user']['role'] == 'ADMIN' %}
-																		<li><a href="{{ url_for('show.show_template', temId=item['template_id']) }}"><i class="fa fa-eye"></i></a></li>
+																		<li><a href="{{ url_for('show.show_template', temId=item['template_id']) }}" target="_blank"><i class="fa fa-eye"></i></a></li>
 																		<li><a href="{{ url_for('management.template.edit') }}"><i class="fa fa-pencil"></i></a></li>
 																		<li><a href="{{ url_for('management.template.delete', temId=item['template_id']) }}"><i class="dw dw-delete-3"></i> </a></li>
 																		{% else %}
-																		<li><a href="{{ url_for('show.show_template', temId=item['template_id']) }}"><i class="fa fa-eye"></i></a></li>
-																		<li><a href="{{ url_for('management.invitation.add', id=item['template_id']) }}"><i class="fa fa-plus"></i></a></li>
+																		<li><a href="{{ url_for('show.show_template', temId=item['template_id']) }}" target="_blank"><i class="fa fa-eye"></i></a></li>
+																		<li><a href="{{ url_for('management.invitation.add', temId=item['template_id']) }}"><i class="fa fa-plus"></i></a></li>
 																		{% endif %}
 																	</ul>
 																</div>
@@ -229,7 +230,8 @@
 														</div>
 														<div class="da-card-content">
 															<h5 class="h5 mb-10">{{ item['title'] }}</h5>
-															<p class="mb-0">{{ item['category'] }}</p>
+															<p class="mb-1">{{ item['category'] }}</p>
+															<p class="mb-0 blockquote-footer">{{ item['type_txt'] }} by <cite title="Source Title">{{ item['owner_txt'] }}</cite></p>
 														</div>
 													</div>
 												</div>

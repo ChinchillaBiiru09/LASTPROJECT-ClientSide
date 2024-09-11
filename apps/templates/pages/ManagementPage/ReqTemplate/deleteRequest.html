@@ -1,5 +1,5 @@
 <!-- ============================================================== -->
-<!-- PAGE CONTENT - GUEST - USER -->
+<!-- PAGE CONTENT - CATEGORY MANAGEMENT - ADMIN -->
 <!-- ============================================================== -->
 {% extends 'layouts/dash_layout.html' %} {% block content %}
 
@@ -31,13 +31,13 @@
 	
 
 	<!-- ============================================================== -->
-	<!-- MAIN CONTENT - GUEST - USER -->
+	<!-- MAIN CONTENT - CATEGORY MANAGEMENT - ADMIN -->
 	<!-- ============================================================== -->
 	<div class="main-container">
 		<div class="pd-ltr-20 xs-pd-20-10">
             <!-- ============================================================== -->
 			<!-- Content Section -->
-			<div class="min-height-200px">
+			<div class="min-height-200px pb-30">
 				<!-- ============================================================== -->
 				<!-- Header Content Section -->
 				<div class="page-header">
@@ -48,7 +48,7 @@
 							<!-- ============================================================== -->
 							<!-- Title Section -->
 							<div class="title">
-								<h4>Detail Tamu</h4>
+								<h4>Request Template</h4>
 							</div>
 							<!-- End Title -->
 							<!-- ============================================================== -->
@@ -58,8 +58,7 @@
 							<nav aria-label="breadcrumb" role="navigation">
 								<ol class="breadcrumb">
 									<li class="breadcrumb-item"><a href="{{ url_for('dashboard.index') }}">Home</a></li>
-									<li class="breadcrumb-item"><a href="{{ url_for('guest.index') }}">Daftar Tamu</a></li>
-									<li class="breadcrumb-item active" aria-current="page">Detail Data</li>
+									<li class="breadcrumb-item active" aria-current="page">Hapus Data</li>
 								</ol>
 							</nav>
 							<!-- End Breadcrumb -->
@@ -71,78 +70,35 @@
 				</div>
 				<!-- End Header Content -->
 				<!-- ============================================================== -->
-
+			 
+				<!-- ============================================================== -->
+				<!-- Alert Section -->
+				{% with messages = get_flashed_messages(with_categories=true) %}
+				{% include "components/alert.html" %}
+				{% endwith %}
+				<!-- End Alert -->
+				<!-- ============================================================== -->
+				
 				<!-- ============================================================== -->
 				<!-- Simple Datatable Section -->
-				<div class="card-box mb-30">
-					<!-- ============================================================== -->
-					<!-- Table Title -->
-					<div class="pd-20">
-						<h4 class="text-blue h4">Daftar Tamu Undangan {{ data['guest'][0]['event'] }}</h4>
-					</div>
-					<!-- End Table Title -->
-					<!-- ============================================================== -->
-
-					<!-- ============================================================== -->
-					<!-- Table Content -->
-					<div class="pb-20">
-						<table class="data-table table stripe hover nowrap">
-							<!-- ============================================================== -->
-							<!-- Heading Table Column -->
-							<thead>
-								<tr>
-									<th class="table-plus datatable-nosort">No</th>
-									<th>Nama</th>
-									<th>Alamat</th>
-									<th>No. Hp</th>
-									<th>Kode undangan</th>
-									<th class="datatable-nosort">Action</th>
-								</tr>
-							</thead>
-							<!-- End Heading Table Column -->
-							<!-- ============================================================== -->
-
-							<!-- ============================================================== -->
-							<!-- Body Table -->
-							<tbody>
-								{# checking data #} {% if data['guest'] != None %}
-								{# Looping data popular #} {% for item in data['guest'] %}
-									<!-- ============================================================== -->
-									<!-- Template Popular - Row Box Data Section -->
-									<tr>
-										<td class="table-plus">{{ loop.index }}</td>
-										<td>{{ item['name'] }}</td>
-										<td>{{ item['address'] }}</td>
-										<td>{{ item['phone'] }}</td>
-										<td>{{ item['invitation_code'] }}</td>
-										<td>
-											<div class="dropdown">
-												<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-													<i class="dw dw-more"></i>
-												</a>
-												<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-													<a class="dropdown-item" href="{{ url_for('guest.edit', gueId=item['guest_id'], id=item['invitation_id']) }}"><i class="dw dw-edit2"></i> Ubah</a>
-													<a class="dropdown-item" href="{{ url_for('guest.delete', gueId=item['guest_id'], id=item['invitation_id']) }}"><i class="dw dw-delete-3"></i> Hapus</a>
-												</div>
-											</div>
-										</td>
-									</tr>
-									<!-- End Template Popular - Row Box Data -->
-									<!-- ============================================================== -->
-								{% endfor %}
-								{% endif %}
-							</tbody>
-							<!-- End Body Table -->
-							<!-- ============================================================== -->
-						</table>
-					</div>
-					<!-- End Table Content -->
-					<!-- ============================================================== -->
-				</div>
+				<div class="pd-20 card-box mb-30">
+                    <div class="clearfix">
+                        <div class="pull-left">
+                            <h4 class="text-blue h4">Peringatan!</h4>
+                        </div>
+                    </div>
+                    <div class="modal-body" id="dynamic-form">
+                        <p class="mb-30">Apakah anda yakin akan menghapus request template <b>"{{ data['request']['category'] }}"</b> anda??</p>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="{{ url_for('dashboard.index') }}" type="button" class="btn btn-outline-danger mr-1">Kembali</a>
+                        <a href="{{ url_for('management.reqtemp.request_delete_proccess', reqId=data['request']['req_id']) }}" type="button" class="btn btn-outline-primary">Simpan</a>
+                    </div>
+                </div>
 				<!-- End Simple Datatable -->
 				<!-- ============================================================== -->
 			</div>
-            <!-- End Content -->
+			<!-- End Content -->
 			<!-- ============================================================== -->
 
 			<!-- ============================================================== -->
@@ -154,16 +110,6 @@
 	</div>
 	<!-- ============================================================== -->
 	<!-- END MAIN CONTENT -->
-	<!-- ============================================================== -->
-
-
-    <!-- ============================================================== -->
-	<!-- JAVASCRIPT -->
-	<!-- ============================================================== -->
-	<script src="{{ url_for('static', filename='src/plugins/sweetalert2/sweetalert2.all.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/Management/Guest/deleteGuest.js') }}"></script>
-    <!-- ============================================================== -->
-	<!-- END JAVASCRIPT -->
 	<!-- ============================================================== -->
 
 {% endblock %}

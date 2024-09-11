@@ -1,0 +1,176 @@
+<!-- ============================================================== -->
+<!-- PAGE CONTENT - TEMPLATE MANAGEMENT - ADMIN -->
+<!-- ============================================================== -->
+{% extends 'layouts/dash_layout.html' %} {% block content %}
+
+    <!-- ============================================================== -->
+    <!-- PRELOADER - ALL PAGE - ALL -->
+    <!-- ============================================================== -->
+    {% include 'components/preloader.html' %}
+    <!-- ============================================================== -->
+    <!-- END PRELOADER -->
+    <!-- ============================================================== -->
+	
+
+	<!-- ============================================================== -->
+	<!-- HEADER - ALL PAGE - ALL -->
+	<!-- ============================================================== -->
+	{% include 'components/dash_header.html' %}
+	<!-- ============================================================== -->
+	<!-- END HEADER -->
+	<!-- ============================================================== -->
+	
+
+	<!-- ============================================================== -->
+	<!-- NAVIGATION SIDEBAR - ALL PAGE - ALL -->
+	<!-- ============================================================== -->
+	{% include 'components/dash_sidebar.html' %}
+	<!-- ============================================================== -->
+	<!-- END NAVIGATION SIDEBAR -->
+	<!-- ============================================================== -->
+	
+
+	<!-- ============================================================== -->
+	<!-- MAIN CONTENT - TEMPLATE MANAGEMENT - ADMIN -->
+	<!-- ============================================================== -->
+	<div class="main-container">
+		<div class="pd-ltr-20 xs-pd-20-10">
+            <!-- ============================================================== -->
+			<!-- Content Section -->
+			<div class="min-height-200px">
+				<!-- ============================================================== -->
+				<!-- Header COntent Section -->
+				<div class="page-header">
+					<div class="row">
+						<!-- ============================================================== -->
+						<!-- Title & Breadcrumb Section -->
+						<div class="col-md-6 col-sm-12">
+							<!-- ============================================================== -->
+							<!-- Title Section -->
+							<div class="title">
+								<h4>Request Template</h4>
+							</div>
+							<!-- End Title -->
+							<!-- ============================================================== -->
+
+							<!-- ============================================================== -->
+							<!-- Breadcrumb Section -->
+							<nav aria-label="breadcrumb" role="navigation">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="{{ url_for('dashboard.index') }}">Home</a></li>
+									<li class="breadcrumb-item active" aria-current="page">Daftar Request</li>
+								</ol>
+							</nav>
+							<!-- End Breadcrumb -->
+							<!-- ============================================================== -->
+						</div>
+						<!-- End Title & Breadcrumb -->
+						<!-- ============================================================== -->
+
+						<!-- ============================================================== -->
+						<!-- Management Add Button Section -->
+						<div class="col-md-6 col-sm-10 text-right">
+							<a href="{{ url_for('management.reqtemp.request_create') }}" class="btn btn-primary" type="button" role="button">
+								<i class="fa fa-plus pr-2"></i> Request Template
+							</a>
+						</div>
+						<!-- End Management Add Button -->
+						<!-- ============================================================== -->
+					</div>
+				</div>
+				<!-- End Header COntent -->
+				<!-- ============================================================== -->
+				 
+				<!-- ============================================================== -->
+				<!-- Alert Section -->
+				{% with messages = get_flashed_messages(with_categories=true) %}
+				{% include "components/alert.html" %}
+				{% endwith %}
+				<!-- End Alert -->
+				<!-- ============================================================== -->
+
+				<!-- ============================================================== -->
+				<!-- Template Gallery Section -->
+				<div class="card-box pd-20 height-100-p mb-30">
+                    <h2 class="h4 pd-20">Request Template</h2>
+                    {# If Template Null #} {% if data['template_request'] == None %}
+                    <!-- ============================================================== -->
+                    <!-- Template Popular Null Section -->
+                    <div class="tab-pane fade show active" id="invitationTabModal" role="tabpanel">
+                        <div class="pd-20">
+                            {% with
+                                title = "Request template undangan belum tersedia.",
+                                pict_size = 350
+                            %}
+                            {% include 'components/not_found.html' %}
+                            {% endwith %}
+                        </div>
+                    </div>
+                    <!-- End Template Popular Null -->
+                    <!-- ============================================================== -->
+    
+                    {# If template already #} {% else %}
+                    <!-- ============================================================== -->
+                    <!-- Request Template Section -->
+                    <table class="data-table table nowrap">
+                        <thead>
+                            <tr>
+                                <th class="table-plus datatable-nosort">No</th>
+                                <th>Desain</th>
+                                <th>Kategori</th>
+                                <th>Tipe</th>
+                                <th>Status</th>
+                                <th class="datatable-nosort">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {# Looping data request #} {% for item in data['template_request'] %}
+                            <tr>
+                                <td>{{ loop.index }}</td>
+                                <td class="table-plus">
+                                    <img src="{{ item['design_file'] }}" width="70" height="70" alt="">
+                                </td>
+                                <td>{{ item['category'] }}</td>
+                                <td>{{ item['type_txt'] }}</td>
+                                <td>{{ item['status_txt'] }}</td>
+                                <td>
+                                    <a class="dropdown-item" href="{{ url_for('management.reqtemp.request_delete', reqId=item['req_id']) }}"><i class="dw dw-delete-3 mr-2"></i> Batalkan</a>
+                                    <!-- <div class="dropdown">
+                                        <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                            <i class="dw dw-more"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list"> -->
+                                            <!-- <a class="dropdown-item" href="{{ url_for('management.invitation.edit', reqIdd=item['invitation_id']) }}"><i class="fa fa-pencil"></i> Ubah</a> -->
+                                            <!-- <a class="dropdown-item" href="{{ url_for('management.reqtemp.request_detail', reqId=item['invitation_id']) }}"><i class="fa fa-info"></i> Detail</a> -->
+                                        <!-- </div>
+                                    </div> -->
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <!-- End Request Template -->
+                    <!-- ============================================================== -->
+                    {% endif %}
+                </div>
+				<!-- End Template Gallery -->
+				<!-- ============================================================== -->
+			</div>
+			<!-- End Content -->
+			<!-- ============================================================== -->
+
+			<!-- ============================================================== -->
+			<!-- Footer Section -->
+			{% include 'components/dash_footer.html' %}
+			<!-- End Footer -->
+			<!-- ============================================================== -->
+		</div>
+	</div>
+    <!-- ============================================================== -->
+	<!-- END MAIN CONTENT -->
+	<!-- ============================================================== -->
+
+{% endblock %}
+<!-- ============================================================== -->
+<!-- END PAGE CONTENT -->
+<!-- ============================================================== -->

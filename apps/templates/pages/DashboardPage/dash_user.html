@@ -168,14 +168,41 @@
 			<!-- ============================================================== -->
 			<!-- Request Template Section -->
 			<div class="card-box pd-20 height-100-p mb-30">
-				<h2 class="h4 pd-20">Request Template</h2>
-				{# If Template Null #} {% if data['template_request'] == None %}
+				<h2 class="h4 pd-20">Most Popular Templates</h2>
+				<form action="{{ url_for('dashboard.index') }}" method="get">
+					<label class="col-sm-12 col-md-2">Kategori</label>
+					<div class="form-group row">
+						<div class="col-sm-12 col-md-10">
+							<select class="custom-select col-12" name="category">
+								{% if data['activate'] is not none %}
+									<option value="0">Semua</option>
+									{% for item in data['list_category'] %}
+										{% if data['activate']['category'] == item['category_id'] %}
+											<option selected value="{{ item['category_id'] }}">{{ item['category'] }}</option>
+										{% else %}
+											<option value="{{ item['category_id'] }}">{{ item['category'] }}</option>
+										{% endif %}
+									{% endfor %}
+								{% else %}
+									<option value="0" selected>Semua</option>
+									{% for item in data['list_category'] %}
+										<option value="{{ item['category_id'] }}">{{ item['category'] }}</option>
+									{% endfor %}
+								{% endif %}
+							</select>
+						</div>
+						<div class="col-sm-12 col-md-2">
+							<input type="submit" class="btn btn-primary" value="Search">
+						</div>
+					</div>
+				</form>
+				{# If Template Null #} {% if data['template_popular'] == None %}
 				<!-- ============================================================== -->
 				<!-- Template Popular Null Section -->
 				<div class="tab-pane fade show active" id="invitationTabModal" role="tabpanel">
 					<div class="pd-20">
 						{% with
-							title = "Request template undangan belum tersedia.",
+							title = "Template undangan belum tersedia.",
 							pict_size = 350
 						%}
 						{% include 'components/not_found.html' %}
@@ -191,36 +218,41 @@
 				<table class="data-table table nowrap">
 					<thead>
 						<tr>
-							<th class="table-plus datatable-nosort">No</th>
-							<th>Desain</th>
-							<th>Kategori</th>
-							<th>Tipe</th>
-							<th>Status</th>
-							<th class="datatable-nosort">Aksi</th>
+							<th>Thumbnail</th>
+							<th>Title</th>
+							<th>Copied</th>
+							<th>Category</th>
+							<th>Type</th>
+							<th>Published</th>
+							<!-- <th class="datatable-nosort">Aksi</th> -->
 						</tr>
 					</thead>
 					<tbody>
-						{# Looping data request #} {% for item in data['template_request'] %}
+						{# Looping data request #} {% for item in data['template_popular'] %}
 						<tr>
-							<td>{{ loop.index }}</td>
 							<td class="table-plus">
-								<img src="{{ item['design_file'] }}" width="70" height="70" alt="">
+								<img src="{{ item['thumbnail'] }}" width="70" height="70" alt="">
 							</td>
+							<td>
+								<h5 class="font-16">{{ item['title'] }}</h5>
+								by {{ item['owner_txt'] }}
+							</td>
+							<td>{{ item['count'] }}</td>
 							<td>{{ item['category'] }}</td>
 							<td>{{ item['type_txt'] }}</td>
-							<td>{{ item['status_txt'] }}</td>
-							<td>
-								<a class="dropdown-item" href="{{ url_for('management.template.request_delete', reqId=item['req_id']) }}"><i class="dw dw-delete-3 mr-2"></i> Batalkan</a>
-								<!-- <div class="dropdown">
+							<td>{{ item['created_at']['date'] }}</td>
+							<!-- <td>
+								<a class="dropdown-item" href="{{ url_for('management.reqtemp.request_delete', reqId=item['req_id']) }}"><i class="dw dw-delete-3 mr-2"></i> Batalkan</a>
+								<div class="dropdown">
 									<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
 										<i class="dw dw-more"></i>
 									</a>
-									<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list"> -->
-										<!-- <a class="dropdown-item" href="{{ url_for('management.invitation.edit', reqIdd=item['invitation_id']) }}"><i class="fa fa-pencil"></i> Ubah</a> -->
-										<!-- <a class="dropdown-item" href="{{ url_for('management.template.request_detail', reqId=item['invitation_id']) }}"><i class="fa fa-info"></i> Detail</a> -->
-									<!-- </div>
-								</div> -->
-							</td>
+									<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list"> 
+										<a class="dropdown-item" href="{{ url_for('management.invitation.edit', reqIdd=item['invitation_id']) }}"><i class="fa fa-pencil"></i> Ubah</a>
+										<a class="dropdown-item" href="{{ url_for('management.reqtemp.request_detail', reqId=item['invitation_id']) }}"><i class="fa fa-info"></i> Detail</a>
+									</div>
+								</div>
+							</td> -->
 						</tr>
 						{% endfor %}
 					</tbody>

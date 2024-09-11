@@ -1,0 +1,44 @@
+/*/ HTML - Profile
+
+										<div class="tab-pane fade show active" id="logactivity" role="tabpanel">
+											<div class="pd-20">
+												<div class="profile-timeline">
+												{# If Log is not ready #} {% if data['log'] == None %}
+													{% with
+														title = "Log Activity are not yet available.",
+														pict_size = 300
+													%}
+													{% include 'components/not_found.html' %}
+													{% endwith %}
+												{# If Log is ready #} {% else %}
+													<!-- ============================================================== -->
+													<!-- List Activity -->
+													{# Looping data log from response request #} {% for items in data['log'] %}
+													<div class="timeline-month">
+														<h5>{{ items['created_MY'] }}</h5>
+													</div>
+													<div class="profile-timeline-list scrollspy-example"  data-spy="scroll" data-offset="0">
+														<ul>
+														{# Looping data log detail from response request #} {% for item in items['detail'] %}
+															<!-- ============================================================== -->
+															<!-- Row -->
+															<li>
+																<div class="date">{{ item['created_at']['day_month'] }}</div>
+																<!-- <div class="task-name"><i class="ion-android-alarm-clock"></i> Task Added</div> -->
+																<p>{{ item['activity'] }}</p>
+																<div class="task-time">{{ item['created_at']['time'] }}</div>
+															</li>
+															<!-- End Row -->
+															<!-- ============================================================== -->
+														{% endfor %}
+														</ul>
+													</div>
+													{% endfor %}
+													<!-- End List Activity -->
+													<!-- ============================================================== -->
+												{% endif %}
+												</div>
+											</div>
+										</div>
+
+

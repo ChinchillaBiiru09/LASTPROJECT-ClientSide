@@ -66,6 +66,19 @@
 						</div>
 						<!-- End Title & Breadcrumb -->
 						<!-- ============================================================== -->
+						
+							
+						<!-- ============================================================== -->
+						<!-- Management Add Button Section -->
+						<div class="col-md-6 col-sm-10 text-right">
+							{% if data['request']['status'] == 3 %}
+							<a href="{{ url_for('management.template.add') }}" class="btn btn-primary" type="button" role="button">
+								<i class="fa fa-plus pr-2"></i>  Upload
+							</a>
+							{% endif %}
+						</div>
+						<!-- End Management Add Button -->
+						<!-- ============================================================== -->
 					</div>
 				</div>
 				<!-- End Header COntent -->
@@ -102,7 +115,7 @@
 							<div class="form-group">
 								<label>Batas Waktu</label>
 								<p class="border border-secondary rounded-lg" style="padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;">
-									{{ data['request']['deadline'] }}
+									{{ data['request']['deadline']['day'] }}, {{ data['request']['deadline']['date'] }}
 								</p>
 							</div>
 							<div class="form-group">
@@ -139,7 +152,7 @@
 							<h4 class="text-blue h4">Form Konfirmasi</h4>
 						</div>
 					</div>
-					<form action="{{ url_for('management.template.update_reqstatus') }}" method="post">
+					<form action="{{ url_for('management.reqtemp.update_reqstatus') }}" method="post">
 						<div class="form-group row">
 							<input type="hidden" name="req_id" id="req_id" value="{{ data['request']['req_id'] }}">
 						</div>

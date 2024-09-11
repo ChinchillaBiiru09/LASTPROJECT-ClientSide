@@ -19,7 +19,6 @@ show = Blueprint(
 def show_template():
     data = dict()
     data['template'] = get_detail_template()
-    print(data['template'])
     dt = datetime.now()
 
     if data['template']['category'].upper() == "PERNIKAHAN": 
@@ -111,7 +110,7 @@ def show_template():
             "personal_data": {
                 "man_fullname": "Nama Lengkap Mempelai Pria",
                 "man_name": "Pria",
-                "mans_photo": "http://127.0.0.1:5000/invitation/media/2024-07-21_043130_QzXuiE_man_photo_5.jpg",
+                "mans_photo": app.config['BE_URL']+"/profile/media/user/default_avatar.png",
                 "son_no": "1",
                 "man_dad_status": "0",
                 "mans_dad": "Nama Ayah Mempelai Pria",
@@ -122,7 +121,7 @@ def show_template():
                 
                 "woman_fullname": "Nama Lengkap Mempelai Wanita",
                 "woman_name": "Wanita",
-                "womans_photo": "http://127.0.0.1:5000/invitation/media/2024-07-21_044419_QzXuiE_woman_photo_5.jpg",
+                "womans_photo": app.config['BE_URL']+"/profile/media/user/default_avatar.png",
                 "daughter_no": "1",
                 "woman_dad_status": "Alm",
                 "womans_dad": "Nama Ayah Mempelai Wanita",
@@ -135,7 +134,7 @@ def show_template():
             "template_id": 14,
             "template_js": data['template']['js_file'],
             "template_thumb": data['template']['thumbnail'],
-            "template_title": "Sepia Floral Orange",
+            "template_title": data['template']['title'],
             "template_wall": data['template']['wallpaper'],
             "template_wall2": data['template']['wallpaper_2'],
             "user_id": 5
@@ -203,7 +202,7 @@ def show_template():
             "personal_data": {
                 "fullname": "Nama Lengkap",
                 "callname": "Nama",
-                "myphoto": "http://127.0.0.1:5000/invitation/media/2024-07-21_043130_QzXuiE_man_photo_5.jpg",
+                "myphoto": app.config['BE_URL']+"/profile/media/user/default_avatar.png",
                 "birthday": "17",
             },
             "template_css": data['template']['css_file'],
